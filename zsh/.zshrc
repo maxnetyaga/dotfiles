@@ -27,7 +27,7 @@ eval "$(zoxide init zsh)"
 # Misc env vars
 export TIME_STYLE=long-iso
 
-export TERM=xterm-256color
+export TERM=tmux-256color
 
 export ZSH_COMPDUMP=~/.cache/zsh/.zcompdump
 
