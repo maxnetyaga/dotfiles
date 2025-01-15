@@ -36,6 +36,8 @@ export GIT_EDITOR=nvim
 
 export LESS='--mouse'
 
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+
 # Adding rust binaries to PATH
 export PATH="$PATH:/home/netya/.cargo/bin"
 
@@ -48,3 +50,7 @@ alias pdftohtmldef="pdftohtml -s -i -noframes"
 alias zshconfig="$EDITOR ~/.zshrc"
 alias vim="nvim"
 alias ssh-keygen-tagged='ssh-keygen -C "$(hostname)-$(date +%Y-%m-%d)"'
+
+# Functions
+cl () { cd "$@" && ls -A; }
+zl () { z "$@" && ls -A; }
