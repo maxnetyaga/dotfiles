@@ -1,1 +1,37 @@
-editor.true-color=true
+theme = "tokyonight"
+
+[editor]
+true-color = true
+line-number = "absolute"
+# cursorline = true
+auto-completion = true
+# auto-format = true
+auto-info = true
+color-modes = true
+auto-pairs = true
+# gutters = ["diff", "diagnostics", "line-numbers", "spacer"]
+middle-click-paste = true
+
+[editor.lsp]
+enable = true
+display-messages = true
+auto-signature-help = true
+display-inlay-hints = true
+display-signature-help-docs = true
+snippets = true
+
+[editor.statusline]
+left = ["mode", "spinner"]
+center = ["file-name"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type", "version-control"]
+separator = "│"
+
+[editor.whitespace]
+render = "all"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+tab = "→"
+newline = "⏎"
+tabpad = "·" # Tabs will look like "→···" (depending on tab width)
