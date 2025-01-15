@@ -27,9 +27,9 @@ eval "$(zoxide init zsh)"
 # Misc env vars
 export TIME_STYLE=long-iso
 
-export TERM=tmux-256color
+export TERM=xterm-256color
 
-export ZSH_COMPDUMP=~/.cache/zsh/.zcompdump
+# export ZSH_COMPDUMP=~/.cache/zsh/.zcompdump
 
 export EDITOR=nvim
 export GIT_EDITOR=nvim
@@ -43,6 +43,9 @@ export PATH="$PATH:/home/netya/.cargo/bin"
 
 # Addind personal scripths to PATH
 export PATH="$PATH:/home/netya/Scripts"
+
+# Adding wsl VSCode to PATH
+export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"
 
 # Aliases
 alias exp="explorer.exe"
