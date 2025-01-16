@@ -36,8 +36,6 @@ export GIT_EDITOR=nvim
 
 export LESS='--mouse'
 
-export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
-
 # Adding rust binaries to PATH
 export PATH="$PATH:/home/netya/.cargo/bin"
 
