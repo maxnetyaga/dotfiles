@@ -3,3 +3,5 @@
 	email = max.netyaga@gmail.com
 [init]
 	defaultBranch = main
+[core]
+	quotePath = false
