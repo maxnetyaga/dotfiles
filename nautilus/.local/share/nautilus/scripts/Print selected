@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# print-selected.sh
+#
+# Print files from the right-click context menu in Nautilus.
+# Place this script in ~/.local/share/nautilus/scripts & make executable.
+#
+# @see http://askubuntu.com/questions/319948/printing-multiple-files-from-nautilus
+# @see http://www.frenssen.be/content/printing-file-right-click-context-menu-nautilus
+for i in $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS
+do
+  lpr $i
+done
+exit 0

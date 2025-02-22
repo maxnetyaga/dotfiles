@@ -1,81 +1,52 @@
+/* :root {
+    --white: #f0ead2
+    --blue: #004700
+    --green: #adc178
+} */
+
 * {
     border: none;
     border-radius: 0;
     font-family: "ComicShannsMono Nerd Font Propo";
-    /* font-family: "ComicShannsMono Nerd Font"; */
-    font-size: 18px;
+    font-size: 14px;
     min-height: 0;
     padding: 1px 1px;
 }
 
 window#waybar {
     background: rgba(40, 40, 40, 1);
-    color: @white_b;
+    color: #f0ead2;
 }
 
 #workspaces button {
     padding: 0 5px;
     background: transparent;
-    color: @white_b;
+    color: #f0ead2;
     border-bottom: 3px solid transparent;
 }
 
 #workspaces button.focused {
-    background: @blue;
-    border-bottom: 3px solid @blue;
+    /* background: #f0ead2; */
+    border-bottom: 3px solid #adc178;
 }
 
-#mode,
 #clock,
-#battery {
-    padding: 0 10px;
-    margin: 0 5px;
-}
-
-#mode {
-    background: @red;
-    border-bottom: 3px solid @white_b;
+#language,
+#tray,
+#pulseaudio {
+    padding: 8px 6px;
+    padding-right: 9px;
+    margin: 0 3px;
+    border-right: 2px solid #adc178;
 }
 
 #clock {
-    background-color: @orange_b;
-    color: @white_b;
+    border-right: none;
 }
 
-#battery {
-    background-color: @white_b;
-    color: @background;
-}
-
-#battery.charging {
-    color: @background;
-    background-color: @green;
-}
-
-@keyframes blink {
+/* @keyframes blink {
     to {
         background-color: @white_b;
         color: @background;
     }
-}
-
-#idle_inhibitor,
-#pulseaudio,
-#custom-openvpn,
-#network,
-#cpu,
-#memory,
-#temperature,
-#backlight,
-#battery,
-#clock,
-#tray {
-    padding: 0 6px;
-    margin: 0 3px;
-}
-
-#language, #pulseaudio, #network, #memory, #temperature, #battery, #tray {
-    padding-right: 8px;
-    padding-left: 8px;
-    border-right: 2px solid #004700;
-}
+} */

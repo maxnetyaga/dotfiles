@@ -146,6 +146,7 @@ export TERM=xterm-256color
 
 export EDITOR=nvim
 export GIT_EDITOR=nvim
+export PAGER=moar
 
 export LESS='--mouse'
 
