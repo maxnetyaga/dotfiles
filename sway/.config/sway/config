@@ -37,6 +37,7 @@ exec swayidle -w \
          timeout 600 'swaylock -f -c 000000' \
          resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
+bindcode $mod+53 exec rofi -show power-menu -modi power-menu:rofi-power-menu
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
@@ -48,9 +49,11 @@ exec swayidle -w \
 # Read `man 5 sway-input` for more information about this section.
 
     input * {
-        xkb_layout "us,ru"
+        xkb_layout "us,ru,ua"
 	    xkb_options "grp:rshift_toggle"
     }
+
+    bindcode $mod+27 exec $XDG_CONFIG_HOME/rofi/scripts/language_switcher.py
 
 #
 ### Key bindings
@@ -65,7 +68,7 @@ exec swayidle -w \
     bindcode 274 kill
 
     # Start your launcher
-    bindsym $mod+Space exec $menu
+    bindcode $mod+65 exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -141,8 +144,8 @@ exec swayidle -w \
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
+    # bindsym $mod+b splith
+    # bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
@@ -162,6 +165,12 @@ exec swayidle -w \
     bindsym $mod+a focus parent
 
     for_window {
+        [app_id="org.telegram.desktop"] floating enable
+        [app_id="org.telegram.desktop"] move position center
+        [app_id="blueman-manager"] floating enable
+        [instance="code"] move workspace 3
+        [instance="code"] focus
+
         [title="Extension: \(Bitwarden Password Manager\) - Bitwarden — Mozilla Firefox"] floating enable
         [app_id="org.gnome.NautilusPreviewer"] floating enable
         [app_id="org.pulseaudio.pavucontrol"] floating enable
@@ -170,6 +179,11 @@ exec swayidle -w \
         [window_role="bubble"] floating enable
         [window_role="dialog"] floating enable
         [window_type="dialog"] floating enable
+    }
+
+    assign {
+        [app_id="code"] workspace 3
+        [instance="code"] workspace 3
     }
 
     workspace_layout tabbed
@@ -206,7 +220,7 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resize"
+# bindsym $mod+r mode "resize"
 #
 # Utilities:
 #
@@ -215,19 +229,27 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
     bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+    # Media playback control
+    bindsym --locked XF86AudioPlay exec playerctl play-pause
+    bindsym --locked XF86AudioStop exec playerctl play-pause
+    bindsym --locked XF86AudioNext exec playerctl next
+    bindsym --locked XF86AudioPrev exec playerctl previous
     # Special keys to adjust brightness
-    bindcode --locked $mod+59 exec ddcutil setvcp --noverify --bus 5 10 - 25
-    bindcode --locked $mod+60 exec ddcutil setvcp --noverify --bus 5 10 + 25
+    bindcode --locked $mod+59 exec echo '-' > /tmp/waybar-ddc-module-rx
+    bindcode --locked $mod+60 exec echo '+' > /tmp/waybar-ddc-module-rx
     # Calculator
     bindsym --locked XF86Calculator exec rofi -show calc -modi calc -no-show-match -no-sort
-    # Special key to take a screenshot with grim
-    bindsym Print exec IMG=~/Pictures/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g "$($XDG_CONFIG_HOME/sway/scripts/runonce.sh slurp)" $IMG && wl-copy < $IMG
+    # Screenshot with grim
+    bindsym Print exec grim -g "$($XDG_CONFIG_HOME/sway/scripts/runonce.sh slurp)" - | swappy -f -
+    bindsym $mod+Print exec $XDG_CONFIG_HOME/sway/scripts/window-screenshot.sh
+    # bindsym $mod+u exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
     # Zoomt
     bindsym $mod+z exec $XDG_CONFIG_HOME/sway/scripts/runonce.sh woomer
-
     # Clipboard tool
     exec wl-paste --watch cliphist store
     bindsym $mod+c exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
+    # Emoji picker
+    bindsym $mod+m exec rofi -modi emoji -show emoji -kb-secondary-copy "" -kb-custom-1 Ctrl+c
 #
 # Autostart:
 #

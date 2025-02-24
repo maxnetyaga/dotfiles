@@ -3,7 +3,14 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": [],
-    "modules-right": ["pulseaudio", "tray", "sway/language", "clock"],
+    "modules-right": [
+        "mpris",
+        "pulseaudio",
+        "custom/ddcutil",
+        "tray",
+        "sway/language",
+        "clock"
+    ],
 
     // modules-right
 
@@ -13,11 +20,33 @@
     },
 
     "sway/language": {
-        "format": "{long}"
+        "format": "lang: {flag}"
     },
 
     "tray": {
         "spacing": 10
+    },
+
+    "custom/ddcutil": {
+        // I don't even want to know why this works.
+        // Change it to the following for your custom icons,
+        // current format is a hack for Material Symbols to display normally:
+        "format": "{percentage}% {icon}",
+        // "format": "<span rise='-2pt' size='12pt'>{icon}</span> <span rise='1pt' size='10pt'>{percentage}%</span>",
+        "format-icons": [
+            // Icons from Google Material Symbols.
+            // Put your icons here.
+            "󰃜",
+            "󰃛",
+            "󰃚"
+        ],
+        "exec": "$XDG_CONFIG_HOME/waybar/scripts/ddcutil",
+        "return-type": "json",
+        "on-scroll-up": "echo '+' > /tmp/waybar-ddc-module-rx",
+        "on-scroll-down": "echo '-' > /tmp/waybar-ddc-module-rx",
+        "on-click": "echo 'min' > /tmp/waybar-ddc-module-rx",
+        "on-click-right": "echo 'max' > /tmp/waybar-ddc-module-rx",
+        "tooltip": false
     },
 
     "pulseaudio": {
@@ -36,9 +65,23 @@
             "car": "",
             "default": ["", ""]
         },
+        "format-source": "Mic ON",
+        "format-source-muted": "Mic OFF",
         "scroll-step": 1,
         "on-click": "pavucontrol",
         "ignored-sinks": ["Easy Effects Sink"]
+    },
+
+    "mpris": {
+        "format": "{player_icon} {dynamic}",
+        "format-paused": "{status_icon} <i>{dynamic}</i>",
+        "player-icons": {
+            "default": "🎺 "
+        },
+        "status-icons": {
+            "paused": "⏸"
+        }
+        // "ignored-players": ["firefox"]
     },
 
     // modules-left

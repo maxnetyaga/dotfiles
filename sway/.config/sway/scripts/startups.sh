@@ -22,4 +22,8 @@ $toolwait --nocheck telegram-desktop --waitfor telegram-desktop
 
 swaymsg "workspace number 7"
 
+# whould be cleared on config reload
 swaymsg "focus_on_window_activation focus"
+
+# setting keyboard layout
+swaymsg 'input * xkb_layout "us,ru"'

@@ -1,6 +1,6 @@
 configuration {
 	modes: [ combi ];
-  combi-modes: [ window, drun, run ];
+  combi-modes: [ drun, run, window ];
 	font: "sans 12";
 /*	location: 0;*/
 /*	yoffset: 0;*/

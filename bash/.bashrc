@@ -9,7 +9,7 @@ export OSH='/home/max/.oh-my-bash'
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-OSH_THEME="font"
+OSH_THEME="powerbash10k"
 
 # If you set OSH_THEME to "random", you can ignore themes you don't like.
 # OMB_THEME_RANDOM_IGNORED=("powerbash10k" "wanelo")
@@ -142,8 +142,6 @@ eval "$(zoxide init bash)"
 export TIME_STYLE=long-iso
 export TERM=xterm-256color
 
-# export ZSH_COMPDUMP=~/.cache/zsh/.zcompdump
-
 export EDITOR=nvim
 export GIT_EDITOR=nvim
 export PAGER=moar
@@ -156,11 +154,11 @@ export PATH="$PATH:$HOME.cargo/bin"
 export PATH="$PATH:$HOME/.local/bin"
 
 # Aliases
-alias exp="explorer.exe"
 alias pdftohtmldef="pdftohtml -s -i -noframes"
-alias zshconfig="$EDITOR ~/.zshrc"
+alias shconfig="$EDITOR ~/.zshrc"
 alias vim="nvim"
 alias ssh-keygen-tagged='ssh-keygen -C "$(hostname)-$(date +%Y-%m-%d)"'
+alias restow="stow -R"
 
 # Functions
 cl() { cd "$@" && ls -A; }

@@ -33,15 +33,23 @@ window#waybar {
 #clock,
 #language,
 #tray,
-#pulseaudio {
+#custom-ddcutil,
+#pulseaudio,
+#mpris {
     padding: 8px 6px;
     padding-right: 9px;
     margin: 0 3px;
     border-right: 2px solid #adc178;
+    min-width: 0;
 }
 
 #clock {
     border-right: none;
+}
+
+#language {
+    min-width: 65px;
+    padding-right: 12px;
 }
 
 /* @keyframes blink {
