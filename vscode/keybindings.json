@@ -1,0 +1,74 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+n",
+        "command": "explorer.newFile",
+        "when": "explorerViewletFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+f",
+        "command": "editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor && !editorHasSelection"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "-workbench.action.showAllSymbols"
+    },
+    {
+        "key": "ctrl+,",
+        "command": "workbench.action.toggleMaximizedPanel",
+        "when": "panelMaximized"
+    },
+    {
+        "key": "ctrl+,",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminalFocus && !panelMaximized"
+    },
+    {
+        "key": "ctrl+,",
+        "command": "workbench.action.terminal.focus",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+t",
+        "command": "workbench.action.terminal.new",
+        "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.toggleMaximizedPanel",
+                "workbench.action.terminal.toggleTerminal"
+            ]
+        },
+        "when": "!panelVisible || panelMaximized"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.toggleMaximizedPanel",
+                "workbench.action.terminal.focus"
+            ]
+        },
+        "when": "panelVisible && !panelMaximized"
+    },
+    {
+        "key": "f5",
+        "command": "vscode-postgres.runQuery",
+        "when": "editorLangId == 'postgres' ||  editorLangId == 'sql'"
+    }
+]
