@@ -121,20 +121,16 @@ source "$OSH"/oh-my-bash.sh
 
 # Program Inits #--------------------------------------------------------------
 
-# NVM Init
-# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] &&
-#   printf %s "${HOME}/.nvm" ||
-#   printf %s "${XDG_CONFIG_HOME}/nvm")"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# # PYENV Init
-# export PYENV_ROOT="$HOME/.pyenv"
-# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PATH:$PYENV_ROOT/bin"
-# eval "$(pyenv init -)"
-
 # Zoxide Init
 eval "$(zoxide init bash)"
+
+# NVM init
+source /usr/share/nvm/init-nvm.sh
+
+# Pyenv init
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
 
 # User configuration #---------------------------------------------------------
 
@@ -145,7 +141,6 @@ export TERM=xterm-256color
 export EDITOR=nvim
 export GIT_EDITOR=nvim
 export PAGER=moar
-
 export LESS='--mouse'
 
 # Adding rust binaries to PATH
@@ -159,13 +154,13 @@ alias shconfig="$EDITOR ~/.zshrc"
 alias vim="nvim"
 alias ssh-keygen-tagged='ssh-keygen -C "$(hostname)-$(date +%Y-%m-%d)"'
 alias restow="stow -R"
-alias code="code --disable-gpu-compositing"
+# alias code="code --disable-gpu-compositing"
 
 # Functions
 cl() { cd "$@" && ls -A; }
 zl() { z "$@" && ls -A; }
 
-source /usr/share/nvm/init-nvm.sh
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"
+# Tmux autostart
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  tmux
+fi
