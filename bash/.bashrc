@@ -159,7 +159,13 @@ alias shconfig="$EDITOR ~/.zshrc"
 alias vim="nvim"
 alias ssh-keygen-tagged='ssh-keygen -C "$(hostname)-$(date +%Y-%m-%d)"'
 alias restow="stow -R"
+alias code="code --disable-gpu-compositing"
 
 # Functions
 cl() { cd "$@" && ls -A; }
 zl() { z "$@" && ls -A; }
+
+source /usr/share/nvm/init-nvm.sh
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"

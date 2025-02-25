@@ -21,6 +21,9 @@ swaymsg "workspace number 6"
 $toolwait --nocheck telegram-desktop --waitfor telegram-desktop
 
 swaymsg "workspace number 7"
+$toolwait --nocheck thunderbird --waitfor thunderbird
+
+swaymsg "workspace number 8"
 
 # whould be cleared on config reload
 swaymsg "focus_on_window_activation focus"
