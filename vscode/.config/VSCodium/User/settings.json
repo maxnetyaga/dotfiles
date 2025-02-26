@@ -11,10 +11,6 @@
         "editor.suggest.insertMode": "replace",
         "editor.wordBasedSuggestions": "off"
     },
-    "[caddyfile]": {
-        "editor.formatOnSave": true,
-        "editor.insertSpaces": false
-    },
     "[dockercompose]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
     },
@@ -38,7 +34,6 @@
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
-        // "editor.formatOnSave": true
     },
     "[rust]": {
         "editor.defaultFormatter": "rust-lang.rust-analyzer"
@@ -63,7 +58,7 @@
     "editor.fontWeight": "normal",
     "editor.formatOnPaste": false,
     "editor.formatOnSaveMode": "modificationsIfAvailable",
-    "editor.minimap.enabled": false,
+    "editor.minimap.enabled": true,
     "editor.mouseWheelZoom": true,
     "editor.renderWhitespace": "boundary",
     "editor.rulers": [79, 119],
@@ -157,7 +152,6 @@
         "*.docx": "docxreader.docxEditor"
     },
     "workbench.iconTheme": "vscode-icons",
-    "workbench.layoutControl.enabled": false,
     "workbench.list.smoothScrolling": true,
     "workbench.settings.applyToAllProfiles": ["editor.fontFamily"],
     "workbench.sideBar.location": "right",
@@ -165,5 +159,7 @@
     "workbench.tree.expandMode": "doubleClick",
     "workbench.tree.indent": 24,
     "workbench.tree.renderIndentGuides": "always",
-    "workbench.colorTheme": "Rubber"
+    "workbench.colorTheme": "Rubber",
+    "workbench.layoutControl.enabled": false,
+    "workbench.editor.enablePreviewFromQuickOpen": true
 }
