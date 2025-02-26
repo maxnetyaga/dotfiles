@@ -2,6 +2,7 @@
 # Author: https://github.com/caschb/rofi-language-switcher/blob/main/language_switcher.py
 import os
 import csv
+from pathlib import Path
 import sys
 
 class Rofi:
@@ -20,18 +21,23 @@ class Rofi:
         return int(ans)
 
 
-def show_menu(languages):
+def show_menu(languages: list[tuple[str, str]]):
     rofi = Rofi()
+    tmp = Path("./lang")
+    tmp.touch()
 
-    options = []
-    for lang in languages:
-        options.append(lang[0])
+    names, codes = zip(*languages)
 
-    selected = 0
-    selected = rofi.select("Select layout", options, selected)
+    code = tmp.read_text()
+    code_i = codes.index(code) if code else 0
 
-    if selected != -1:
-        os.popen(f"swaymsg 'input * xkb_layout \"{languages[selected][1]}\"'")
+    code_i = rofi.select("Select layout", names, code_i)
+    code = tmp.write_text(codes[code_i])
+
+    if code_i != -1:
+        os.popen(f"swaymsg 'input * xkb_layout \"{codes[code_i]}\"'")
+        os.putenv("XKB_LAYOUT", codes[code_i])
+        # os.environ["XKB_LAYOUT"] = codes[cur_code_i]
 
 
 if (__name__ == "__main__"):

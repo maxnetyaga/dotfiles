@@ -15,7 +15,7 @@
     // modules-right
 
     "clock": {
-        "format-alt": "{:%a, %d. %b  %H:%M}",
+        "format": "{:%a, %d. %b | %H:%M}",
         "tooltip": false
     },
 

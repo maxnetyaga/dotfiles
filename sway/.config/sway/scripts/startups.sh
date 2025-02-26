@@ -30,5 +30,6 @@ swaymsg "focus_on_window_activation focus"
 
 # setting keyboard layout
 swaymsg 'input * xkb_layout "us,ru"'
+echo -n "us,ru" >| $XDG_CONFIG_HOME/rofi/scripts/lang
 
 swaymsg "[app_id="org.telegram.desktop"]" floating disable
