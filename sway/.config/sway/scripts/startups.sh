@@ -30,3 +30,5 @@ swaymsg "focus_on_window_activation focus"
 
 # setting keyboard layout
 swaymsg 'input * xkb_layout "us,ru"'
+
+swaymsg "[app_id="org.telegram.desktop"]" floating disable
