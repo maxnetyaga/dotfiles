@@ -23,13 +23,13 @@ class Rofi:
 
 def show_menu(languages: list[tuple[str, str]]):
     rofi = Rofi()
-    tmp = Path("./lang")
+    tmp = Path("~/.config/rofi/scripts/lang").expanduser()
     tmp.touch()
 
     names, codes = zip(*languages)
 
     code = tmp.read_text()
-    code_i = codes.index(code) if code else 0
+    code_i = codes.index(code) if code and code in codes else 0
 
     code_i = rofi.select("Select layout", names, code_i)
     code = tmp.write_text(codes[code_i])
