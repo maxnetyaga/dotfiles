@@ -27,7 +27,7 @@ window#waybar {
 #workspaces button.focused {
     background: #7f78c1;
     border-radius: 1px;
-    border-bottom: 3px solid #adc178;
+    /* border-bottom: 3px solid #adc178; */
 }
 
 #clock,
@@ -36,7 +36,7 @@ window#waybar {
 #custom-ddcutil,
 #pulseaudio,
 #mpris {
-    padding: 8px 6px;
+    padding: 0px 6px;
     padding-right: 11px;
     border-right: 2px solid #adc178;
     margin: 0 3px;
@@ -54,6 +54,7 @@ window#waybar {
 
 #mpris {
     padding-left: 11px;
+    min-height: 26px;
     border-left: 2px solid #7f78c1;
     border-right: 2px solid #7f78c1;
 }

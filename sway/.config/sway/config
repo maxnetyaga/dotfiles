@@ -271,10 +271,14 @@ mode "resize" {
     bindsym Mod1+Tab exec rofi -show window
     # Emoji picker
     bindsym $mod+m exec rofi -modi emoji -show emoji -kb-secondary-copy "" -kb-custom-1 Ctrl+c
+    # Notifications
+    # $mod+n
+    bindcode $mod+57 exec swaync-client -t -sw
 #
 # Autostart:
 #
     exec waybar
+    exec swaync
     exec nm-applet
     exec blueman-applet
     exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
