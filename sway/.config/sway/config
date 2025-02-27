@@ -278,7 +278,7 @@ mode "resize" {
 # Autostart:
 #
     exec waybar
-    exec swaync
+    # exec swaync
     exec nm-applet
     exec blueman-applet
     exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
