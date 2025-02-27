@@ -12,14 +12,10 @@ set $down j
 set $up k
 set $right l
 
-# Your preferred terminal emulator
+# App aliases
 set $term alacritty
-
 set $files nemo
-
-set $browser firefox
-
-# Your preferred application launcher
+set $browser chromium
 set $menu rofi -show combi
 
 #

@@ -3,7 +3,7 @@
 toolwait=$XDG_CONFIG_HOME/sway/scripts/toolwait
 
 swaymsg "workspace number 1"
-$toolwait --nocheck firefox --waitfor firefox
+$toolwait --nocheck chromium --waitfor chromium
 
 swaymsg "workspace number 2"
 $toolwait --nocheck alacritty --waitfor alacritty
@@ -33,3 +33,5 @@ swaymsg 'input * xkb_layout "us,ru"'
 echo -n "us,ru" >| $XDG_CONFIG_HOME/rofi/scripts/lang
 
 swaymsg "[app_id="org.telegram.desktop"]" floating disable
+
+exec localsend --hidden
