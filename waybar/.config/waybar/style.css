@@ -22,11 +22,11 @@ window#waybar {
     padding: 0 5px;
     background: transparent;
     color: #f0ead2;
-    border-bottom: 3px solid transparent;
 }
 
 #workspaces button.focused {
-    /* background: #f0ead2; */
+    background: #7f78c1;
+    border-radius: 1px;
     border-bottom: 3px solid #adc178;
 }
 
@@ -38,14 +38,25 @@ window#waybar {
 #mpris {
     padding: 8px 6px;
     padding-right: 11px;
-    margin: 0 3px;
     border-right: 2px solid #adc178;
+    margin: 0 3px;
     min-width: 0;
 }
 
 /* #clock {
     border-right: none;
 } */
+
+#pulseaudio {
+    padding-left: 11px;
+    border-left: 2px solid #adc178;
+}
+
+#mpris {
+    padding-left: 11px;
+    border-left: 2px solid #7f78c1;
+    border-right: 2px solid #7f78c1;
+}
 
 #language {
     min-width: 65px;

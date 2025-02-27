@@ -15,10 +15,10 @@ swaymsg "workspace number 4"
 $toolwait --nocheck nautilus --waitfor nautilus
 
 swaymsg "workspace number 5"
-$toolwait --nocheck spotify --waitfor spotify
+$toolwait --nocheck telegram-desktop --waitfor telegram-desktop
 
 swaymsg "workspace number 6"
-$toolwait --nocheck telegram-desktop --waitfor telegram-desktop
+$toolwait --nocheck spotify --waitfor spotify
 
 swaymsg "workspace number 7"
 $toolwait --nocheck thunderbird --waitfor thunderbird
