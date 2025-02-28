@@ -16,7 +16,7 @@ set $right l
 set $term alacritty
 set $files nemo
 set $browser chromium
-set $menu rofi -show combi
+set $menu rofi -show drun
 
 #
 ### Output configuration
@@ -58,7 +58,10 @@ bindcode $mod+53 exec rofi -show power-menu -modi "power-menu:rofi-power-menu --
     bindcode 274 kill
 
     # Start your launcher
+    # $mod+Space
     bindcode $mod+65 exec $menu
+    # $mod+l
+    bindcode $mod+46 exec rofi -show run
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
