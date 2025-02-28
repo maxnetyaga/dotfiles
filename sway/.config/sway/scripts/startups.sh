@@ -15,7 +15,7 @@ swaymsg "workspace number 4"
 $toolwait --nocheck nautilus --waitfor nautilus
 
 swaymsg "workspace number 5"
-$toolwait --nocheck telegram-desktop --waitfor telegram-desktop
+$toolwait --nocheck ./run_telegram.sh --waitfor org.telegram.desktop
 
 swaymsg "workspace number 6"
 $toolwait --nocheck spotify --waitfor spotify
