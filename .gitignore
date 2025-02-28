@@ -1,3 +1,4 @@
 ssh/.ssh/*
 
 !ssh/.ssh/config
+rofi/.config/rofi/scripts/lang

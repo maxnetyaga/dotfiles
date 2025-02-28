@@ -202,6 +202,8 @@ bindcode $mod+53 exec rofi -show power-menu -modi "power-menu:rofi-power-menu --
 
         [app_id="qalculate-gtk"] floating enable
 
+        [app_id="com.github.rajsolai.textsnatcher"] floating enable
+
         [window_role="pop-up"] floating enable
         [window_role="bubble"] floating enable
         [window_role="dialog"] floating enable
