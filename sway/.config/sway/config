@@ -61,7 +61,7 @@ bindcode $mod+53 exec rofi -show power-menu -modi "power-menu:rofi-power-menu --
     # $mod+Space
     bindcode $mod+65 exec $menu
     # $mod+l
-    bindcode $mod+46 exec rofi -show run
+    # bindcode $mod+46 exec rofi -show run
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -179,19 +179,29 @@ bindcode $mod+53 exec rofi -show power-menu -modi "power-menu:rofi-power-menu --
     for_window {
         [app_id="org.telegram.desktop"] floating enable
         [app_id="org.telegram.desktop"] move position center
+
         [app_id="blueman-manager"] floating enable
+
+        [app_id="Alacritty"] move workspace 2
+        [app_id="Alacritty"] focus
+
         [instance="code"] move workspace 3
         [instance="code"] focus
+
         [app_id="org.gnome.Nautilus"] move workspace 4
         [app_id="org.gnome.Nautilus"] focus
 
         [title="Extension: \(Bitwarden Password Manager\) - Bitwarden — Mozilla Firefox"] floating enable
+
         [title="btop"] floating enable
         [title="btop"] resize set 1200 900
+
         [app_id="org.gnome.NautilusPreviewer"] floating enable
+
         [app_id="org.pulseaudio.pavucontrol"] floating enable
+
         [app_id="qalculate-gtk"] floating enable
-        [app_id="qalculate-gtk"] floating enable
+
         [window_role="pop-up"] floating enable
         [window_role="bubble"] floating enable
         [window_role="dialog"] floating enable

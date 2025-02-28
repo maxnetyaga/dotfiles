@@ -154,6 +154,7 @@ alias shconfig="$EDITOR ~/.zshrc"
 alias vim="nvim"
 alias ssh-keygen-tagged='ssh-keygen -C "$(hostname)-$(date +%Y-%m-%d)"'
 alias restow="stow -R"
+alias wine-ru="LC_ALL='ru_RU.UTF-8' wine"
 # alias code="code --disable-gpu-compositing"
 
 # Functions
