@@ -9,7 +9,7 @@ export XDG_CURRENT_DESKTOP=sway
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 export QT_QPA_PLATFORMTHEME=qt6ct
 export GTK_USE_PORTAL=1
-# export ELECTRON_OZONE_PLATFORM_HINT=auto
+export PATH="$PATH:$HOME/bin/rofi-translate"
 
 
 if [ -z "$WAYLAND_DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then

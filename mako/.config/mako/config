@@ -2,7 +2,7 @@
 #   man 5 mako
 # To view all configuration options.
 
-font=ComicShannsMono Nerd Font Propo
+font=ComicShannsMono Nerd Font Propo 10
 sort=-time
 layer=overlay
 anchor=bottom-right

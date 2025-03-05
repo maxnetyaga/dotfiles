@@ -138,15 +138,16 @@ eval "$(pyenv init - bash)"
 export TIME_STYLE=long-iso
 export TERM=xterm-256color
 
-export EDITOR=nvim
+export EDITOR=code
+export SUDO_EDITOR="code --wait"
 export GIT_EDITOR=nvim
 export PAGER=moar
 export LESS='--mouse'
 
 # Adding rust binaries to PATH
-export PATH="$PATH:$HOME.cargo/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 # Addind personal scripts to PATH
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/bin"
 
 # Aliases
 alias pdftohtmldef="pdftohtml -s -i -noframes"
@@ -160,6 +161,7 @@ alias wine-ru="LC_ALL='ru_RU.UTF-8' wine"
 # Functions
 cl() { cd "$@" && ls -A; }
 zl() { z "$@" && ls -A; }
+reboot () { echo 'Reboot? (y/n)' && read x && [[ "$x" == "y" ]] && /sbin/reboot; }
 
 # Tmux autostart
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then

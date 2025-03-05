@@ -1,8 +1,8 @@
 # Read `man 5 sway` for a complete reference.
 
-#
-### Variables
-#
+
+### Variables #################################################################
+
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 
@@ -18,288 +18,330 @@ set $files nemo
 set $browser chromium
 set $menu rofi -show drun
 
-#
-### Output configuration
-#
-output * bg /home/max/Themes/Wallpapers/Impressionnisme/Claude_Monet_2.jpg fill
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+###############################################################################
 
-#
-### Idle configuration
-#
-exec swayidle -w \
-         timeout 600 'swaymsg "output * power off"' \
-         timeout 600 'swaylock -f -i /home/max/Themes/Wallpapers/Impressionnisme/Claude_Monet_2.jpg' \
-         resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -i /home/max/Themes/Wallpapers/Impressionnisme/Claude_Monet_2.jpg'
 
-bindcode $mod+53 exec rofi -show power-menu -modi "power-menu:rofi-power-menu --choices=shutdown/reboot/logout"
-
-#
-### Input configuration
-#
+### Input configuration #######################################################
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
-    input * {
-        xkb_layout "us,ru,ua"
-        xkb_options "grp:rshift_toggle"
-    }
-
-    bindcode $mod+27 exec $XDG_CONFIG_HOME/rofi/scripts/language_switcher.py
-
-#
-### Key bindings
-#
-# Basics:
-#
-    # Kill focused window
-    bindsym $mod+q kill
-    bindcode 274 kill
-
-    # Start your launcher
-    # $mod+Space
-    bindcode $mod+65 exec $menu
-    # $mod+l
-    # bindcode $mod+46 exec rofi -show run
-
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
-
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
-
-    # Lock screen
-    bindsym $mod+Shift+d exec "swaylock -f -i /home/max/Themes/Wallpapers/Impressionnisme/Claude_Monet_2.jpg"
-    # $mod+Shift+m
-    bindcode --locked $mod+Shift+58 exec "swaymsg 'output DP-1 power toggle'"
-
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
-
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
-#
-# Workspaces:
-#
-    # Switch to workspace
-    bindcode $mod+112 workspace prev
-    bindcode $mod+117 workspace next
-
-    bindsym $mod+1 workspace number 1
-    # $mod+f
-    bindcode $mod+41 workspace number 1
-
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+Return workspace number 2
-
-    bindsym $mod+3 workspace number 3
-    # $mod+c
-    bindcode $mod+54 workspace number 3
-
-    bindsym $mod+4 workspace number 4
-    bindcode $mod+26 workspace number 4
-
-    bindsym $mod+5 workspace number 5
-    bindcode $mod+28 workspace number 5
-
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
-    # Move focused container to workspace
-    bindsym $mod+F1 move container to workspace number 1
-    bindsym $mod+F2 move container to workspace number 2
-    bindsym $mod+F3 move container to workspace number 3
-    bindsym $mod+F4 move container to workspace number 4
-    bindsym $mod+F5 move container to workspace number 5
-    bindsym $mod+F6 move container to workspace number 6
-    bindsym $mod+F7 move container to workspace number 7
-    bindsym $mod+F8 move container to workspace number 8
-    bindsym $mod+F9 move container to workspace number 9
-    bindsym $mod+F10 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
-#
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    # bindsym $mod+b splith
-    # bindsym $mod+v splitv
-
-    # Switch the current container between different layout styles
-    # bindsym $mod+s layout stacking
-
-    # $mod+w
-    bindcode $mod+25 layout tabbed
-    # $mod+s
-    bindcode $mod+39 layout toggle split
-
-    # Make the current focus fullscreen
-    # $mod+shift+f
-    bindcode $mod+shift+41 fullscreen
-
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+p floating toggle
-
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+Shift+space focus mode_toggle
-
-    # Move focus to the parent container
-    bindsym $mod+a focus parent
-
-    for_window {
-        [app_id="org.telegram.desktop"] floating enable
-        [app_id="org.telegram.desktop"] move position center
-
-        [app_id="blueman-manager"] floating enable
-
-        [app_id="Alacritty"] move workspace 2
-        [app_id="Alacritty"] focus
-
-        [instance="code"] move workspace 3
-        [instance="code"] focus
-
-        [app_id="org.gnome.Nautilus"] move workspace 4
-        [app_id="org.gnome.Nautilus"] focus
-
-        [title="Extension: \(Bitwarden Password Manager\) - Bitwarden — Mozilla Firefox"] floating enable
-
-        [title="btop"] floating enable
-        [title="btop"] resize set 1200 900
-
-        [app_id="org.gnome.NautilusPreviewer"] floating enable
-
-        [app_id="org.pulseaudio.pavucontrol"] floating enable
-
-        [app_id="qalculate-gtk"] floating enable
-
-        [app_id="com.github.rajsolai.textsnatcher"] floating enable
-
-        [window_role="pop-up"] floating enable
-        [window_role="bubble"] floating enable
-        [window_role="dialog"] floating enable
-        [window_type="dialog"] floating enable
-    }
-
-    assign {
-        [app_id="code"] workspace 3
-        [instance="code"] workspace 3
-    }
-
-    workspace_layout tabbed
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
-
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
-
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
-#
-# Resizing containers:
-#
-mode "resize" {
-    # Grow/shrink the containers width
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
-
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
-
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+input * {
+    xkb_layout "us,ru,ua"
+    xkb_options "grp:rshift_toggle"
 }
 
+###############################################################################
+
+
+### Output configuration ######################################################
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+# Wallpapers
+output * bg /home/max/Nextcloud/Themes/Wallpapers/Impressionnisme/The_Japanese_Footbridge_and_the_Water_Lily_Pool,_Giverny_.jpg fill
+
+###############################################################################
+
+
+### Idle configuration ########################################################
+
+exec swayidle -w \
+         timeout 600 'swaymsg "output * power off"' \
+        #  timeout 600 'swaylock -f -i /home/max/Themes/Wallpapers/Impressionnisme/Claude_Monet_2.jpg' \
+         resume 'swaymsg "output * power on"' \
+        #  before-sleep 'swaylock -f -i /home/max/Themes/Wallpapers/Impressionnisme/Claude_Monet_2.jpg'
+
+###############################################################################
+
+
+### Layout ####################################################################
+
+# Default layout = tabbed
+workspace_layout tabbed
+
+# Open apps in specific workspaces
+assign {
+    [title="Alacritty"] 2
+    [app_id="code"] 3
+    [instance="code"] 3
+    [app_id="org.gnome.Nautilus"] 4
+}
+
+# Floatin settings
+for_window {
+    [app_id="org.telegram.desktop"] floating enable
+    [app_id="blueman-manager"] floating enable
+    [app_id="org.gnome.clocks"] floating enable
+    [app_id="org.gnome.Characters"] floating enable
+    [title="btop"] floating enable
+    [app_id="org.gnome.NautilusPreviewer"] floating enable
+    [app_id="org.pulseaudio.pavucontrol"] floating enable
+    [app_id="qalculate-gtk"] floating enable
+    [app_id="com.github.rajsolai.textsnatcher"] floating enable
+    [window_role="pop-up"] floating enable
+    [window_role="bubble"] floating enable
+    [window_role="dialog"] floating enable
+    [window_type="dialog"] floating enable
+}
+
+# Focus apps on start
+for_window {
+    [title="Alacritty"] focus
+    [instance="code"] focus
+    [app_id="org.gnome.Nautilus"] focus
+}
+
+# Other for_window rules
+for_window {
+    [app_id="org.telegram.desktop"] move position center
+    [title="btop"] resize set 1200 900
+}
+
+###############################################################################
+
+
+### Keybindings ###############################################################
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
+
+
+### Moving around ###
+
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# Or use $mod+[up|down|left|right]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+
+### Workspaces ###
+
+# Switch to prev/next workspace
+bindcode $mod+112 workspace prev
+bindcode $mod+117 workspace next
+
+# Switch to numbered/named workspaces
+bindsym $mod+1 workspace number 1
+# $mod+f
+bindcode $mod+41 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+Return workspace number 2
+bindsym $mod+3 workspace number 3
+# $mod+c
+bindcode $mod+54 workspace number 3
+bindsym $mod+4 workspace number 4
+bindcode $mod+26 workspace number 4
+bindsym $mod+5 workspace number 5
+# $mod+t
+bindcode $mod+28 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# Move focused container to workspace
+bindsym $mod+F1 move container to workspace number 1
+bindsym $mod+F2 move container to workspace number 2
+bindsym $mod+F3 move container to workspace number 3
+bindsym $mod+F4 move container to workspace number 4
+bindsym $mod+F5 move container to workspace number 5
+bindsym $mod+F6 move container to workspace number 6
+bindsym $mod+F7 move container to workspace number 7
+bindsym $mod+F8 move container to workspace number 8
+bindsym $mod+F9 move container to workspace number 9
+bindsym $mod+F10 move container to workspace number 10
+
+
+### Windows control ###
+
+# Kill focused window
+# $mod+q
+bindcode $mod+24 kill
+bindcode 274 kill
+
+# Toggle tabbed layout
+# $mod+w
+bindcode $mod+25 layout tabbed
+
+# Toggle split layout
+# $mod+s
+bindcode $mod+39 layout toggle split
+
+# Make the current focus fullscreen
+# $mod+shift+f
+bindcode $mod+shift+41 fullscreen
+
+# Toggle the current focus between tiling and floating mode
+# $mod+p
+bindcode $mod+33 floating toggle
+
+# Swap focus between the tiling area and the floating area
+bindsym $mod+Shift+space focus mode_toggle
+
+# Move focus to the parent container
+# bindsym $mod+a focus parent
+
+
+### Scratchpad ###
+
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+# bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+# bindsym $mod+minus scratchpad show
+
+
+### Resizing containers ###
+
 # bindsym $mod+r mode "resize"
-#
-# Utilities:
-#
-    # Special keys to adjust volume via PulseAudio
-    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
-    # Media playback control
-    bindsym --locked XF86AudioPlay exec playerctl play-pause
-    bindsym --locked XF86AudioStop exec playerctl play-pause
-    bindsym --locked XF86AudioNext exec playerctl next
-    bindsym --locked XF86AudioPrev exec playerctl previous
-    # Special keys to adjust brightness
-    bindcode --locked $mod+59 exec echo '-' > /tmp/waybar-ddc-module-rx
-    bindcode --locked $mod+60 exec echo '+' > /tmp/waybar-ddc-module-rx
-    # Calculator
-    bindsym --locked XF86Calculator exec rofi -show calc -modi calc -no-show-match -no-sort
-    # Screenshot with grim
-    bindsym Print exec grim -g "$($XDG_CONFIG_HOME/sway/scripts/runonce.sh slurp)" - | swappy -f -
-    bindsym $mod+Print exec $XDG_CONFIG_HOME/sway/scripts/window-screenshot.sh
-    # bindsym $mod+u exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
-    # Zoomt
-    bindsym $mod+z exec $XDG_CONFIG_HOME/sway/scripts/runonce.sh woomer
-    # Clipboard tool
-    exec wl-paste --watch cliphist store
-    # $mod+v
-    bindcode $mod+55 exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
-    # Window picker
-    bindsym Mod1+Tab exec rofi -show window
-    # Emoji picker
-    bindsym $mod+m exec rofi -modi emoji -show emoji -kb-secondary-copy "" -kb-custom-1 Ctrl+c
-    # Notifications
-    # $mod+n
-    bindcode $mod+57 exec swaync-client -t -sw
-#
-# Autostart:
-#
-    exec waybar
-    # exec swaync
-    exec nm-applet
-    exec blueman-applet
-    exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# mode "resize" {
+#     # Grow/shrink the containers width
+#     bindsym $left resize shrink width 10px
+#     bindsym $down resize grow height 10px
+#     bindsym $up resize shrink height 10px
+#     bindsym $right resize grow width 10px
 
-    exec $HOME/.config/sway/scripts/startups.sh
+#     # Ditto, with arrow keys
+#     bindsym Left resize shrink width 10px
+#     bindsym Down resize grow height 10px
+#     bindsym Up resize shrink height 10px
+#     bindsym Right resize grow width 10px
 
-#
-# Other stuff:
-#
-    exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
-    exec systemctl --user import-environment DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-    exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY
-    exec --no-startup-id systemctl start --user sway-session.service
+#     # Return to default mode
+#     bindsym Return mode "default"
+#     bindsym Escape mode "default"
+# }
+
+
+### Menus ###
+
+# Launcher
+# $mod+Space
+bindcode $mod+65 exec $menu
+
+# Rofi run
+# $mod+Shift+r
+bindcode $mod+Shift+27 exec rofi -show run
+
+# Window picker
+bindsym Mod1+Tab exec rofi -show window
+
+# Language switcher
+# $mod+r
+bindcode $mod+27 exec $XDG_CONFIG_HOME/rofi/scripts/language_switcher.py
+
+# Clipboard history
+# $mod+v
+bindcode $mod+55 exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
+
+# Calculator
+bindsym XF86Calculator exec rofi -show calc -modi calc -no-show-match -no-sort
+
+# Emoji picker
+# $mod+m
+bindcode $mod+58 exec rofi -modi emoji -show emoji -kb-secondary-copy "" -kb-custom-1 Ctrl+c
+
+
+### Power control ###
+
+# Power menu
+# $mod+x
+bindcode $mod+53 exec rofi -show power-menu -modi "power-menu:rofi-power-menu --choices=shutdown/reboot/logout"
+
+# Lock screen
+# $mod+Shift+d
+bindcode $mod+Shift+40 exec "swaylock -f -i /home/max/Themes/Wallpapers/Impressionnisme/Claude_Monet_2.jpg"
+
+# Turn off screen
+# $mod+Shift+m
+bindcode --locked $mod+Shift+58 exec "swaymsg 'output DP-1 power toggle'"
+
+
+### Media control ###
+
+# Volume control
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+# Media playback control
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioStop exec playerctl play-pause
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
+
+
+### Screen control ###
+
+# Brightness
+bindcode --locked $mod+59 exec echo '-' > /tmp/waybar-ddc-module-rx
+bindcode --locked $mod+60 exec echo '+' > /tmp/waybar-ddc-module-rx
+
+
+### Utilities ###
+
+# Screenshots
+bindsym Print exec grim -g "$($XDG_CONFIG_HOME/sway/scripts/runonce.sh slurp)" - | wl-copy
+bindsym $mod+Print exec grim -g "$($XDG_CONFIG_HOME/sway/scripts/runonce.sh slurp)" - | swappy -f -
+bindsym $mod+Shift+Print exec $XDG_CONFIG_HOME/sway/scripts/window-screenshot.sh
+
+# Zoom
+# $mod+z
+bindcode $mod+52 exec $XDG_CONFIG_HOME/sway/scripts/runonce.sh woomer
+
+
+### Other ###
+
+# Reload the configuration file
+# $mod+Shift+c
+bindcode $mod+Shift+54 reload
+
+###############################################################################
+
+
+### Startup ###################################################################
+
+### System ###
+
+exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
+exec systemctl --user import-environment DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY
+exec --no-startup-id systemctl start --user sway-session.service
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec wl-paste --watch cliphist store
+
+### Waybar ###
+
+exec waybar
+exec nm-applet
+exec blueman-applet
+
+### Scripts ###
+
+exec $HOME/.config/sway/scripts/startups.sh

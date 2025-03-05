@@ -161,5 +161,6 @@
     "workbench.tree.renderIndentGuides": "always",
     "workbench.colorTheme": "Rubber",
     "workbench.layoutControl.enabled": false,
-    "workbench.editor.enablePreviewFromQuickOpen": true
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+    "terminal.integrated.defaultProfile.linux": "zsh"
 }
