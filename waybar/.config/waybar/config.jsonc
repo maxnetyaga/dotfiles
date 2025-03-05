@@ -15,7 +15,8 @@
     // modules-right
 
     "clock": {
-        "format": "{:%a, %d. %b | %H:%M}",
+        "format": "{:%Y-%m-%d, %a | %H:%M:%S}",
+        "interval": 5,
         "tooltip": false
     },
 
