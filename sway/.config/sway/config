@@ -56,7 +56,7 @@ workspace_layout tabbed
 
 # Open apps in specific workspaces
 assign {
-    [title="Alacritty"] 2
+    # [title="Alacritty"] 2
     [app_id="code"] 3
     [instance="code"] 3
     [app_id="org.gnome.Nautilus"] 4
@@ -68,11 +68,13 @@ for_window {
     [app_id="blueman-manager"] floating enable
     [app_id="org.gnome.clocks"] floating enable
     [app_id="org.gnome.Characters"] floating enable
+    [app_id="org.gnome.font-viewer"] floating enable
     [title="btop"] floating enable
     [app_id="org.gnome.NautilusPreviewer"] floating enable
     [app_id="org.pulseaudio.pavucontrol"] floating enable
     [app_id="qalculate-gtk"] floating enable
     [app_id="com.github.rajsolai.textsnatcher"] floating enable
+    [title="clipse"] floating enable
     [window_role="pop-up"] floating enable
     [window_role="bubble"] floating enable
     [window_role="dialog"] floating enable
@@ -245,7 +247,7 @@ bindcode $mod+65 exec $menu
 bindcode $mod+Shift+27 exec rofi -show run
 
 # Window picker
-bindsym Mod1+Tab exec rofi -show window
+bindsym $mod+Tab exec rofi -show window
 
 # Language switcher
 # $mod+r
@@ -253,7 +255,7 @@ bindcode $mod+27 exec $XDG_CONFIG_HOME/rofi/scripts/language_switcher.py
 
 # Clipboard history
 # $mod+v
-bindcode $mod+55 exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
+bindcode $mod+55 exec alacritty -T clipse -e sh -c clipse
 
 # Calculator
 bindsym XF86Calculator exec rofi -show calc -modi calc -no-show-match -no-sort
@@ -321,6 +323,13 @@ bindcode $mod+Shift+54 reload
 ###############################################################################
 
 
+### Style #####################################################################
+
+font pango:ComicShannsMono Nerd Font 11
+
+###############################################################################
+
+
 ### Startup ###################################################################
 
 ### System ###
@@ -330,7 +339,8 @@ exec systemctl --user import-environment DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CU
 exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY
 exec --no-startup-id systemctl start --user sway-session.service
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec wl-paste --watch cliphist store
+exec sway-alttab
+exec clipse -listen 
 
 ### Waybar ###
 

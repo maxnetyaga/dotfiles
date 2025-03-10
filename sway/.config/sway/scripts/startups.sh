@@ -2,6 +2,8 @@
 
 toolwait=$XDG_CONFIG_HOME/sway/scripts/toolwait
 run_telegram=$XDG_CONFIG_HOME/sway/scripts/run_telegram.sh
+run_spotify=$XDG_CONFIG_HOME/sway/scripts/run_spotify.sh
+
 
 swaymsg "workspace number 1"
 $toolwait --nocheck chromium --waitfor chromium
@@ -19,8 +21,7 @@ swaymsg "workspace number 5"
 $toolwait --nocheck $run_telegram --waitfor org.telegram.desktop
 
 swaymsg "workspace number 6"
-$toolwait --nocheck spotify --waitfor spotify
-
+$toolwait --nocheck $run_spotify --waitfor chrome-pjibgclleladliembfgfagdaldikeohf-Defaul
 swaymsg "workspace number 7"
 $toolwait --nocheck thunderbird --waitfor thunderbird
 
