@@ -340,7 +340,7 @@ exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activati
 exec --no-startup-id systemctl start --user sway-session.service
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec sway-alttab
-exec clipse -listen 
+exec clipse -listen
 
 ### Waybar ###
 

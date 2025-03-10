@@ -4,6 +4,7 @@ toolwait=$XDG_CONFIG_HOME/sway/scripts/toolwait
 run_telegram=$XDG_CONFIG_HOME/sway/scripts/run_telegram.sh
 run_spotify=$XDG_CONFIG_HOME/sway/scripts/run_spotify.sh
 
+swaymsg 'input * events disabled'
 
 swaymsg "workspace number 1"
 $toolwait --nocheck chromium --waitfor chromium
@@ -35,5 +36,8 @@ swaymsg 'input * xkb_layout "us,ru"'
 echo -n "us,ru" >| $XDG_CONFIG_HOME/rofi/scripts/lang
 
 swaymsg "[app_id="org.telegram.desktop"]" floating disable
+
+# can cause problems
+swaymsg 'input * events enabled'
 
 exec localsend --hidden
