@@ -70,11 +70,13 @@ for_window {
     [app_id="org.gnome.Characters"] floating enable
     [app_id="org.gnome.font-viewer"] floating enable
     [title="btop"] floating enable
+    [class="zoom"] floating enable
     [app_id="org.gnome.NautilusPreviewer"] floating enable
     [app_id="org.pulseaudio.pavucontrol"] floating enable
     [app_id="qalculate-gtk"] floating enable
     [app_id="com.github.rajsolai.textsnatcher"] floating enable
     [title="clipse"] floating enable
+    [app_id="org.gnome.FileRoller"] floating enable
     [window_role="pop-up"] floating enable
     [window_role="bubble"] floating enable
     [window_role="dialog"] floating enable
@@ -255,7 +257,7 @@ bindcode $mod+27 exec $XDG_CONFIG_HOME/rofi/scripts/language_switcher.py
 
 # Clipboard history
 # $mod+v
-bindcode $mod+55 exec alacritty -T clipse -e sh -c clipse
+bindcode $mod+55 exec cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy
 
 # Calculator
 bindsym XF86Calculator exec rofi -show calc -modi calc -no-show-match -no-sort
@@ -340,7 +342,8 @@ exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activati
 exec --no-startup-id systemctl start --user sway-session.service
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec sway-alttab
-exec clipse -listen
+exec rm ~/.cache/cliphist/db 
+exec wl-paste --watch cliphist store
 
 ### Waybar ###
 

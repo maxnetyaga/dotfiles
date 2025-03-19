@@ -30,7 +30,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[markdown]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
@@ -162,5 +162,16 @@
     "workbench.colorTheme": "Rubber",
     "workbench.layoutControl.enabled": false,
     "workbench.editor.enablePreviewFromQuickOpen": true,
-    "terminal.integrated.defaultProfile.linux": "zsh"
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[go]": {
+        "editor.insertSpaces": false,
+        "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "never"
+        }
+    }
 }
