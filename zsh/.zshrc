@@ -1,17 +1,18 @@
 # Program Inits #--------------------------------------------------------------
 
+export XDG_CONFIG_HOME=$HOME/.config
+
 # Oh-my-zsh Init
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="alanpeabody"
 plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
+
 # NVM Init
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] \
-	&& printf %s "${HOME}/.nvm" \
-	|| printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # PYENV Init
 export PYENV_ROOT="$HOME/.pyenv"
@@ -31,6 +32,7 @@ export TERM=xterm-256color
 
 # export ZSH_COMPDUMP=~/.cache/zsh/.zcompdump
 
+export PAGER=moar
 export EDITOR=nvim
 export GIT_EDITOR=nvim
 
