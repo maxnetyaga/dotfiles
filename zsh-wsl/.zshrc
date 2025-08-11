@@ -90,3 +90,6 @@ alias py='uv run'
 cl() { cd "$@" && ls -A; }
 zl() { z "$@" && ls -A; }
 
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
