@@ -89,6 +89,13 @@ alias py='uv run'
 # Functions
 cl() { cd "$@" && ls -A; }
 zl() { z "$@" && ls -A; }
+lf() {
+    local selected
+    selected=$(fzf --bind "start:reload:rg --files --color=never --encoding UTF-8")
+    if [[ -n "$selected" ]]; then
+        echo "$selected" | copy
+    fi
+}
 
 
 # Generated for envman. Do not edit.
