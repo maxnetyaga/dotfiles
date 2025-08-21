@@ -14,6 +14,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="candy"
 
 plugins=(
+  fzf
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
@@ -100,3 +101,7 @@ lf() {
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --color=always'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="--ansi"
