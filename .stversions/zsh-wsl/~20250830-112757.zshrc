@@ -35,10 +35,6 @@ eval "$(uvx --generate-shell-completion zsh)"
 
 ### User configuration ###-----------------------------------------------------
 
-if [ -f ~/.host_specific_vars ]; then
-  source ~/.host_specific_vars
-fi
-
 HISTFILE=~/.zsh_history
 HISTSIZE=40000
 SAVEHIST=999999999
@@ -58,6 +54,8 @@ export SUDO_EDITOR='code --wait'
 export GIT_EDITOR=nvim
 
 export LESS='--mouse'
+
+export WINHOME=$PATH:/mnt/c/Users/netya
 
 # Adding rust binaries to PATH
 export PATH="$PATH:$HOME/.cargo/bin"
