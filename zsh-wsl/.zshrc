@@ -1,9 +1,9 @@
-for i in "/mnt/wslg/runtime-dir/"*; do
-  if [ ! -L "$XDG_RUNTIME_DIR$(basename "$i")" ]; then
-    [ -d "$XDG_RUNTIME_DIR$(basename "$i")" ] && rm -r "$XDG_RUNTIME_DIR$(basename "$i")"
-    ln -s "$i" "$XDG_RUNTIME_DIR$(basename "$i")"
-  fi
-done
+# for i in "/mnt/wslg/runtime-dir/"*; do
+#   if [ ! -L "$XDG_RUNTIME_DIR$(basename "$i")" ]; then
+#     [ -d "$XDG_RUNTIME_DIR$(basename "$i")" ] && rm -r "$XDG_RUNTIME_DIR$(basename "$i")"
+#     ln -s "$i" "$XDG_RUNTIME_DIR$(basename "$i")"
+#   fi
+# done
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
