@@ -13,14 +13,28 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="candy"
 
-plugins=(
+ plugins=(
   fzf
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
   you-should-use
   docker
-)
+  tmux
+  tmuxinator
+  ssh
+  zsh-interactive-cd
+  httpie
+  nvm
+  npm
+  pip
+  python
+  redis-cli
+  postgres
+  colored-man-pages
+  cp
+ )
+
 source $ZSH/oh-my-zsh.sh
 
 # NVM Init
@@ -53,8 +67,8 @@ export LC_ALL=en_DK.UTF-8
 export TERM=xterm-256color
 
 export PAGER=moar
-export EDITOR='code --wait'
-export SUDO_EDITOR='code --wait'
+export EDITOR=nvim
+export SUDO_EDITOR=nvim
 export GIT_EDITOR=nvim
 
 export LESS='--mouse'
