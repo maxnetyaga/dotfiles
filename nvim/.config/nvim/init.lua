@@ -29,7 +29,7 @@ require("conform").formatters.stylua = {
     append_args = { "--indent-type", "Spaces" },
 }
 
-vim.keymap.set({ "n", "v" }, "<leader>f", function()
+vim.keymap.set({ "n", "v" }, "<leader>fr", function()
     require("conform").format({ async = true, lsp_fallback = true })
 end, { desc = "Format file or range" })
 
@@ -59,6 +59,14 @@ require("nvim-treesitter.configs").setup({
 
 --------------------------------------------------------------------------------
 
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
+
+--------------------------------------------------------------------------------
+
 vim.cmd([[colorscheme rubber]])
 vim.cmd([[set termguicolors]])
 
@@ -68,7 +76,7 @@ vim.cmd([[set relativenumber]])
 vim.opt.list = true
 
 vim.opt.listchars = {
-    tab = "» ",
+    tab = "→ ",
     trail = "·",
     extends = "…",
     precedes = "…",
