@@ -1,63 +1,68 @@
-# for i in "/mnt/wslg/runtime-dir/"*; do
-#   if [ ! -L "$XDG_RUNTIME_DIR$(basename "$i")" ]; then
-#     [ -d "$XDG_RUNTIME_DIR$(basename "$i")" ] && rm -r "$XDG_RUNTIME_DIR$(basename "$i")"
-#     ln -s "$i" "$XDG_RUNTIME_DIR$(basename "$i")"
-#   fi
-# done
-
 export XDG_CONFIG_HOME="$HOME/.config"
 
-### Inits ###------------------------------------------------------------------
+# OH-MY-ZSH ###################################################################
 
-# Oh-my-zsh Init
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="candy"
+export ZSH_THEME="candy"
 
- plugins=(
-  fzf
-  git
-  zsh-syntax-highlighting
-  zsh-autosuggestions
-  you-should-use
-  docker
-  tmux
-  tmuxinator
-  ssh
-  zsh-interactive-cd
-  httpie
-  nvm
-  npm
-  pip
-  python
-  redis-cli
-  postgres
-  colored-man-pages
-  cp
- )
+plugins=(
+    fzf
+    git
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    you-should-use
+    docker
+    tmux
+    tmuxinator
+    ssh
+    zsh-interactive-cd
+    httpie
+    nvm
+    npm
+    pip
+    python
+    redis-cli
+    postgres
+    colored-man-pages
+    cp
+)
 
 source $ZSH/oh-my-zsh.sh
 
-# NVM Init
-source /usr/share/nvm/init-nvm.sh
+# SOME INITS ##################################################################
 
+# NVM
+source /usr/share/nvm/init-nvm.sh
 # Zoxide Init
 eval "$(zoxide init zsh)"
-
-# Uv Init
+# UV Init
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-### User configuration ###-----------------------------------------------------
+# User configuration ##########################################################
 
 if [ -f ~/.host_specific_vars ]; then
-  source ~/.host_specific_vars
+    source ~/.host_specific_vars
 fi
+
+export PATH="$PATH:$HOME/.local/bin"
+# Adding rust binaries to PATH
+export PATH="$PATH:$HOME/.cargo/bin"
+# Adding go binaries to PATH
+export PATH="$PATH:$HOME/go/bin"
+# Adding wsl VSCode to PATH
+export PATH="$PATH:$WINHOME/AppData/Local/Programs/Microsoft VS Code/bin"
+# Addind personal scripts to PATH
+export PATH="$PATH:$HOME/bin"
 
 HISTFILE=~/.zsh_history
 HISTSIZE=40000
 SAVEHIST=999999999
 
 unsetopt BEEP
+setopt CORRECT
 
 export TIME_STYLE=long-iso
 
@@ -73,21 +78,11 @@ export GIT_EDITOR=nvim
 
 export LESS='--mouse'
 
-# Adding rust binaries to PATH
-export PATH="$PATH:$HOME/.cargo/bin"
+export FZF_DEFAULT_COMMAND='fd --type file --type dir --follow --hidden --color=always'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="--ansi"
 
-# Adding go binaries to PATH
-export PATH="$PATH:$HOME/go/bin"
-
-# Addind personal scripts to PATH
-export PATH="$PATH:$HOME/bin"
-
-# Adding wsl VSCode to PATH
-export PATH="$PATH:$WINHOME/AppData/Local/Programs/Microsoft VS Code/bin"
-
-export PATH="$PATH:$HOME/.local/bin"
-
-# Binds
+# Bindings
 bindkey -s ^f "tmux-sessionizer\n"
 
 # Aliases
@@ -116,10 +111,3 @@ lf() {
     fi
 }
 
-
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-
-export FZF_DEFAULT_COMMAND='fd --type file --type dir --follow --hidden --color=always'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS="--ansi"

@@ -17,6 +17,7 @@ return {
         tag = "0.1.8",
         dependencies = { "nvim-lua/plenary.nvim" },
     },
+    { "nvim-tree/nvim-tree.lua" },
     { "lewis6991/gitsigns.nvim" },
 
     ----------------------------------------------------------------------------
