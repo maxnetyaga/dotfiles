@@ -111,3 +111,4 @@ lf() {
     fi
 }
 
+source '/home/max/.config/nvm/versions/node/v22.14.0/lib/node_modules/@hyperupcall/autoenv/activate.sh'
