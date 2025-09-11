@@ -12,7 +12,14 @@ require("conform").setup({
     formatters_by_ft = {
         lua = { "stylua" },
         -- Conform will run multiple formatters sequentially
-        python = { "isort", "black" },
+        python = {
+            -- To fix auto-fixable lint errors.
+            "ruff_fix",
+            -- To run the Ruff formatter.
+            "ruff_format",
+            -- To organize the imports.
+            "ruff_organize_imports",
+        },
         -- You can customize some of the format options for the filetype (:help conform.format)
         rust = { "rustfmt", lsp_format = "fallback" },
         -- Conform will run the first available formatter
@@ -20,6 +27,10 @@ require("conform").setup({
         sh = { "beautysh" },
         zsh = { "beautysh" },
         sql = { "pg_format" },
+    },
+
+    default_format_opts = {
+        lsp_format = "fallback",
     },
 })
 
@@ -33,14 +44,22 @@ require("conform").formatters.stylua = {
 
 --- LSP & Autocompletion ------------------------------------------------------
 
-vim.lsp.codelens = true
-
 vim.diagnostic.config({
-    virtual_text = true,
-    signs = false,
-    underline = true,
+    virtual_text = false,
+    signs = true,
+    underline = false,
     update_in_insert = true,
+    float = {
+        source = true,
+    },
 })
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+-- Enable dynamic registration for watched files
+capabilities.workspace.didChangeWatchedFiles = {
+    dynamicRegistration = true,
+}
 
 vim.lsp.enable("lua_ls")
 vim.lsp.config("lua_ls", {
@@ -98,7 +117,75 @@ vim.lsp.config("lua_ls", {
 })
 
 vim.lsp.enable("bashls")
-vim.lsp.enable("basedpyright")
+
+-- python
+
+require("lspconfig").basedpyright.setup({
+    capabilities = capabilities,
+    settings = {
+        basedpyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+        },
+        python = {
+            analysis = {
+                -- Ignore all files for analysis to exclusively use Ruff for linting
+                ignore = { "*" },
+            },
+        },
+    },
+})
+
+-- require("lspconfig").pylsp.setup({
+--     settings = {
+--         plugins = {
+--             pylsp_rope = { rename = true, enabled = true },
+--             rope_rename = { enabled = false },
+--             jedi_rename = { enabled = false },
+--             autopep8 = { enabled = false },
+--             jedi_definition = { enabled = false },
+--             jedi_hover = { enabled = false },
+--             jedi_signature = { enabled = false },
+--             jedi_references = { enabled = false },
+--             jedi_symbols = { enabled = false },
+--             jedi_type_definition = { enabled = false },
+--             mccabe = { enabled = false },
+--             preload = { enabled = false },
+--             pycodestyle = { enabled = false },
+--             pyflakes = { enabled = false },
+--             rope_autoimports = { enabled = false },
+--             yapf = { enabled = false },
+--         },
+--     },
+-- })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client == nil then
+            return
+        end
+        if client.name == "ruff" then
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+        end
+    end,
+    desc = "LSP: Disable hover capability from Ruff",
+})
+
+vim.lsp.config("ruff", {
+    init_options = {
+        settings = {
+            configuration = vim.fn.expand("~/.config/ruff/ruff.toml"),
+        },
+    },
+})
+
+vim.lsp.enable("ruff")
+
+-- sql
+
 vim.lsp.enable("postgres_lsp")
 
 -------------------------------------------------------------------------------
@@ -145,21 +232,24 @@ require("oil").setup({
             winblend = 0,
         },
     },
+    keymaps = {
+        ["q"] = "actions.close",
+    },
 })
 
 --- Buffer Management ---------------------------------------------------------
 
-require("hbac").setup({
-    autoclose = true, -- set autoclose to false if you want to close manually
-    threshold = 1, -- hbac will start closing unedited buffers once that number is reached
-    close_command = function(bufnr)
-        vim.api.nvim_buf_delete(bufnr, {})
-    end,
-    close_buffers_with_windows = false, -- hbac will close buffers with associated windows if this option is `true`
-    telescope = {
-        -- See #telescope-configuration below
-    },
-})
+-- require("hbac").setup({
+--     autoclose = true, -- set autoclose to false if you want to close manually
+--     threshold = 1, -- hbac will start closing unedited buffers once that number is reached
+--     close_command = function(bufnr)
+--         vim.api.nvim_buf_delete(bufnr, {})
+--     end,
+--     close_buffers_with_windows = false, -- hbac will close buffers with associated windows if this option is `true`
+--     telescope = {
+--         -- See #telescope-configuration below
+--     },
+-- })
 
 --- Better Folds --------------------------------------------------------------
 
@@ -271,6 +361,13 @@ require("commander").add({
         keys = { "n", "gd" },
         cmd = vim.lsp.buf.definition,
         desc = "LSP: Go to Definition",
+    },
+})
+require("commander").add({
+    {
+        keys = { "n", "gt" },
+        cmd = vim.lsp.buf.type_definition,
+        desc = "LSP: Go to Type Definition",
     },
 })
 require("commander").add({
@@ -393,9 +490,28 @@ vim.cmd([[
   hi FloatBorder guibg=NONE
   hi Pmenu guibg=NONE
 ]])
+require("notify").setup({
+    background_colour = "#000000",
+})
 
 vim.cmd([[set number]])
 vim.cmd([[set relativenumber]])
+
+vim.opt.clipboard = "unnamedplus"
+vim.cmd([[
+    let g:clipboard = {
+      \   'name': 'win32yank-wsl',
+      \   'copy': {
+      \      '+': '/mnt/c/Users/netya/bin/win32yank.exe -i --crlf',
+      \      '*': '/mnt/c/Users/netya/bin/win32yank.exe -i --crlf',
+      \    },
+      \   'paste': {
+      \      '+': '/mnt/c/Users/netya/bin/win32yank.exe -o --lf',
+      \      '*': '/mnt/c/Users/netya/bin/win32yank.exe -o --lf',
+      \   },
+      \   'cache_enabled': 0,
+      \ }
+]])
 
 vim.opt.list = true
 vim.opt.colorcolumn = { 80 }
@@ -411,15 +527,12 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
--- vim.api.nvim_set_hl(0, "MiniPairsMatched", { fg = "#0009FF", bg = "NONE", bold = true })
--- vim.api.nvim_set_hl(0, "MiniPairsUnmatched", { fg = "#FA3320", bg = "NONE", bold = true })
 require("mini.pairs").setup()
 local cursorline_bg = vim.api.nvim_get_hl(0, { name = "CursorLine" }).bg
 vim.api.nvim_set_hl(0, "MatchParen", { fg = "#D75F87", bg = cursorline_bg })
 
 require("mini.surround").setup()
 require("mini.icons").setup()
--- require("bufferline").setup({})
 require("lualine").setup({
     options = {
         icons_enabled = true,
@@ -520,6 +633,13 @@ require("noice").setup({
             ["vim.lsp.util.stylize_markdown"] = true,
             ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
         },
+        hover = {
+            enabled = true,
+            opts = { border = "rounded" },
+        },
+        signature = {
+            enabled = true,
+        },
     },
     -- you can enable a preset for easier configuration
     presets = {
@@ -533,24 +653,24 @@ require("noice").setup({
 
 --- Autocentering ---
 
---- Center when inserting
-vim.api.nvim_create_autocmd("InsertEnter", {
-    callback = function()
-        local debounce = 8
-        if vim.fn.abs(vim.fn.line(".") - math.floor(vim.fn.line("w0") + vim.fn.winheight(0) / 2)) >= debounce then
-            vim.cmd("norm! zz")
-        end
-    end,
-})
-
--- Keep it centered while hitting <CR> if past debounce
-vim.keymap.set("i", "<CR>", function()
-    local debounce = 8
-    if vim.fn.abs(vim.fn.line(".") - math.floor(vim.fn.line("w0") + vim.fn.winheight(0) / 2)) >= debounce then
-        return "<CR><cmd>norm! zz<CR>"
-    end
-    return "<CR>"
-end, { expr = true })
+-- --- Center when inserting
+-- vim.api.nvim_create_autocmd("InsertEnter", {
+--     callback = function()
+--         local debounce = 8
+--         if vim.fn.abs(vim.fn.line(".") - math.floor(vim.fn.line("w0") + vim.fn.winheight(0) / 2)) >= debounce then
+--             vim.cmd("norm! zz")
+--         end
+--     end,
+-- })
+--
+-- -- Keep it centered while hitting <CR> if past debounce
+-- vim.keymap.set("i", "<CR>", function()
+--     local debounce = 8
+--     if vim.fn.abs(vim.fn.line(".") - math.floor(vim.fn.line("w0") + vim.fn.winheight(0) / 2)) >= debounce then
+--         return "<CR><cmd>norm! zz<CR>"
+--     end
+--     return "<CR>"
+-- end, { expr = true })
 
 --- Windows Management ---
 

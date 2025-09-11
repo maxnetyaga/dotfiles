@@ -38,6 +38,8 @@ eval "$(zoxide init zsh)"
 # UV Init
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+# PIPX
+eval "$(register-python-argcomplete pipx)"
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 

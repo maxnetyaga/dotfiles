@@ -36,10 +36,10 @@ return {
             -- C-k: Toggle signature help (if signature.enabled = true)
             --
             -- see :h blink-cmp-config-keymap for defining your own keymap
-            -- keymap = {
-            --     preset = "default",
-            --     ["<C-h>"] = { "show", "show_documentation", "hide_documentation" },
-            -- },
+            keymap = {
+                preset = "enter",
+                -- ["<C-h>"] = { "show", "show_documentation", "hide_documentation" },
+            },
 
             appearance = {
                 -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
@@ -50,7 +50,7 @@ return {
             },
 
             -- (Default) Only show the documentation popup when manually triggered
-            completion = { documentation = { auto_show = false } },
+            completion = { documentation = { auto_show = true } },
 
             -- Default list of enabled providers defined so that you can extend it
             -- elsewhere in your config, without redefining it, due to `opts_extend`
@@ -68,6 +68,23 @@ return {
         },
         opts_extend = { "sources.default" },
     },
+    {
+        {
+            "alexpasmantier/pymple.nvim",
+            dependencies = {
+                "nvim-lua/plenary.nvim",
+                "MunifTanjim/nui.nvim",
+                -- optional (nicer ui)
+                "stevearc/dressing.nvim",
+                "nvim-tree/nvim-web-devicons",
+            },
+            build = ":PympleBuild",
+            config = function()
+                require("pymple").setup()
+            end,
+        },
+    },
+
     ---------------------------------------------------------------------------
 
     {
@@ -77,7 +94,7 @@ return {
             events = { "BufWritePost", "BufReadPost", "InsertLeave" },
             linters_by_ft = {
                 fish = { "fish" },
-                python = { "pylint" },
+                python = { "ruff" },
                 -- Use the "*" filetype to run linters on all filetypes.
                 -- ['*'] = { 'global linter' },
                 -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
@@ -198,10 +215,10 @@ return {
 
     --- Buffer Management -----------------------------------------------------
 
-    {
-        "axkirillov/hbac.nvim",
-        config = true,
-    },
+    -- {
+    --     "axkirillov/hbac.nvim",
+    --     config = true,
+    -- },
 
     --- Project File Actions --------------------------------------------------
 
@@ -213,8 +230,16 @@ return {
             -- optional setup call to override plugin options
             -- alternatively you can set options with vim.g.grug_far = { ... }
             require("grug-far").setup({
-                -- options, see Configuration section below
-                -- there are no required options atm
+                keymaps = {
+                    -- Normal mode
+                    close = "q", -- close window
+                    replace = "<leader>r", -- start replace
+                    replace_all = "<leader>R", -- replace all
+                    preview = "gp", -- preview changes
+                    -- Insert mode
+                    edit_pattern = "<C-p>", -- edit pattern
+                    edit_replacement = "<C-r>", -- edit replacement
+                },
             })
         end,
         cmd = "GrugFar",
@@ -226,13 +251,11 @@ return {
                     local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
                     grug.open({
                         transient = true,
-                        prefills = {
-                            filesFilter = ext and ext ~= "" and "*." .. ext or nil,
-                        },
+                        prefills = {},
                     })
                 end,
                 mode = { "n", "v" },
-                desc = "Search&Replace",
+                desc = "Search & Replace",
             },
         },
     },
@@ -270,25 +293,25 @@ return {
 
     ---------------------------------------------------------------------------
 
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        },
-        keys = {
-            {
-                "<leader>?",
-                function()
-                    require("which-key").show({ global = false })
-                end,
-                desc = "Buffer Local Keymaps (which-key)",
-            },
-        },
-    },
+    -- {
+    --     "folke/which-key.nvim",
+    --     event = "VeryLazy",
+    --
+    --     opts = {
+    --         -- your configuration comes here
+    --         -- or leave it empty to use the default settings
+    --         -- refer to the configuration section below
+    --     },
+    --     keys = {
+    --         {
+    --             "<leader>?",
+    --             function()
+    --                 require("which-key").show({ global = false })
+    --             end,
+    --             desc = "Buffer Local Keymaps (which-key)",
+    --         },
+    --     },
+    -- },
 
     ---------------------------------------------------------------------------
 
@@ -311,8 +334,21 @@ return {
             scroll = { enabled = true },
             statuscolumn = { enabled = true },
             words = { enabled = true },
+            colorschemes = {
+                enabled = true,
+                win_options = {
+                    winblend = 0,
+                },
+            },
         },
         keys = {
+            {
+                "NONE",
+                function()
+                    Snacks.picker.colorschemes()
+                end,
+                desc = "Colorsheme Picker",
+            },
             {
                 "<leader>fp",
                 function()
@@ -385,10 +421,6 @@ return {
                 desc = "Toggle Terminal",
             },
         },
-        opts = {
-            terminal = {
-            },
-        },
     },
 
     ---------------------------------------------------------------------------
@@ -424,6 +456,13 @@ return {
     -- { "psliwka/vim-smoothie" },
     { "rafi/awesome-vim-colorschemes" },
     { "VonHeikemen/rubber-themes.vim" },
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    },
+    { "rebelot/kanagawa.nvim" },
     { "nvim-mini/mini.icons", version = "*" },
     -- { "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
 }
