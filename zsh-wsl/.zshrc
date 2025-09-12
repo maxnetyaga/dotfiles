@@ -71,7 +71,7 @@ export TIME_STYLE=long-iso
 export LC_CTYPE=en_DK.UTF-8
 export LC_ALL=en_DK.UTF-8
 
-export TERM=xterm-256color
+export TERM="xterm-256color"
 
 export PAGER=moar
 export EDITOR=nvim
@@ -88,6 +88,7 @@ export FZF_DEFAULT_OPTS="--ansi"
 bindkey -s ^f "tmux-sessionizer\n"
 
 # Aliases
+alias tmux="export TERM=tmux-256color; tmux"
 alias exp="/mnt/c/windows/explorer.exe"
 alias pdftohtmldef="pdftohtml -s -i -noframes"
 alias zshconfig="$EDITOR ~/.zshrc"

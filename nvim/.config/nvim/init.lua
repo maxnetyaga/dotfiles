@@ -24,9 +24,10 @@ require("conform").setup({
         rust = { "rustfmt", lsp_format = "fallback" },
         -- Conform will run the first available formatter
         javascript = { "prettierd", "prettier", stop_after_first = true },
+        json = { "prettierd", "prettier", stop_after_first = true },
         sh = { "beautysh" },
         zsh = { "beautysh" },
-        sql = { "pg_format" },
+        sql = { "sql_formatter" },
     },
 
     default_format_opts = {
@@ -34,20 +35,76 @@ require("conform").setup({
     },
 })
 
-require("conform").formatters.pg_format = {
-    args = { "-B", "-w", "80", "-u", "1" },
-}
-
 require("conform").formatters.stylua = {
     append_args = { "--indent-type", "Spaces" },
 }
 
 --- LSP & Autocompletion ------------------------------------------------------
 
+local cmp = require("cmp")
+
+cmp.setup({
+    snippet = {
+        -- REQUIRED - you must specify a snippet engine
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+            -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+
+            -- For `mini.snippets` users:
+            -- local insert = MiniSnippets.config.expand.insert or MiniSnippets.default_insert
+            -- insert({ body = args.body }) -- Insert at cursor
+            -- cmp.resubscribe({ "TextChangedI", "TextChangedP" })
+            -- require("cmp.config").set_onetime({ sources = {} })
+        end,
+    },
+    window = {
+        -- completion = cmp.config.window.bordered(),
+        -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.abort(),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "vsnip" }, -- For vsnip users.
+        -- { name = 'luasnip' }, -- For luasnip users.
+        -- { name = 'ultisnips' }, -- For ultisnips users.
+        -- { name = 'snippy' }, -- For snippy users.
+    }, {
+        { name = "buffer" },
+    }),
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = sql_ft,
+    callback = function()
+        local cmp = require("cmp")
+
+        -- global sources
+        ---@param source cmp.SourceConfig
+        local sources = vim.tbl_map(function(source)
+            return { name = source.name }
+        end, cmp.get_config().sources)
+
+        -- add vim-dadbod-completion source
+        table.insert(sources, { name = "vim-dadbod-completion" })
+
+        -- update sources for the current buffer
+        cmp.setup.buffer({ sources = sources })
+    end,
+})
+
 vim.diagnostic.config({
     virtual_text = false,
     signs = true,
-    underline = false,
+    underline = true,
     update_in_insert = true,
     float = {
         source = true,
@@ -60,6 +117,20 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.workspace.didChangeWatchedFiles = {
     dynamicRegistration = true,
 }
+
+-- Do nothing if hover fails
+local vim_notify = vim.notify
+vim.notify = function(msg, level, opts)
+    if mgs == "No information available" then
+        return
+    end
+
+    return vim_notify(msg, level, opts)
+    -- Or with `rcarriga/nvim-notify`
+    -- return require('notify').notify(msg, level, opts)
+end
+
+--- Lua ---
 
 vim.lsp.enable("lua_ls")
 vim.lsp.config("lua_ls", {
@@ -116,9 +187,11 @@ vim.lsp.config("lua_ls", {
     },
 })
 
+--- Shell ---
+
 vim.lsp.enable("bashls")
 
--- python
+--- Python ---
 
 require("lspconfig").basedpyright.setup({
     capabilities = capabilities,
@@ -135,29 +208,6 @@ require("lspconfig").basedpyright.setup({
         },
     },
 })
-
--- require("lspconfig").pylsp.setup({
---     settings = {
---         plugins = {
---             pylsp_rope = { rename = true, enabled = true },
---             rope_rename = { enabled = false },
---             jedi_rename = { enabled = false },
---             autopep8 = { enabled = false },
---             jedi_definition = { enabled = false },
---             jedi_hover = { enabled = false },
---             jedi_signature = { enabled = false },
---             jedi_references = { enabled = false },
---             jedi_symbols = { enabled = false },
---             jedi_type_definition = { enabled = false },
---             mccabe = { enabled = false },
---             preload = { enabled = false },
---             pycodestyle = { enabled = false },
---             pyflakes = { enabled = false },
---             rope_autoimports = { enabled = false },
---             yapf = { enabled = false },
---         },
---     },
--- })
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
@@ -184,9 +234,27 @@ vim.lsp.config("ruff", {
 
 vim.lsp.enable("ruff")
 
--- sql
+--- Web ---
 
-vim.lsp.enable("postgres_lsp")
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("css_variables")
+vim.lsp.enable("cssls")
+vim.lsp.enable("cssmodules_ls")
+vim.lsp.enable("tailwindcss")
+vim.lsp.enable("eslint")
+
+--- SQL ---
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = {"sql", "mysql", "plsql"},
+--     callback = function()
+--         cmp.setup.buffer {
+--             sources = {
+--                 { name = 'vim-dadbod-completion' }
+--             }
+--         }
+--     end,
+-- })
 
 -------------------------------------------------------------------------------
 
@@ -320,14 +388,6 @@ require("commander").add({
 --     },
 -- })
 
-require("commander").add({
-    {
-        desc = "LSP: Code Action",
-        cmd = vim.lsp.buf.code_action,
-        keys = { "n", "<Leader>a" },
-    },
-})
-
 --- Formatting
 require("commander").add({
     {
@@ -352,21 +412,21 @@ require("commander").add({
 require("commander").add({
     {
         keys = { "n", "<F2>" },
-        cmd = vim.lsp.buf.rename,
+        cmd = "<CMD>Lspsaga rename<CR>",
         desc = "LSP: Rename",
     },
 })
 require("commander").add({
     {
         keys = { "n", "gd" },
-        cmd = vim.lsp.buf.definition,
+        cmd = "<CMD>Lspsaga finder def<CR>",
         desc = "LSP: Go to Definition",
     },
 })
 require("commander").add({
     {
         keys = { "n", "gt" },
-        cmd = vim.lsp.buf.type_definition,
+        cmd = "<CMD>Lspsaga finder tyd<CR>",
         desc = "LSP: Go to Type Definition",
     },
 })
@@ -380,15 +440,30 @@ require("commander").add({
 require("commander").add({
     {
         keys = { "n", "gi" },
-        cmd = vim.lsp.buf.implementation,
+        cmd = "<CMD>Lspsaga finder imp<CR>",
         desc = "LSP: Go to Implementation",
     },
 })
 require("commander").add({
     {
         keys = { "n", "gr" },
-        cmd = vim.lsp.buf.references,
+        cmd = "<CMD>Lspsaga finder ref<CR>",
         desc = "LSP: Go to References",
+    },
+})
+require("commander").add({
+    {
+        desc = "LSP: Code Action",
+        cmd = "<CMD>Lspsaga code_action<CR>",
+        keys = { "n", "<Leader>a" },
+    },
+})
+require("commander").add({
+    {
+        desc = "LSP: Hover",
+        cmd = "<CMD>Lspsaga hover_doc<CR>",
+        -- cmd = vim.lsp.buf.hover,
+        keys = { "n", "K" },
     },
 })
 
@@ -397,25 +472,46 @@ require("commander").add({
     {
         keys = { "n", "<leader>dd" },
         cmd = vim.diagnostic.open_float,
-        desc = "Diagnoscit: Show message",
+        desc = "Diagnostic: Show message",
     },
 })
+-- require("commander").add({
+--     {
+--         keys = { "n", "<leader>dn" },
+--         cmd = function ()
+--             vim.diagnostic.jump({ severity = { min = 4, max = 1 }, count = 1 })
+--         end,
+--         desc = "Diagnostic: Next problem",
+--     },
+-- })
 require("commander").add({
     {
         keys = { "n", "<leader>dn" },
-        cmd = function()
-            vim.diagnostic.jump({ severity = { min = 4, max = 1 }, count = 1 })
-        end,
+        cmd = "<CMD>Lspsaga diagnostic_jump_next<CR>",
         desc = "Diagnostic: Next problem",
+    },
+})
+-- require("commander").add({
+--     {
+--         keys = { "n", "<leader>dp" },
+--         cmd = function ()
+--             vim.diagnostic.jump({ severity = { min = 4, max = 1 }, count = -1 })
+--         end,
+--         desc = "Diagnostic: Previous problem",
+--     },
+-- })
+require("commander").add({
+    {
+        keys = { "n", "<leader>dp" },
+        cmd = "<CMD>Lspsaga diagnostic_jump_prev<CR>",
+        desc = "Diagnostic: Previous problem",
     },
 })
 require("commander").add({
     {
-        keys = { "n", "<leader>dp" },
-        cmd = function()
-            vim.diagnostic.jump({ severity = { min = 4, max = 1 }, count = -1 })
-        end,
-        desc = "Diagnostic: Previous problem",
+        keys = { "n", "<leader>do" },
+        cmd = "<cmd>Telescope diagnostics<cr>",
+        desc = "Telescope: Diagnostic",
     },
 })
 
@@ -423,15 +519,63 @@ require("commander").add({
 require("commander").add({
     {
         keys = { "n", "<leader>ff" },
-        cmd = require("telescope.builtin").find_files,
+        cmd = function()
+            require("telescope.builtin").find_files({
+                find_command = {
+                    "fd",
+                    "--type",
+                    "f",
+                    "--type",
+                    "l",
+                    "--type",
+                    "d",
+                    "--hidden",
+                    "--no-ignore",
+                    "--exclude",
+                    ".git",
+                    "--exclude",
+                    "__pycache__",
+                    "--exclude",
+                    ".mypy_cache",
+                    "--exclude",
+                    ".venv",
+                    "--exclude",
+                    "node_modules",
+                },
+            })
+        end,
         desc = "Telescope: Find",
     },
 })
 require("commander").add({
     {
         keys = { "n", "<C-p>" },
-        cmd = require("telescope.builtin").find_files,
-        desc = "Telescope: Files",
+        cmd = function()
+            require("telescope.builtin").find_files({
+                find_command = {
+                    "fd",
+                    "--type",
+                    "f",
+                    "--type",
+                    "l",
+                    "--type",
+                    "d",
+                    "--hidden",
+                    "--no-ignore",
+                    "--exclude",
+                    ".git",
+                    "--exclude",
+                    "__pycache__",
+                    "--exclude",
+                    ".mypy_cache",
+                    "--exclude",
+                    ".venv",
+                    "--exclude",
+                    "node_modules",
+                },
+            })
+        end,
+        desc = "Telescope: Find",
     },
 })
 require("commander").add({
@@ -482,7 +626,7 @@ require("commander").add({
 
 --- SMTH ----------------------------------------------------------------------
 
-vim.cmd([[colorscheme rubber]])
+vim.cmd([[colorscheme tokyonight]])
 vim.cmd([[set termguicolors]])
 vim.cmd([[set cursorline]])
 vim.cmd([[
@@ -492,12 +636,12 @@ vim.cmd([[
 ]])
 require("notify").setup({
     background_colour = "#000000",
+    timeout = 10000,
 })
 
 vim.cmd([[set number]])
 vim.cmd([[set relativenumber]])
 
-vim.opt.clipboard = "unnamedplus"
 vim.cmd([[
     let g:clipboard = {
       \   'name': 'win32yank-wsl',
@@ -527,11 +671,21 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
+-- SQL-specific settings
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "sql",
+    callback = function()
+        vim.opt_local.tabstop = 2
+        vim.opt_local.shiftwidth = 2
+    end,
+})
+
 require("mini.pairs").setup()
 local cursorline_bg = vim.api.nvim_get_hl(0, { name = "CursorLine" }).bg
 vim.api.nvim_set_hl(0, "MatchParen", { fg = "#D75F87", bg = cursorline_bg })
 
-require("mini.surround").setup()
+-- require("mini.surround").setup()
+require("leap").set_default_mappings()
 require("mini.icons").setup()
 require("lualine").setup({
     options = {
@@ -633,13 +787,6 @@ require("noice").setup({
             ["vim.lsp.util.stylize_markdown"] = true,
             ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
         },
-        hover = {
-            enabled = true,
-            opts = { border = "rounded" },
-        },
-        signature = {
-            enabled = true,
-        },
     },
     -- you can enable a preset for easier configuration
     presets = {
@@ -672,7 +819,45 @@ require("noice").setup({
 --     return "<CR>"
 -- end, { expr = true })
 
+vim.api.nvim_create_autocmd("Filetype", {
+    pattern = "sql",
+    callback = function()
+        pcall(vim.keymap.del, "i", "<left>", { buffer = true })
+        pcall(vim.keymap.del, "i", "<right>", { buffer = true })
+    end,
+})
+
+--- Tabs ---
+
+-- Leader + number to jump to tab
+vim.keymap.set("n", "<leader>1", "1gt", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>2", "2gt", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>3", "3gt", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>4", "4gt", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>5", "5gt", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>6", "6gt", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>7", "7gt", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>8", "8gt", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>9", "9gt", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>0", ":tablast<CR>", { noremap = true, silent = true })
+
+-- Create 9 tabs on start
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        for i = 2, 9 do -- start from 2, because the first tab exists already
+            vim.cmd("tabnew")
+        end
+        vim.cmd("tabn 1")
+    end,
+})
+
+vim.opt.showtabline = 0
+
+vim.keymap.set({ "n", "v", "i" }, "<C-s><C-s>", "<cmd>w<cr>", { noremap = true, silent = true })
+
 --- Windows Management ---
+
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { noremap = true, silent = true })
 
 -- Normal mode Alt + hjkl
 vim.keymap.set("n", "<A-h>", "<C-w>h", { noremap = true })

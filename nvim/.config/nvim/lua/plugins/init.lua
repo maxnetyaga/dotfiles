@@ -4,86 +4,58 @@ return {
     ---------------------------------------------------------------------------
 
     { "nvim-treesitter/nvim-treesitter" },
+    -- { "nvim-treesitter/nvim-treesitter-context" },
+
+    ---------------------------------------------------------------------------
+
+    {
+        "kristijanhusak/vim-dadbod-ui",
+        dependencies = {
+            { "tpope/vim-dadbod", lazy = true },
+            { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+        },
+        cmd = {
+            "DBUI",
+            "DBUIToggle",
+            "DBUIAddConnection",
+            "DBUIFindBuffer",
+        },
+        init = function()
+            -- Your DBUI configuration
+            vim.g.db_ui_use_nerd_fonts = 1
+        end,
+    },
 
     ---------------------------------------------------------------------------
 
     { "neovim/nvim-lspconfig" },
     {
-        "saghen/blink.cmp",
-        -- optional: provides snippets for the snippet source
-        dependencies = { "rafamadriz/friendly-snippets" },
-
-        -- use a release tag to download pre-built binaries
-        version = "1.6.0",
-        -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-        -- build = 'cargo build --release',
-        -- If you use nix, you can build from source using latest nightly rust with:
-        -- build = 'nix run .#build-plugin',
-
-        ---@module 'blink.cmp'
-        ---@type blink.cmp.Config
-        opts = {
-            -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-            -- 'super-tab' for mappings similar to vscode (tab to accept)
-            -- 'enter' for enter to accept
-            -- 'none' for no mappings
-            --
-            -- All presets have the following mappings:
-            -- C-space: Open menu or open docs if already open
-            -- C-n/C-p or Up/Down: Select next/previous item
-
-            -- C-e: Hide menu
-            -- C-k: Toggle signature help (if signature.enabled = true)
-            --
-            -- see :h blink-cmp-config-keymap for defining your own keymap
-            keymap = {
-                preset = "enter",
-                -- ["<C-h>"] = { "show", "show_documentation", "hide_documentation" },
-            },
-
-            appearance = {
-                -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-
-                -- Adjusts spacing to ensure icons are aligned
-
-                nerd_font_variant = "mono",
-            },
-
-            -- (Default) Only show the documentation popup when manually triggered
-            completion = { documentation = { auto_show = true } },
-
-            -- Default list of enabled providers defined so that you can extend it
-            -- elsewhere in your config, without redefining it, due to `opts_extend`
-            sources = {
-                default = { "lsp", "path", "snippets", "buffer" },
-            },
-
-            -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
-            -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
-            -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
-
-            --
-            -- See the fuzzy documentation for more information
-            fuzzy = { implementation = "prefer_rust_with_warning" },
-        },
-        opts_extend = { "sources.default" },
-    },
-    {
-        {
-            "alexpasmantier/pymple.nvim",
-            dependencies = {
-                "nvim-lua/plenary.nvim",
-                "MunifTanjim/nui.nvim",
-                -- optional (nicer ui)
-                "stevearc/dressing.nvim",
-                "nvim-tree/nvim-web-devicons",
-            },
-            build = ":PympleBuild",
-            config = function()
-                require("pymple").setup()
-            end,
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
         },
     },
+
+    -- {
+    --     "saghen/blink.cmp",
+    --     opts = {
+    --         keymap = {
+    --             preset = "enter",
+    --             -- ["<C-h>"] = { "show", "show_documentation", "hide_documentation" },
+    --         },
+    --         sources = {
+    --             default = { "lsp", "dadbod", "path", "snippets", "buffer" },
+    --             per_filetype = {
+    --                 sql = { "snippets", "dadbod", "lsp", "path", "buffer" },
+    --             },
+    --             providers = {
+    --                 dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+    --             },
+    --         },
+    --     },
+    -- },
 
     ---------------------------------------------------------------------------
 
@@ -91,10 +63,16 @@ return {
         "mfussenegger/nvim-lint",
         opts = {
             -- Event to trigger linters
-            events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+            events = { "BufWritePost", "BufReadPost", "InsertLeave", "TextChanged", "TextChangedI" },
             linters_by_ft = {
                 fish = { "fish" },
-                python = { "ruff" },
+
+                -- Add eslint for JavaScript
+                javascript = { "eslint" },
+                javascriptreact = { "eslint" }, -- if you use JSX/React
+                typescript = { "eslint" }, -- if you want TS handled by eslint
+                typescriptreact = { "eslint" }, -- for TSX/React
+
                 -- Use the "*" filetype to run linters on all filetypes.
                 -- ['*'] = { 'global linter' },
                 -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
@@ -105,13 +83,14 @@ return {
             -- or add custom linters.
             ---@type table<string,table>
             linters = {
-                -- -- Example of using selene only when a selene.toml file is present
-                -- selene = {
-                --   -- `condition` is another LazyVim extension that allows you to
-                --   -- dynamically enable/disable linters based on the context.
-                --   condition = function(ctx)
-                --     return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]
-                --   end,
+                -- -- Example: eslint only when config file is present
+                -- eslint = {
+                --     condition = function(ctx)
+                --         return vim.fs.find(
+                --             { ".eslintrc", ".eslintrc.js", ".eslintrc.json", ".eslintrc.cjs" },
+                --             { path = ctx.filename, upward = true }
+                --         )[1]
+                --     end,
                 -- },
             },
         },
@@ -188,7 +167,7 @@ return {
     ---------------------------------------------------------------------------
 
     { "nvim-mini/mini.pairs", version = "*" },
-    { "nvim-mini/mini.surround", version = "*" },
+    -- { "nvim-mini/mini.surround", version = "*" },
 
     --- File Management -------------------------------------------------------
 
@@ -264,9 +243,10 @@ return {
 
     { "lewis6991/gitsigns.nvim" },
 
-    ---------------------------------------------------------------------------
+    --- Navigation ------------------------------------------------------------
 
     { "mg979/vim-visual-multi" },
+    { "ggandor/leap.nvim" },
 
     ---------------------------------------------------------------------------
 
@@ -293,25 +273,25 @@ return {
 
     ---------------------------------------------------------------------------
 
-    -- {
-    --     "folke/which-key.nvim",
-    --     event = "VeryLazy",
-    --
-    --     opts = {
-    --         -- your configuration comes here
-    --         -- or leave it empty to use the default settings
-    --         -- refer to the configuration section below
-    --     },
-    --     keys = {
-    --         {
-    --             "<leader>?",
-    --             function()
-    --                 require("which-key").show({ global = false })
-    --             end,
-    --             desc = "Buffer Local Keymaps (which-key)",
-    --         },
-    --     },
-    -- },
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
+        keys = {
+            {
+                "<leader>?",
+                function()
+                    require("which-key").show({ global = false })
+                end,
+                desc = "Buffer Local Keymaps (which-key)",
+            },
+        },
+    },
 
     ---------------------------------------------------------------------------
 
@@ -326,7 +306,6 @@ return {
             bufdelete = { enabled = true },
             indent = { enabled = true },
             input = { enabled = true },
-            terminal = { enabled = true },
             picker = { enabled = true },
             notifier = { enabled = true },
             quickfile = { enabled = true },
@@ -343,7 +322,7 @@ return {
         },
         keys = {
             {
-                "NONE",
+                "<leader>C",
                 function()
                     Snacks.picker.colorschemes()
                 end,
@@ -415,9 +394,7 @@ return {
             },
             {
                 "<leader>,",
-                function()
-                    Snacks.terminal()
-                end,
+                "<cmd>:Lspsaga term_toggle<cr>",
                 desc = "Toggle Terminal",
             },
         },
@@ -433,16 +410,42 @@ return {
 
     ---------------------------------------------------------------------------
 
+    { "dstein64/nvim-scrollview" },
     {
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
     {
+        "nvimdev/lspsaga.nvim",
+        config = function()
+            require("lspsaga").setup({
+                definition = {
+                    keys = {
+                        edit = "<C-s>o",
+                        vsplit = "<C-s>v",
+                        split = "<C-s>i",
+                        tabe = "<C-s>t",
+                        close = "<C-s>",
+                    },
+                },
+                symbol_in_winbar = { enable = false },
+                lightbulb = { enable = false },
+                finder = {
+                    methods = {
+                        tyd = "textDocument/typeDefinition",
+                    },
+                },
+            })
+        end,
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter", -- optional
+            "nvim-tree/nvim-web-devicons", -- optional
+        },
+    },
+    {
         "folke/noice.nvim",
         event = "VeryLazy",
-        opts = {
-            -- add any options here
-        },
+        opts = {},
         dependencies = {
             -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
             "MunifTanjim/nui.nvim",
@@ -453,7 +456,6 @@ return {
         },
         extensions = { "neo-tree", "lazy", "fzf" },
     },
-    -- { "psliwka/vim-smoothie" },
     { "rafi/awesome-vim-colorschemes" },
     { "VonHeikemen/rubber-themes.vim" },
     {
