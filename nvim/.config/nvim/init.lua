@@ -199,6 +199,7 @@ require("lspconfig").basedpyright.setup({
         basedpyright = {
             -- Using Ruff's import organizer
             disableOrganizeImports = true,
+            typeCheckingMode = "basic",
         },
         python = {
             analysis = {
