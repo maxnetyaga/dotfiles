@@ -828,6 +828,8 @@ vim.api.nvim_create_autocmd("Filetype", {
     end,
 })
 
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+
 --- Tabs ---
 
 -- Leader + number to jump to tab

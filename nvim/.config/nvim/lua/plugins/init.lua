@@ -37,6 +37,7 @@ return {
             "hrsh7th/cmp-path",
         },
     },
+    { "hrsh7th/vim-vsnip" },
 
     -- {
     --     "saghen/blink.cmp",
