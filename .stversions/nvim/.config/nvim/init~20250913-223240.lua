@@ -73,18 +73,6 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        {
-            name = "path",
-            option = {
-                -- pathMappings = {
-                --     ["@"] = "${folder}/src",
-                --     -- ['/'] = '${folder}/src/public/',
-                --     -- ['~@'] = '${folder}/src',
-                --     -- ['/images'] = '${folder}/src/images',
-                --     -- ['/components'] = '${folder}/src/components',
-                -- },
-            },
-        },
         { name = "vsnip" }, -- For vsnip users.
     }, {
         { name = "buffer" },
@@ -172,11 +160,7 @@ vim.lsp.config("lua_ls", {
                 path = {
                     "lua/?.lua",
                     "lua/?/init.lua",
-                    vim.split(package.path, ";"),
                 },
-            },
-            diagnostics = {
-                globals = { "vim" }, -- so 'vim' is recognized
             },
             -- Make the server aware of Neovim runtime files
             workspace = {
@@ -320,14 +304,8 @@ require("oil").setup({
             winblend = 0,
         },
     },
-    delete_to_trash = true,
-    watch_for_changes = true,
-    view_options = {
-        show_hidden = true,
-    },
     keymaps = {
         ["q"] = "actions.close",
-        ["<ESC><ESC>"] = "actions.close",
     },
 })
 
@@ -417,7 +395,7 @@ require("commander").add({
 require("commander").add({
     {
         keys = { { "n", "v" }, "<leader>db" },
-        cmd = "<cmd>DBUI<cr>",
+        cmd = ":DBUI",
         desc = "DB: UI",
     },
 })

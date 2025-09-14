@@ -172,11 +172,7 @@ vim.lsp.config("lua_ls", {
                 path = {
                     "lua/?.lua",
                     "lua/?/init.lua",
-                    vim.split(package.path, ";"),
                 },
-            },
-            diagnostics = {
-                globals = { "vim" }, -- so 'vim' is recognized
             },
             -- Make the server aware of Neovim runtime files
             workspace = {

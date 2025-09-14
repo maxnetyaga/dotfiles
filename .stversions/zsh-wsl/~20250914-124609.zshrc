@@ -92,6 +92,7 @@ export FZF_DEFAULT_OPTS="--ansi"
 bindkey -s ^f "tmux-sessionizer\n"
 
 # Aliases
+alias tmux="(TERM=tmux-256color; tmux)"
 alias exp="/mnt/c/windows/explorer.exe"
 alias pdftohtmldef="pdftohtml -s -i -noframes"
 alias zshconfig="$EDITOR ~/.zshrc"

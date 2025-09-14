@@ -25,7 +25,6 @@ plugins=(
     postgres
     colored-man-pages
     cp
-    direnv
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -92,6 +91,7 @@ export FZF_DEFAULT_OPTS="--ansi"
 bindkey -s ^f "tmux-sessionizer\n"
 
 # Aliases
+alias tmux="(TERM=tmux-256color; tmux)"
 alias exp="/mnt/c/windows/explorer.exe"
 alias pdftohtmldef="pdftohtml -s -i -noframes"
 alias zshconfig="$EDITOR ~/.zshrc"
@@ -116,3 +116,5 @@ lf() {
         echo "$selected" | copy
     fi
 }
+
+# source '/home/max/.config/nvm/versions/node/v22.14.0/lib/node_modules/@hyperupcall/autoenv/activate.sh'
