@@ -73,6 +73,18 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
+        {
+            name = "path",
+            option = {
+                -- pathMappings = {
+                --     ["@"] = "${folder}/src",
+                --     -- ['/'] = '${folder}/src/public/',
+                --     -- ['~@'] = '${folder}/src',
+                --     -- ['/images'] = '${folder}/src/images',
+                --     -- ['/components'] = '${folder}/src/components',
+                -- },
+            },
+        },
         { name = "vsnip" }, -- For vsnip users.
     }, {
         { name = "buffer" },
@@ -160,7 +172,11 @@ vim.lsp.config("lua_ls", {
                 path = {
                     "lua/?.lua",
                     "lua/?/init.lua",
+                    vim.split(package.path, ";"),
                 },
+            },
+            diagnostics = {
+                globals = { "vim" }, -- so 'vim' is recognized
             },
             -- Make the server aware of Neovim runtime files
             workspace = {
@@ -200,9 +216,10 @@ require("lspconfig").basedpyright.setup({
     capabilities = capabilities,
     settings = {
         basedpyright = {
-            -- Using Ruff's import organizer
-            disableOrganizeImports = true,
-            typeCheckingMode = "basic",
+            analysis = {
+                disableOrganizeImports = true,
+                typeCheckingMode = "basic",
+            },
         },
         python = {
             analysis = {
@@ -278,7 +295,7 @@ require("nvim-treesitter.configs").setup({
 
 --- File Management -----------------------------------------------------------
 
-require("telescope").load_extension("neoclip")
+-- require("telescope").load_extension("neoclip")
 require("telescope").setup({
     pickers = {
         buffers = {
@@ -292,6 +309,14 @@ require("telescope").setup({
             },
         },
     },
+    defaults = {
+        vimgrep_arguments = {
+            "grep",
+            "--line-number",
+            "--column",
+            "--no-color",
+        },
+    },
 })
 
 require("oil").setup({
@@ -303,6 +328,11 @@ require("oil").setup({
         win_options = {
             winblend = 0,
         },
+    },
+    delete_to_trash = true,
+    watch_for_changes = true,
+    view_options = {
+        show_hidden = true,
     },
     keymaps = {
         ["q"] = "actions.close",
@@ -342,7 +372,7 @@ for _, ls in ipairs(language_servers) do
         -- you can add other fields for setting up lsp server in this table
     })
 end
-require("ufo").setup()
+-- require("ufo").setup()
 
 --- Command Palette -----------------------------------------------------------
 
@@ -620,22 +650,22 @@ require("commander").add({
     },
 })
 
----  Folds
-require("commander").add({
-    {
-        keys = { "n", "zR" },
-        cmd = require("ufo").openAllFolds,
-        desc = "Open all folds",
-    },
-})
-
-require("commander").add({
-    {
-        keys = { "n", "zM" },
-        cmd = require("ufo").closeAllFolds,
-        desc = "Close all folds",
-    },
-})
+-- ---  Folds
+-- require("commander").add({
+--     {
+--         keys = { "n", "zR" },
+--         cmd = require("ufo").openAllFolds,
+--         desc = "Open all folds",
+--     },
+-- })
+--
+-- require("commander").add({
+--     {
+--         keys = { "n", "zM" },
+--         cmd = require("ufo").closeAllFolds,
+--         desc = "Close all folds",
+--     },
+-- })
 
 --- SMTH ----------------------------------------------------------------------
 
@@ -698,7 +728,7 @@ local cursorline_bg = vim.api.nvim_get_hl(0, { name = "CursorLine" }).bg
 vim.api.nvim_set_hl(0, "MatchParen", { fg = "#D75F87", bg = cursorline_bg })
 
 -- require("mini.surround").setup()
-require("leap").set_default_mappings()
+-- require("leap").set_default_mappings()
 require("mini.icons").setup()
 require("lualine").setup({
     options = {
@@ -755,61 +785,61 @@ require("lualine").setup({
     extensions = {},
 })
 
-local Popup = require("nui.popup")
+-- local Popup = require("nui.popup")
 
-local popup = Popup({
-    position = "50%",
-    size = {
-        width = 80,
-        height = 40,
-    },
-    enter = true,
-    focusable = true,
-    zindex = 50,
-    relative = "editor",
-    border = {
-        padding = {
-            top = 2,
-            bottom = 2,
-            left = 3,
-            right = 3,
-        },
-        style = "rounded",
-        text = {
-            top = " I am top title ",
-            top_align = "center",
-            bottom = "I am bottom title",
-            bottom_align = "left",
-        },
-    },
-    buf_options = {
-        modifiable = true,
-        readonly = false,
-    },
-    win_options = {
-        winblend = 10,
-        winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-    },
-})
+-- local popup = Popup({
+--     position = "50%",
+--     size = {
+--         width = 80,
+--         height = 40,
+--     },
+--     enter = true,
+--     focusable = true,
+--     zindex = 50,
+--     relative = "editor",
+--     border = {
+--         padding = {
+--             top = 2,
+--             bottom = 2,
+--             left = 3,
+--             right = 3,
+--         },
+--         style = "rounded",
+--         text = {
+--             top = " I am top title ",
+--             top_align = "center",
+--             bottom = "I am bottom title",
+--             bottom_align = "left",
+--         },
+--     },
+--     buf_options = {
+--         modifiable = true,
+--         readonly = false,
+--     },
+--     win_options = {
+--         winblend = 10,
+--         winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+--     },
+-- })
 
-require("noice").setup({
-    lsp = {
-        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-        override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-        },
-    },
-    -- you can enable a preset for easier configuration
-    presets = {
-        bottom_search = true, -- use a classic bottom cmdline for search
-        command_palette = true, -- position the cmdline and popupmenu together
-        long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false, -- add a border to hover docs and signature help
-    },
-})
+-- require("noice").setup({
+--     lsp = {
+--         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+--         override = {
+--             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+--             ["vim.lsp.util.stylize_markdown"] = true,
+--             ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+--         },
+--     },
+--     -- you can enable a preset for easier configuration
+--     presets = {
+--         bottom_search = true, -- use a classic bottom cmdline for search
+--         command_palette = true, -- position the cmdline and popupmenu together
+--         long_message_to_split = true, -- long messages will be sent to a split
+--         inc_rename = false, -- enables an input dialog for inc-rename.nvim
+--         lsp_doc_border = false, -- add a border to hover docs and signature help
+--     },
+-- })
 
 --- Autocentering ---
 

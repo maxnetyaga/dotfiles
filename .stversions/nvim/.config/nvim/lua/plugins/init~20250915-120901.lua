@@ -243,10 +243,10 @@ return {
     --- Git -------------------------------------------------------------------
 
     { "lewis6991/gitsigns.nvim" },
-    {
-        "benomahony/oil-git.nvim",
-        dependencies = { "stevearc/oil.nvim" },
-    },
+    -- {
+    --     "benomahony/oil-git.nvim",
+    --     dependencies = { "stevearc/oil.nvim" },
+    -- },
 
     --- Navigation ------------------------------------------------------------
 
@@ -255,15 +255,15 @@ return {
 
     ---------------------------------------------------------------------------
 
-    {
-        "AckslD/nvim-neoclip.lua",
-        dependencies = {
-            { "nvim-telescope/telescope.nvim" },
-        },
-        config = function()
-            require("neoclip").setup()
-        end,
-    },
+    -- {
+    --     "AckslD/nvim-neoclip.lua",
+    --     dependencies = {
+    --         { "nvim-telescope/telescope.nvim" },
+    --     },
+    --     config = function()
+    --         require("neoclip").setup()
+    --     end,
+    -- },
 
     ---------------------------------------------------------------------------
 
@@ -315,7 +315,7 @@ return {
             notifier = { enabled = true },
             quickfile = { enabled = true },
             scope = { enabled = true },
-            scroll = { enabled = true },
+            scroll = { enabled = false },
             statuscolumn = { enabled = true },
             words = { enabled = true },
             colorschemes = {
