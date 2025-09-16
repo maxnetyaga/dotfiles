@@ -17,7 +17,6 @@ plugins=(
     ssh
     zsh-interactive-cd
     httpie
-    nvm
     npm
     pip
     python
@@ -32,8 +31,6 @@ source $ZSH/oh-my-zsh.sh
 
 # SOME INITS ##################################################################
 
-# NVM
-source /usr/share/nvm/init-nvm.sh
 # Zoxide Init
 eval "$(zoxide init zsh)"
 # UV Init
