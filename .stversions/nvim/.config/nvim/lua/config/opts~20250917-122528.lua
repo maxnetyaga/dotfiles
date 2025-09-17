@@ -4,10 +4,13 @@ vim.g.maplocalleader = "\\"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.opt.termguicolors = true
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.colorcolumn = { 80 }
+vim.opt.colorcolumn = { 80, 121 }
+vim.api.nvim_set_hl(0, "ColorColumn", { ctermbg = "red" })
 
 vim.opt.list = true
 vim.opt.listchars = {

@@ -7,7 +7,7 @@ return {
                 "<leader>k",
                 mode = "n",
                 function()
-                    require("conform").format({ async = true, lsp_fallback = true })
+                    require("conform").format({ async = true })
                 end,
                 desc = "Format buffer",
             },
@@ -22,6 +22,10 @@ return {
                     stop_after_first = true,
                 },
             },
+            default_format_opts = {
+                lsp_format = "fallback",
+            },
+            lsp_format = true,
             formatters = {
                 stylua = {
                     append_args = {

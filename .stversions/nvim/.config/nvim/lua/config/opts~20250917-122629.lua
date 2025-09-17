@@ -9,7 +9,8 @@ vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- vim.opt.colorcolumn = { 80, 121 }
+vim.opt.colorcolumn = { 80, 121 }
+vim.cmd [[highlight ColorColumn ctermbg=lightgrey guibg=lightgrey]]
 
 vim.opt.list = true
 vim.opt.listchars = {
