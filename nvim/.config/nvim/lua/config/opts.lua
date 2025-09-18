@@ -23,3 +23,28 @@ vim.opt.listchars = {
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+vim.cmd([[
+    let g:clipboard = {
+      \   'name': 'win32yank-wsl',
+      \   'copy': {
+      \      '+': 'win32yank.exe -i --crlf',
+      \      '*': 'win32yank.exe -i --crlf',
+      \    },
+      \   'paste': {
+      \      '+': 'win32yank.exe -o --lf',
+      \      '*': 'win32yank.exe -o --lf',
+      \   },
+      \   'cache_enabled': 0,
+      \ }
+]])
+
+vim.diagnostic.config({
+    float = {
+        source = true,
+    },
+})

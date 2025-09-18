@@ -19,7 +19,8 @@ return {
                 show_hidden = true,
             },
             keymaps = {
-                ["<ESC>"] = {"actions.close", mode = "n"},
+                ["q"] = "actions.close",
+                ["<ESC><ESC>"] = "actions.close",
                 ["<leader>e"] = "actions.close",
             },
         },

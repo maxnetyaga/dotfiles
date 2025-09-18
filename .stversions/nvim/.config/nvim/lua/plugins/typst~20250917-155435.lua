@@ -4,7 +4,7 @@ return {
         ft = "typst",
         version = "1.*",
         opts = {
-            port = 24368,
+            port = 9234,
         }, 
     },
 }

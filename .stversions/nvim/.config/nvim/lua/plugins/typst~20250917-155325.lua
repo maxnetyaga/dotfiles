@@ -3,8 +3,6 @@ return {
         "chomosuke/typst-preview.nvim",
         ft = "typst",
         version = "1.*",
-        opts = {
-            port = 24368,
-        }, 
+        opts = {}, -- lazy.nvim will implicitly calls `setup {}`
     },
 }

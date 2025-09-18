@@ -1,6 +1,5 @@
 return {
     {
-
         "stevearc/conform.nvim",
         cmd = { "ConformInfo" },
         keys = {
@@ -8,7 +7,7 @@ return {
                 "<leader>k",
                 mode = "n",
                 function()
-                    require("conform").format({ async = true })
+                    require("conform").format({ async = true, lsp_fallback = true })
                 end,
                 desc = "Format buffer",
             },
@@ -17,14 +16,20 @@ return {
             formatters_by_ft = {
                 lua = { "stylua" },
                 python = { "isort", "black" },
-                javascript = { "prettierd", "prettier", stop_after_first = true },
-            },
-            default_format_opts = {
-                lsp_format = "fallback",
+                javascript = {
+                    "prettierd",
+                    "prettier",
+                    stop_after_first = true,
+                },
             },
             formatters = {
                 stylua = {
-                    append_args = { "--indent-type", "spaces" },
+                    append_args = {
+                        "--indent-type",
+                        "spaces",
+                        "--column-width",
+                        "79",
+                    },
                 },
             },
         },

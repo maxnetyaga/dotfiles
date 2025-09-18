@@ -14,6 +14,9 @@ return {
                     "query",
                     "markdown",
                     "markdown_inline",
+                    "typst",
+                    "typescript",
+                    "python",
                 },
             })
         end,

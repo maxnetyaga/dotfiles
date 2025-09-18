@@ -875,16 +875,16 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 --- Tabs ---
 
 -- Leader + number to jump to tab
-vim.keymap.set("n", "<leader>1", "1gt", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>2", "2gt", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>3", "3gt", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>4", "4gt", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>5", "5gt", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>6", "6gt", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>7", "7gt", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>8", "8gt", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>9", "9gt", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>0", ":tablast<CR>", { noremap = true, silent = true })
+vim.keymap.set({"n", "x", "v", "i"}, "<leader>1", "1gt", { noremap = true, silent = true })
+vim.keymap.set({"n", "x", "v", "i"}, "<leader>2", "2gt", { noremap = true, silent = true })
+vim.keymap.set({"n", "x", "v", "i"}, "<leader>3", "3gt", { noremap = true, silent = true })
+vim.keymap.set({"n", "x", "v", "i"}, "<leader>4", "4gt", { noremap = true, silent = true })
+vim.keymap.set({"n", "x", "v", "i"}, "<leader>5", "5gt", { noremap = true, silent = true })
+vim.keymap.set({"n", "x", "v", "i"}, "<leader>6", "6gt", { noremap = true, silent = true })
+vim.keymap.set({"n", "x", "v", "i"}, "<leader>7", "7gt", { noremap = true, silent = true })
+vim.keymap.set({"n", "x", "v", "i"}, "<leader>8", "8gt", { noremap = true, silent = true })
+vim.keymap.set({"n", "x", "v", "i"}, "<leader>9", "9gt", { noremap = true, silent = true })
+vim.keymap.set({"n", "x", "v", "i"}, "<leader>0", ":tablast<CR>", { noremap = true, silent = true })
 
 -- Create 9 tabs on start
 vim.api.nvim_create_autocmd("VimEnter", {

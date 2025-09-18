@@ -40,6 +40,9 @@ eval "$(uvx --generate-shell-completion zsh)"
 eval "$(register-python-argcomplete pipx)"
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+# NVM Init
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # User configuration ##########################################################
 
@@ -65,7 +68,6 @@ HISTSIZE=40000
 SAVEHIST=999999999
 
 unsetopt BEEP
-setopt CORRECT
 
 export TIME_STYLE=long-iso
 
@@ -99,7 +101,6 @@ alias clip.exe='/mnt/c/Windows/System32/clip.exe'
 alias clip='/mnt/c/Windows/System32/clip.exe'
 alias copy='iconv -f UTF-8 -t UTF-16LE | /mnt/c/Windows/System32/clip.exe'
 alias ed='ms-edit'
-alias rm='echo "This is not the command you are looking for."; false'
 alias t='trash'
 alias py='uv run'
 

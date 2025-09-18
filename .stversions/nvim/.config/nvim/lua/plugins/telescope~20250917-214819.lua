@@ -8,13 +8,6 @@ local keys = {
         desc = "Telescope: Find files",
     },
     {
-        "<leader>fr",
-        function()
-            require("telescope.builtin").oldfiles()
-        end,
-        desc = "Telescope: Find files",
-    },
-    {
         "<leader>fg",
         function()
             require("telescope.builtin").live_grep()
@@ -24,9 +17,7 @@ local keys = {
     {
         "<leader>fb",
         function()
-            require("telescope.builtin").buffers({
-                initial_mode = "normal",
-            })
+            require("telescope.builtin").buffers()
         end,
         desc = "Telescope: Buffers",
     },
@@ -40,25 +31,14 @@ local keys = {
     {
         "<leader>fs",
         function()
-            require("telescope.builtin").lsp_document_symbols()
+            require("telescope.builtin").treesitter()
         end,
-        desc = "Telescope: Symbols",
-    },
-    {
-        "<leader>fd",
-        function()
-            require("telescope.builtin").diagnostics({
-                initial_mode = "normal",
-            })
-        end,
-        desc = "Telescope: Symbols",
+        desc = "Telescope: Objects",
     },
     {
         "<leader>fc",
         function()
-            require("telescope.builtin").git_commits({
-                initial_mode = "normal",
-            })
+            require("telescope.builtin").git_commits()
         end,
         desc = "Tlescope: Git commits",
     },
@@ -86,21 +66,9 @@ return {
                         -- the default case_mode is "smart_case"
                     },
                 },
-                pickers = {
-                    find_files = {
-                        hidden = true,
-                    },
-                    live_grep = {
-                        hidden = true,
-                    },
-                },
             })
 
             require("telescope").load_extension("fzf")
         end,
-    },
-    {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
     },
 }
