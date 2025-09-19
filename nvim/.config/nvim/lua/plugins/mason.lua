@@ -13,11 +13,20 @@ return {
                 "cssmodules_ls",
                 "tailwindcss",
                 "eslint",
+                "jsonls",
+                "yamlls",
+                "taplo",
             },
         },
         dependencies = {
-            { "mason-org/mason.nvim", opts = {} },
+            "mason-org/mason.nvim",
             "neovim/nvim-lspconfig",
+        },
+    },
+    {
+        "mason-org/mason.nvim",
+        opts = {
+            PATH = "append",
         },
     },
 }

@@ -4,7 +4,7 @@ return {
         cmd = { "ConformInfo" },
         keys = {
             {
-                "<leader>k",
+                "<leader>kk",
                 mode = "n",
                 function()
                     require("conform").format({
@@ -36,7 +36,7 @@ return {
                 typescriptreact = {
                     "prettierd",
                 },
-                json = { "prettierd", stop_after_first = true },
+                json = { "prettierd" },
                 sh = { "beautysh" },
                 zsh = { "beautysh" },
                 sql = { "sql_formatter" },

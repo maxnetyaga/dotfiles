@@ -63,6 +63,8 @@ vim.keymap.set(
     { noremap = true, silent = true }
 )
 
+-------------------------------------------------------------------------------
+
 local commander = require("commander")
 
 commander.add({
@@ -70,5 +72,10 @@ commander.add({
         desc = "LSP: Go to definition",
         cmd = vim.lsp.buf.definition,
         keys = { "n", "gd" },
+    },
+    {
+        desc = "ESLint: Fix all",
+        cmd = "<cmd>:LspEslintFixAll<cr>",
+        keys = { "n", "<leader>ko" },
     },
 })
