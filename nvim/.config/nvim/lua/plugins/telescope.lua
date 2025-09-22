@@ -24,9 +24,7 @@ local keys = {
     {
         "<leader>fb",
         function()
-            require("telescope.builtin").buffers({
-                initial_mode = "normal",
-            })
+            require("telescope.builtin").buffers()
         end,
         desc = "Telescope: Buffers",
     },
@@ -47,9 +45,7 @@ local keys = {
     {
         "<leader>fd",
         function()
-            require("telescope.builtin").diagnostics({
-                initial_mode = "normal",
-            })
+            require("telescope.builtin").diagnostics()
         end,
         desc = "Telescope: Symbols",
     },

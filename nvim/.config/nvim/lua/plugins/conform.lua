@@ -37,6 +37,7 @@ return {
                     "prettierd",
                 },
                 json = { "prettierd" },
+                jsonc = { "prettierd" },
                 sh = { "beautysh" },
                 zsh = { "beautysh" },
                 sql = { "sql_formatter" },
