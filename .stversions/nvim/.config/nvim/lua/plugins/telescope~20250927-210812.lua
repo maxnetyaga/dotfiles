@@ -5,42 +5,58 @@ local keys = {
         function()
             require("telescope.builtin").find_files()
         end,
-        desc = "Find files",
+        desc = "Telescope: Find files",
+    },
+    {
+        "<leader>fr",
+        function()
+            require("telescope.builtin").oldfiles()
+        end,
+        desc = "Telescope: Find files",
     },
     {
         "<leader>fg",
         function()
             require("telescope.builtin").live_grep()
         end,
-        desc = "Live grep",
+        desc = "Telescope: Live grep",
     },
     {
         "<leader>fb",
         function()
             require("telescope.builtin").buffers()
         end,
-        desc = "Buffers",
+        desc = "Telescope: Buffers",
     },
     {
         "<leader>fh",
         function()
             require("telescope.builtin").help_tags()
         end,
-        desc = "Help tags",
+        desc = "Telescope: Help tags",
     },
     {
         "<leader>fs",
         function()
-            require("telescope.builtin").treesitter()
+            require("telescope.builtin").lsp_document_symbols()
         end,
-        desc = "Help tags",
+        desc = "Telescope: Symbols",
+    },
+    {
+        "<leader>fd",
+        function()
+            require("telescope.builtin").diagnostics()
+        end,
+        desc = "Telescope: Symbols",
     },
     {
         "<leader>fc",
         function()
-            require("telescope.builtin").git_commits()
+            require("telescope.builtin").git_commits({
+                initial_mode = "normal",
+            })
         end,
-        desc = "Help tags",
+        desc = "Tlescope: Git commits",
     },
 }
 
@@ -66,9 +82,21 @@ return {
                         -- the default case_mode is "smart_case"
                     },
                 },
+                pickers = {
+                    find_files = {
+                        hidden = true,
+                    },
+                    live_grep = {
+                        hidden = true,
+                    },
+                },
             })
 
             require("telescope").load_extension("fzf")
         end,
+    },
+    {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
     },
 }

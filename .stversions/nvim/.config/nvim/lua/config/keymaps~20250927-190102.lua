@@ -1,5 +1,3 @@
-local commander = require("commander")
-
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set({ "n", "v" }, "<M-v>", "<C-v>")
 
@@ -66,6 +64,8 @@ vim.keymap.set(
 )
 
 -------------------------------------------------------------------------------
+
+local commander = require("commander")
 
 commander.add({
     {

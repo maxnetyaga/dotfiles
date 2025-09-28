@@ -34,6 +34,11 @@ require("lazy").setup({
 })
 
 require("config.after_plugins_opts")
+
+require("config.wsl_opts")
+
 require("config.lsp")
+
 require("config.keymaps")
+
 require("config.autocmds")

@@ -56,7 +56,7 @@ local keys = {
                 initial_mode = "normal",
             })
         end,
-        desc = "Tlescope: Git commits",
+        desc = "Telescope: Git commits",
     },
 }
 

@@ -15,7 +15,6 @@ return {
             },
             columns = {
                 "icon",
-                "permissions",
                 "size",
             },
             delete_to_trash = true,

@@ -14,7 +14,6 @@ return {
                 },
             },
             columns = {
-                "icon",
                 "permissions",
                 "size",
             },

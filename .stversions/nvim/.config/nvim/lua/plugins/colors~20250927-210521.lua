@@ -5,7 +5,6 @@ return {
         priority = 1000,
         config = function()
             vim.cmd([[colorscheme rubber]])
-            vim.cmd([[highlight ColorColumn ctermbg=#2783F5 guibg=#2783F5]])
         end,
     },
     {

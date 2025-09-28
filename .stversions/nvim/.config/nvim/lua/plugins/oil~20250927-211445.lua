@@ -13,18 +13,13 @@ return {
                     winblend = 0,
                 },
             },
-            columns = {
-                "icon",
-                "permissions",
-                "size",
-            },
             delete_to_trash = true,
             watch_for_changes = true,
             view_options = {
                 show_hidden = true,
             },
             keymaps = {
-                ["<ESC>"] = { "actions.close", mode = "n" },
+                ["<ESC>"] = {"actions.close", mode = "n"},
                 ["<leader>e"] = "actions.close",
             },
         },
@@ -32,12 +27,7 @@ return {
         -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
         lazy = false,
         keys = {
-            {
-                "<leader>e",
-                mode = "n",
-                "<cmd>Oil --float<cr>",
-                desc = "Toggle explorer",
-            },
+            { "<leader>e", mode = "n", "<cmd>Oil --float<cr>", desc = "Toggle explorer" },
         },
     },
 }
