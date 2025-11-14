@@ -1,0 +1,97 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["tray"],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["battery", "pulseaudio", "custom/notification", "clock"],
+  "custom/brightness": {
+    "on-click": "killall com.sidevesh.Luminance || com.sidevesh.Luminance",
+    "format": "{icon}",
+    "format-icons": [""],
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": "",
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true,
+  },
+  "clock": {
+    "format": "{:%Y-%m-%d [%B, %A #%w]}",
+    "interval": 5,
+    "tooltip": false,
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
+    },
+  },
+  "tray": {
+    "spacing": 10,
+  },
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-icons": ["", "", "", ""],
+  },
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-muted": "",
+    "format-icons": {
+      "alsa_output.pci-0000_00_1f.3.analog-stereo": "󱡬",
+      "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "󱡬",
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "phone-muted": "",
+      "portable": "",
+      "car": "",
+      "default": ["", ""],
+    },
+    "format-source": "Mic ON",
+    "format-source-muted": "Mic OFF",
+    "scroll-step": 1,
+    "on-click": "killall pavucontrol || pavucontrol",
+    "ignored-sinks": ["Easy Effects Sink"],
+  },
+  // "mpris": {
+  //     "dynamic-len": 100,
+  //     "format": "{player_icon} {dynamic}",
+  //     "format-paused": "{status_icon} <i>{dynamic}</i>",
+  //     "player-icons": {
+  //         "default": "🎺 "
+  //     },
+  //     "status-icons": {
+  //         "paused": "⏸"
+  //     }
+  // },
+  "hyprland/workspaces": {
+    "active-only": true,
+    "persistent-workspaces": {
+      "*": 10,
+    },
+  },
+}

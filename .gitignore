@@ -1,4 +1,6 @@
-ssh/.ssh/*
+**/ssh/.ssh/*
+!**/ssh/.ssh/config
+**/.stfolder
+**/.stversion
 
-!ssh/.ssh/config
 rofi/.config/rofi/scripts/lang
