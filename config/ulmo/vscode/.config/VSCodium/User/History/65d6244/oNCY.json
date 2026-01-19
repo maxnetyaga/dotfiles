@@ -1,0 +1,11 @@
+{
+    "name": "MODX PHP 5.6 Dev",
+    "dockerComposeFile": "../docker-compose.dev.yml",
+    "service": "web",
+    "workspaceFolder": "/var/www/valentirov.com",
+    "settings": {
+        "php.validate.executablePath": "/usr/local/bin/php"
+    },
+    "extensions": ["bmewburn.vscode-intelephense-client", "xdebug.php-debug"],
+    "postCreateCommand": "composer install || true"
+}

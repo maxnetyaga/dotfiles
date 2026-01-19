@@ -1,0 +1,2 @@
+build:
+	uv run pyinstaller main.py -w -i .\app_icon.ico --contents-directory .

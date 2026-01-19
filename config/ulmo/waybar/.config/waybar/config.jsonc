@@ -1,19 +1,10 @@
 {
   "layer": "top",
   "position": "top",
-  "modules-left": ["tray"],
+  "modules-left": ["tray", "hyprland/window"],
   "modules-center": ["hyprland/workspaces"],
-  "modules-right": [
-    "battery",
-    "pulseaudio",
-    "custom/notification",
-    "clock",
-  ],
-  "custom/brightness": {
-    "on-click": "killall com.sidevesh.Luminance || com.sidevesh.Luminance",
-    "format": "{icon}",
-    "format-icons": [""],
-  },
+  "modules-right": ["custom/timer", "pulseaudio", "clock"],
+
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
@@ -34,6 +25,24 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true,
   },
+
+  "custom/timer": {
+    "exec": "waybar_timer hook",
+    "exec-on-event": false,
+    "return-type": "json",
+    "format": "{0} {icon}",
+    "format-icons": {
+      "standby": "󱫦",
+      "running": "󱫠",
+      "paused": "󱫞",
+    },
+    "on-click": "waybar_timer new 180 'notify-send \"Session finished\"'",
+    "on-click-middle": "waybar_timer cancel",
+    "on-click-right": "waybar_timer togglepause",
+    "on-scroll-up": "waybar_timer increase 60 || waybar_timer new 1 'notify-send -u critical \"Timer expired\"'",
+    "on-scroll-down": "waybar_timer decrease 60",
+  },
+
   "clock": {
     "format": "{:%Y-%m-%d [%B, %A]}",
     "interval": 5,
@@ -53,9 +62,12 @@
       },
     },
   },
+
   "tray": {
     "spacing": 10,
+    // "icon-size": 8,
   },
+
   "pulseaudio": {
     "format": "{volume}% {icon}",
     "format-bluetooth": "{volume}% {icon}",
@@ -78,21 +90,15 @@
     "on-click": "killall pavucontrol || pavucontrol",
     "ignored-sinks": ["Easy Effects Sink"],
   },
-  // "mpris": {
-  //     "dynamic-len": 100,
-  //     "format": "{player_icon} {dynamic}",
-  //     "format-paused": "{status_icon} <i>{dynamic}</i>",
-  //     "player-icons": {
-  //         "default": "🎺 "
-  //     },
-  //     "status-icons": {
-  //         "paused": "⏸"
-  //     }
-  // },
+
   "hyprland/workspaces": {
     "active-only": true,
     "persistent-workspaces": {
-      "*": 10,
+      "*": 11,
     },
+  },
+
+  "hyprland/window": {
+    "format": "{}",
   },
 }

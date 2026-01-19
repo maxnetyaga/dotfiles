@@ -22,4 +22,4 @@ select = [
     "B",
 ]
 
-ignore = ["E501", "S101"]
+ignore = ["E501", "S101", "RUF012"]

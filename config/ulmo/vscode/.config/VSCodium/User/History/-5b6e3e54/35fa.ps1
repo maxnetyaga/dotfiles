@@ -1,0 +1,14 @@
+$env:Path = 'C:\msys64\ucrt64\bin;C:\msys64\usr\bin;' + $env:Path
+
+Import-Module -Name Microsoft.WinGet.CommandNotFound
+Invoke-Expression (&starship init powershell)
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
+
+function lf {
+    $selected = rg --files | ForEach-Object { $_ } | fzf
+    echo $selected
+    if ($selected) {
+        echo "$selected"
+        explorer /select,"$selected"
+    }
+}

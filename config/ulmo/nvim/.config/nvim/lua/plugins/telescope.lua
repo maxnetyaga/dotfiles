@@ -1,4 +1,3 @@
-local file_ignore_patterns = { 'node_modules' }
 local cmd = "Telescope"
 local keys = {
     {
@@ -79,7 +78,7 @@ local keys = {
         desc = "Telescope: Man pages",
     },
     {
-        "<leader>d",
+        "<leader>fd",
         function()
             require("telescope.builtin").diagnostics({ bufnr = 0 })
         end,
@@ -109,21 +108,17 @@ return {
         keys = keys,
         config = function()
             require("telescope").setup({
+                defaults = {
+                    layout_strategy = "vertical",
+                    dynamic_preview_title = true,
+                },
+
                 extensions = {
                     fzf = {
-                        fuzzy = true,                   -- false will only do exact matching
-                        override_generic_sorter = true, -- override the generic sorter
-                        override_file_sorter = true,    -- override the file sorter
-                        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
-                        -- the default case_mode is "smart_case"
-                    },
-                },
-                pickers = {
-                    find_files = {
-                        hidden = true,
-                    },
-                    live_grep = {
-                        hidden = true,
+                        fuzzy = true,
+                        override_generic_sorter = true,
+                        override_file_sorter = true,
+                        case_mode = "smart_case",
                     },
                 },
             })

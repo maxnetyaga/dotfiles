@@ -1,13 +1,23 @@
+---@diagnostic disable: need-check-nil, undefined-field
+
 local commander = require("commander")
 
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set({ "n", "v" }, "<M-v>", "<C-v>")
 
--- Reselect visual block after indenting
-vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
-vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
+vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")
+vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
 
-vim.keymap.set({"n", "v"}, "<C-h>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
+-- Reselect visual block after indenting
+vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })
+vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
+
+vim.keymap.set(
+    { "n", "v" },
+    "<C-h>",
+    "<cmd>nohlsearch<CR>",
+    { desc = "Clear search highlight" }
+)
 
 -- Leader + number to jump to tab
 vim.keymap.set(
@@ -70,6 +80,10 @@ vim.keymap.set(
     ":tablast<CR>",
     { noremap = true, silent = true }
 )
+
+vim.keymap.set({ "n", "v" }, "<Leader>m", function()
+    require("telescope").extensions.macroni.saved_macros()
+end)
 
 -------------------------------------------------------------------------------
 

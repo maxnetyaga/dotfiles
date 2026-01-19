@@ -9,7 +9,6 @@ return {
                 function()
                     require("conform").format({
                         async = true,
-                        lsp_fallback = true,
                     })
                 end,
                 desc = "Format buffer",
@@ -17,6 +16,7 @@ return {
         },
         opts = {
             formatters_by_ft = {
+                c = { "clang-format" },
                 lua = { "stylua" },
                 python = {
                     "ruff_fix",
@@ -36,6 +36,7 @@ return {
                 typescriptreact = {
                     "prettierd",
                 },
+                astro = { "prettierd", lsp_format = "never" },
                 json = { "prettierd" },
                 jsonc = { "prettierd" },
                 sh = { "beautysh" },

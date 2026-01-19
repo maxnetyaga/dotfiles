@@ -1,5 +1,11 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
+  "scripts": {
+    "sound-script": {
+      "exec": "notification_alert",
+      "app-name": ".*"
+    }
+  },
   "positionX": "right",
   "positionY": "bottom",
   "layer": "overlay",

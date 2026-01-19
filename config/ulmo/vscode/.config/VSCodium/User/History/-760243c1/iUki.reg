@@ -1,0 +1,30 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\pwsh]
+@="Open with Powershell"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\pwsh\command]
+@="\"wt.exe\" \"--profile\" \"PowerShell\" \"-d\" \"%V"
+
+
+[HKEY_CLASSES_ROOT\Directory\shell\pwsh]
+@="Open with Powershell"
+
+[HKEY_CLASSES_ROOT\Directory\shell\pwsh\command]
+@="\"wt.exe\" \"--profile\" \"PowerShell\" \"-d\" \"%V"
+
+
+
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\arch]
+@="Open with Arch"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\arch\command]
+@="\"wt.exe\" \"--profile\" \"Arch\" \"-d\" \"%V"
+
+
+[HKEY_CLASSES_ROOT\Directory\shell\arch]
+@="Open with Arch"
+
+[HKEY_CLASSES_ROOT\Directory\shell\arch\command]
+@="\"wt.exe\" \"--profile\" \"Arch\" \"-d\" \"%V"

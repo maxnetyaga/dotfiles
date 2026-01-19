@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+
+  <Package
+    Name="Обробник ДРРП"
+    Manufacturer="GeoInfo"
+    Version="1.0.0"
+    Language="1058"
+    UpgradeCode="3fdad681-cc2c-4d6f-897f-d1d5c9e1eabc" />
+
+  <Icon Id="AppIcon.ico" SourceFile="main\main.ico"/>
+  <Property Id="ARPPRODUCTICON" Value="AppIcon.ico" />
+
+  <Bundle Name="MyApp Installer" Version="1.0.0.0" Manufacturer="YourCompany" UpgradeCode="e3b35bb1-3f01-4d8d-9c18-fb2f2aa92e11">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense" />
+  </Bundle>
+
+  <Fragment>
+    <Directory Id="ProgramFilesFolder">
+      <Directory Id="INSTALLFOLDER" Name="MyApp">
+        <Component Id="MainEXE" Guid="3fdad681-cc2c-4d6f-897f-d1d5c9e1eabc">
+          <File Source="main\main.exe" KeyPath="yes" />
+        </Component>
+        <Directory Id="INTERNALFOLDER" Name="_internal">
+          <Component Id="InternalFiles" Guid="e2bb8c2b-b5f6-4204-a938-69f171c5f001">
+            <File Source="main\_internal\internal.dll" KeyPath="yes" />
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Directory Id="DesktopFolder">
+      <Component Id="DesktopShortcutComponent" Guid="b2d0d3a1-1d6b-4ffb-812f-5c97c8c11b3e">
+        <Shortcut Id="desktopShortcut"
+                  Name="MyApp"
+                  Target="[INSTALLFOLDER]main.exe"
+                  WorkingDirectory="INSTALLFOLDER"
+                  Advertise="yes"
+                  Icon="AppIcon.ico"/>
+        <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\MyApp" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents">
+      <ComponentRef Id="MainEXE" />
+      <ComponentRef Id="InternalFiles" />
+      <ComponentRef Id="DesktopShortcutComponent" />
+    </ComponentGroup>
+  </Fragment>
+
+</Wix>

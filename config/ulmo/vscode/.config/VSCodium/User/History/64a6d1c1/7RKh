@@ -1,0 +1,42 @@
+Host root@proxmox
+  HostName proxmox
+  User root
+
+Host max@geoinfo
+  HostName geoinfo
+  User max
+
+Host root@geoinfo
+  HostName geoinfo
+  User root
+
+Host max@caddy
+  HostName caddy
+  User max
+
+Host root@caddy
+  HostName caddy
+  User root
+
+Host max@docker
+  HostName docker
+  User max
+
+Host root@docker
+  HostName docker
+  User root
+
+Host root@debian1
+  HostName 192.168.114.10
+  User root
+
+Host maria@debian1
+  HostName 192.168.114.10
+  User maria
+
+Host root@debian2
+  HostName 192.168.114.11
+  User root
+
+Host github.com
+  User git

@@ -1,0 +1,50 @@
+#!/bin/bash
+# appimage-install-local.sh
+# Usage: ./appimage-install-local.sh <AppImage_PATH> [AppName]
+
+set -e
+
+APPIMAGE_DIR="$HOME/bin"
+DESKTOP_DIR="$HOME/.local/share/applications"
+
+mkdir -p "$APPIMAGE_DIR"
+mkdir -p "$DESKTOP_DIR"
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <AppImage_PATH> [AppName]"
+    exit 1
+fi
+
+APPIMAGE_SRC="$1"
+
+if [ ! -f "$APPIMAGE_SRC" ]; then
+    echo "Error: File not found: $APPIMAGE_SRC"
+    exit 1
+fi
+
+APP_NAME="${2:-$(basename "$APPIMAGE_SRC" | sed 's/.AppImage//')}"
+APP_PATH="$APPIMAGE_DIR/$APP_NAME.AppImage"
+
+# Copy AppImage
+echo "Installing $APP_NAME..."
+cp "$APPIMAGE_SRC" "$APP_PATH"
+
+# Make executable
+chmod +x "$APP_PATH"
+
+# Create .desktop file
+DESKTOP_FILE="$DESKTOP_DIR/$APP_NAME.desktop"
+
+cat > "$DESKTOP_FILE" <<EOF
+[Desktop Entry]
+Name=$APP_NAME
+Exec=$APP_PATH
+Icon=$APP_PATH
+Type=Application
+Categories=Utility;
+EOF
+
+echo "Installed $APP_NAME to $APPIMAGE_DIR"
+echo "Desktop entry created at $DESKTOP_FILE"
+echo "Done!"
+

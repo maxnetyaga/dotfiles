@@ -1,0 +1,26 @@
+Host debian2
+  HostName debian2
+  User root
+
+Host debian1
+  HostName 192.168.114.10
+  User root
+
+Host debian1-maria
+  HostName 192.168.114.10
+  User maria
+
+Host root@manwe
+  HostName manwe
+  User root
+
+Host max@manwe
+  HostName manwe
+  User max
+
+Host root@proxmox
+  HostName proxmox
+  User root
+
+Host github.com
+  User git

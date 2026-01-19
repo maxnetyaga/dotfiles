@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="QuickStart Application"
+           Version="1.0.0.0"
+           Manufacturer="Your Company Name"
+           UpgradeCode="12345678-1234-1234-1234-123456789012"
+           InstallerVersion="500"
+           Compressed="true"
+           Scope="perMachine">
+
+    <!-- Define the icon for the installer and Control Panel -->
+    <Icon Id="ProductIcon" SourceFile="main/main.ico" />
+    <Property Id="ARPPRODUCTICON" Value="ProductIcon" />
+    
+    <!-- Control Panel entries -->
+    <Property Id="ARPHELPLINK" Value="https://yourwebsite.com/support" />
+    <Property Id="ARPURLINFOABOUT" Value="https://yourwebsite.com" />
+    <Property Id="ARPCONTACT" Value="support@yourcompany.com" />
+    <Property Id="ARPCOMMENTS" Value="QuickStart Application - A powerful tool for quick operations" />
+    <Property Id="ARPNOREPAIR" Value="1" />
+    
+    <!-- Major upgrade logic -->
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    
+    <!-- Media definition -->
+    <MediaTemplate EmbedCab="true" />
+
+    <!-- Feature definition -->
+    <Feature Id="ProductFeature" Title="QuickStart Application" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="DesktopShortcut" />
+      <ComponentRef Id="StartMenuShortcuts" />
+    </Feature>
+
+    <!-- UI definition -->
+    <!-- <UIRef Id="WixUI_InstallDir" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+     -->
+    <!-- Optional: License agreement (remove if you don't have one) -->
+    <!-- <WixVariable Id="WixUILicenseRtf" Value="License.rtf" /> -->
+    
+    <!-- Installer branding images (optional) -->
+    <!-- <WixVariable Id="WixUIDialogBmp" Value="dialog.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" /> -->
+  </Package>
+
+  <!-- Directory structure -->
+  <Fragment>
+    <StandardDirectory Id="ProgramFilesFolder">
+      <Directory Id="INSTALLFOLDER" Name="QuickStart">
+        <Directory Id="InternalFolder" Name="internal" />
+      </Directory>
+    </StandardDirectory>
+    
+    <StandardDirectory Id="DesktopFolder" />
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" Name="QuickStart Application" />
+    </StandardDirectory>
+  </Fragment>
+
+  <!-- Components -->
+  <Fragment>
+    <ComponentGroup Id="ProductComponents">
+      <!-- Main executable -->
+      <Component Id="MainExecutable" Directory="INSTALLFOLDER">
+        <File Id="MainExe" 
+              Name="main.exe" 
+              Source="main\main.exe" 
+              Checksum="true" />
+      </Component>
+
+      <!-- Internal folder components -->
+      <Component Id="InternalFiles" Directory="InternalFolder">
+        <File Id="InternalFile1" 
+              Name="_internal" 
+              Source="main\_internal" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <!-- Desktop shortcut component -->
+  <Fragment>
+    <Component Id="DesktopShortcut" Directory="DesktopFolder">
+      <Shortcut Id="DesktopShortcut"
+                Name="QuickStart Application"
+                Description="Launch QuickStart Application"
+                Target="[INSTALLFOLDER]main.exe"
+                WorkingDirectory="INSTALLFOLDER"
+                Icon="ProductIcon" />
+      <RegistryValue Root="HKCU" 
+                     Key="Software\[Manufacturer]\[ProductName]" 
+                     Name="DesktopShortcut" 
+                     Type="integer" 
+                     Value="1" 
+                     KeyPath="true" />
+    </Component>
+  </Fragment>
+
+  <!-- Start Menu shortcut component -->
+  <Fragment>
+    <Component Id="StartMenuShortcuts" Directory="ApplicationProgramsFolder">
+      <Shortcut Id="ApplicationStartMenuShortcut"
+                Name="QuickStart Application"
+                Description="Launch QuickStart Application"
+                Target="[INSTALLFOLDER]main.exe"
+                WorkingDirectory="INSTALLFOLDER"
+                Icon="ProductIcon" />
+      
+      <Shortcut Id="UninstallProduct"
+                Name="Uninstall QuickStart Application"
+                Description="Uninstalls QuickStart Application"
+                Target="[System64Folder]msiexec.exe"
+                Arguments="/x [ProductCode]" />
+      
+      <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
+      
+      <RegistryValue Root="HKCU" 
+                     Key="Software\[Manufacturer]\[ProductName]" 
+                     Name="StartMenuShortcut" 
+                     Type="integer" 
+                     Value="1" 
+                     KeyPath="true" />
+    </Component>
+  </Fragment>
+</Wix>

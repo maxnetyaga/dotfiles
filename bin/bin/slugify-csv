@@ -1,0 +1,33 @@
+#!/usr/bin/env python3
+
+import csv
+
+import click
+from slugify import slugify
+
+
+@click.command()
+@click.argument("input_file", type=click.Path(exists=True))
+@click.argument("output_file", required=False)
+@click.option(
+    "-i", "--inplace", default=True, is_flag=True, help="Overwrite the input file."
+)
+def main(input_file, output_file, inplace):
+    """Slugify the first row (header) of a CSV."""
+    if inplace and output_file:
+        raise click.UsageError("Use either --inplace or output_file, not both.")
+
+    target = input_file if inplace else (output_file or "output.csv")
+
+    with open(input_file, newline="", encoding="utf-8") as f:
+        rows = list(csv.reader(f))
+
+    rows[0] = [f"{slugify(col)[0:31]}{i + 1}" for i, col in enumerate(rows[0])]
+
+    with open(target, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerows(rows)
+
+
+if __name__ == "__main__":
+    main()

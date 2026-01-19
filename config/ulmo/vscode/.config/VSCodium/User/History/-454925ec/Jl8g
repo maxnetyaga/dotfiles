@@ -1,0 +1,5 @@
+run:
+	uv run pyinstaller main.py -w -i ./app_icon.ico --contents-directory .
+	cp app_icon.png dist/main
+	cp -r config dist/main
+	cp -r poppler dist/main

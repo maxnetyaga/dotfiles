@@ -1,4 +1,8 @@
 # See dunst(5) for all configuration options
+#
+[play_sound]
+    summary = "*"
+    script = notification_alert
 
 [global]
     ### Display ###

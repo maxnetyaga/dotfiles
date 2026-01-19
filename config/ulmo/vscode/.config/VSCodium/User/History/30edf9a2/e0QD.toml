@@ -1,0 +1,17 @@
+[project]
+name = "geoinfo-strip-rrp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+
+[project.dependencies]
+pyqt5="5.15.11"
+
+
+[tool.ruff]
+line-length = 80
+
+[tool.ruff.format]
+quote-style = "single"
+

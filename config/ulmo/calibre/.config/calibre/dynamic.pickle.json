@@ -1,0 +1,34 @@
+{
+  "add books dialog dir": "/home/max/.local/share/downloads",
+  "add books dialog dir-last-used-filter-spec-all-files": false,
+  "choose library location": "/home/max/books/calibre-library",
+  "database location dialog": "/home/max/Nextcloud/Files/Max`s Calibre Library",
+  "notified-version-updates": {
+    "__class__": "set",
+    "__value__": [
+      "8.14"
+    ]
+  },
+  "s_r_search_mode": 0,
+  "save to disk dialog": "/home/max/books/kindle-library",
+  "sort_history": [
+    [
+      "authors",
+      false
+    ],
+    [
+      "title",
+      true
+    ],
+    [
+      "ondevice",
+      true
+    ],
+    [
+      "timestamp",
+      false
+    ]
+  ],
+  "welcome_wizard_device": "default",
+  "welcome_wizard_was_run": true
+}

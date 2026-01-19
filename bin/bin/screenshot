@@ -1,0 +1,21 @@
+#!/bin/bash
+
+LOCK_FILE=/tmp/screenshot.lock
+LOCK_FD=9
+
+get_lock() {
+    eval "exec $LOCK_FD>$LOCK_FILE"
+    flock -n $LOCK_FD
+}
+
+cleanup() {
+    exec {LOCK_FD}>&-
+}
+
+get_lock || exit
+
+grim -g "$(slurp -w 0)" - > /tmp/screenshot || exit
+
+cleanup
+
+wl-copy -t image/png < /tmp/screenshot

@@ -1,0 +1,1 @@
+link32 %1 /SUBSYSTEM:WINDOWS

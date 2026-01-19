@@ -1,0 +1,116 @@
+{
+  "geometry-of-main_window_geometry": {
+    "frame_geometry": {
+      "height": 1414,
+      "width": 1150,
+      "x": 0,
+      "y": 0
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 1414,
+      "width": 1150,
+      "x": 0,
+      "y": 0
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 1414,
+      "width": 1150,
+      "x": 0,
+      "y": 0
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAABH0AAAWFAAAAAAAAAAAAAAR9AAAFhQAAAAACAAAACgAAAAAAAAAAAAAABH0AAAWF"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 2.0,
+      "geometry_in_logical_pixels": {
+        "height": 1440,
+        "width": 2560,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 0,
+      "manufacturer": "Samsung Electric Company",
+      "model": "LS27A800U",
+      "name": "HDMI-A-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1440,
+        "width": 2560
+      },
+      "virtual_geometry": {
+        "height": 1440,
+        "width": 2560,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "main_window_state": {
+    "__class__": "bytearray",
+    "__value__": "AAAA/wAAAAH9AAAAAgAAAAAAAAElAAACwvwCAAAAAvsAAAAQAHQAbwBjAC0AZABvAGMAawAAAAAAAAACwgAAAJgA////+wAAABYAcwBlAGEAcgBjAGgALQBkAG8AYwBrAAAAAAD/////AAAArwD///8AAAABAAACWAAABYb8AgAAAAT7AAAAFgBsAG8AbwBrAHUAcAAtAGQAbwBjAGsAAAAAAP////8AAACfAP////sAAAAcAGIAbwBvAGsAbQBhAHIAawBzAC0AZABvAGMAawAAAAAA/////wAAARwA////+wAAABwAaQBuAHMAcABlAGMAdABvAHIALQBkAG8AYwBrAAAAAAAAAAWGAAAAGwD////7AAAAHgBoAGkAZwBoAGwAaQBnAGgAdABzAC0AZABvAGMAawAAAAAA/////wAAAPUA////AAAEfgAABYYAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAAAAAAAAQAAAB4AYQBjAHQAaQBvAG4AcwBfAHQAbwBvAGwAYgBhAHICAAAAAP////8AAAAAAAAAAA=="
+  },
+  "old_prefs_migrated": true,
+  "session_data": {
+    "controls_help_shown_count": 2,
+    "standalone_font_settings": {},
+    "standalone_misc_settings": {
+      "remember_last_read": true,
+      "remember_window_geometry": false,
+      "save_annotations_in_ebook": true,
+      "singleinstance": false
+    },
+    "standalone_recently_opened": [
+      {
+        "authors": [
+          "Noam Nisan;Shimon Schocken;"
+        ],
+        "key": "/home/max/books/calibre-library/Noam Nisan;Shimon Schocken;/The Elements of Computing Systems, Second Edition (148)/The Elements of Computing Systems, Second - Noam Nisan;Shimon Schocken;.htmlz",
+        "pathtoebook": "/home/max/books/calibre-library/Noam Nisan;Shimon Schocken;/The Elements of Computing Systems, Second Edition (148)/The Elements of Computing Systems, Second - Noam Nisan;Shimon Schocken;.htmlz",
+        "timestamp": "2026-01-09T15:53:16.830Z",
+        "title": "The Elements of Computing Systems, Second Edition"
+      },
+      {
+        "authors": [
+          "Noam Nisan;Shimon Schocken;"
+        ],
+        "key": "/home/max/books/calibre-library/Noam Nisan;Shimon Schocken;/The Elements of Computing Systems, Second Edition (148)/The Elements of Computing Systems, Second - Noam Nisan;Shimon Schocken;.epub",
+        "pathtoebook": "/home/max/books/calibre-library/Noam Nisan;Shimon Schocken;/The Elements of Computing Systems, Second Edition (148)/The Elements of Computing Systems, Second - Noam Nisan;Shimon Schocken;.epub",
+        "timestamp": "2026-01-09T14:14:58.953Z",
+        "title": "The Elements of Computing Systems, Second Edition"
+      },
+      {
+        "authors": [
+          "Фридрих Энгельс",
+          "Карл Генрих Маркс"
+        ],
+        "key": "/home/max/books/calibre-library/Fridrikh Enghiel's/Manifiest Kommunistichieskoi partii (118)/Manifiest Kommunistichieskoi pa - Fridrikh Enghiel's.epub",
+        "pathtoebook": "/home/max/books/calibre-library/Fridrikh Enghiel's/Manifiest Kommunistichieskoi partii (118)/Manifiest Kommunistichieskoi pa - Fridrikh Enghiel's.epub",
+        "timestamp": "2026-01-09T14:11:31.578Z",
+        "title": "Манифест Коммунистической партии"
+      },
+      {
+        "authors": [
+          "Арбитр Петроний"
+        ],
+        "key": "/home/max/books/calibre-library/Arbitr Pietronii/Satirikon (143)/Satirikon - Arbitr Pietronii.epub",
+        "pathtoebook": "/home/max/books/calibre-library/Arbitr Pietronii/Satirikon (143)/Satirikon - Arbitr Pietronii.epub",
+        "timestamp": "2026-01-04T11:34:23.857Z",
+        "title": "Сатирикон"
+      },
+      {
+        "authors": [
+          "Greg Egan"
+        ],
+        "key": "/home/max/books/kindle-library/Аксиоматик.epub",
+        "pathtoebook": "/home/max/books/kindle-library/Аксиоматик.epub",
+        "timestamp": "2025-11-23T14:53:23.950Z",
+        "title": "Аксиоматик"
+      }
+    ]
+  }
+}

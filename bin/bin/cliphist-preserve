@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Watch clipboard changes
+wl-paste --watch cliphist store &
+
+# Watch for clipboard loss and restore last entry
+while true; do
+    wl-paste &>/dev/null
+    if [ $? -ne 0 ]; then
+        cliphist list | head -n1 | cliphist decode | wl-copy
+    fi
+    sleep 1
+done

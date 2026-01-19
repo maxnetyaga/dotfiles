@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Options
+options="Shutdown\nReboot\nLogout"
+
+# Use Rofi to select an option
+chosen=$(echo -e "$options" | rofi -dmenu -p "Power Menu")
+
+case "$chosen" in
+    Shutdown)
+        systemctl poweroff
+        ;;
+    Reboot)
+        systemctl reboot
+        ;;
+    Logout)
+        pkill -KILL -u $USER
+        ;;
+esac

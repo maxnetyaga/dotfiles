@@ -1,0 +1,8 @@
+<Project Sdk="WixToolset.Sdk/6">
+
+  <PropertyGroup>
+    <OutputName>QuickStart</OutputName>
+    <WixTargetPath>Product.wxs</WixTargetPath>
+  </PropertyGroup>
+
+</Project>

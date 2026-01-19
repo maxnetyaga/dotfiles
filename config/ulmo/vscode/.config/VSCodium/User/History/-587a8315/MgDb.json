@@ -1,0 +1,178 @@
+{
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.function": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.lambda": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "sameLine",
+    "C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyFunction": true,
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.semanticHighlighting.enabled": true,
+        "editor.suggest.insertMode": "replace",
+        "editor.wordBasedSuggestions": "off"
+    },
+    "[dockercompose]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+    "[sql]": {
+        "editor.defaultFormatter": "bradymholt.pgformatter"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "csv-edit.initialColumnWidth": 20,
+    "debug.onTaskErrors": "abort",
+    "diffEditor.wordWrap": "on",
+    "editor.accessibilitySupport": "off",
+    "editor.cursorStyle": "line",
+    "editor.fontFamily": "'ComicShannsMono Nerd Font Mono', 'Consolas'",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 18,
+    "editor.fontWeight": "normal",
+    "editor.formatOnPaste": false,
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
+    "editor.minimap.enabled": true,
+    "editor.mouseWheelZoom": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.rulers": [79, 119],
+    "editor.semanticHighlighting.enabled": true,
+    "editor.smoothScrolling": true,
+    "editor.suggestSelection": "first",
+    "editor.unicodeHighlight.nonBasicASCII": false,
+    "editor.wordWrap": "on",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmPasteNative": false,
+    "extensions.ignoreRecommendations": true,
+    "files.associations": {
+        "*.sql": "sql"
+    },
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/.DS_Store": false,
+        "**/.git": false,
+        "**/.hg": false,
+        "**/.svn": false,
+        "**/CVS": false,
+        "**/Thumbs.db": false
+    },
+    "files.hotExit": "off",
+    "git.confirmSync": false,
+    "git.openRepositoryInParentFolders": "always",
+    "javascript.inlayHints.parameterNames.enabled": "none",
+    "javascript.preferences.quoteStyle": "single",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "liveServer.settings.NoBrowser": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveServer.settings.donotVerifyTags": true,
+    "markdown.extension.toc.updateOnSave": false,
+    "nix.enableLanguageServer": true,
+    "nix.serverSettings": {
+        "nil": {
+            "formatting": {
+                "command": ["nixpkgs-fmt"]
+            }
+        }
+    },
+    "path-intellisense.absolutePathToWorkspace": false,
+    "path-intellisense.showHiddenFiles": true,
+    "prettier.printWidth": 79,
+    "prettier.tabWidth": 4,
+    "pylint.args": ["\"pylint.args\": [\"--disable=C0116\"]"],
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.createEnvironment.trigger": "off",
+    "python.defaultInterpreterPath": "C:\\Users\\netya\\.pyenv\\pyenv-win\\versions\\3.13.0\\python.exe",
+    "python.languageServer": "Pylance",
+    "security.allowedUNCHosts": ["wsl.localhost"],
+    "security.workspace.trust.banner": "always",
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "settingsSync.ignoredExtensions": ["alefragnani.project-manager"],
+    "settingsSync.ignoredSettings": ["-pylint.showNotifications"],
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.fontFamily": "",
+    "terminal.integrated.hideOnStartup": "always",
+    "terminal.integrated.mouseWheelZoom": true,
+    "terminal.integrated.profiles.windows": {
+        "Arch (WSL)": {
+            "args": ["-d", "Arch"],
+            "path": "C:\\Windows\\System32\\wsl.exe"
+        },
+        "Command Prompt": null,
+        "Git Bash": null,
+        "JavaScript Debug Terminal": null,
+        "PowerShell": {
+            "icon": "terminal-powershell",
+            "source": "PowerShell"
+        },
+        "Ubuntu (WSL)": null
+    },
+    "typescript.preferences.quoteStyle": "single",
+    "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+    "update.mode": "manual",
+    "vsicons.dontShowNewVersionMessage": true,
+    "vsintellicode.modify.editor.suggestSelection": "disabled",
+    "window.commandCenter": false,
+    "window.confirmSaveUntitledWorkspace": false,
+    "window.menuBarVisibility": "toggle",
+    "window.restoreWindows": "none",
+    "window.title": "${rootName}${separator}${activeEditorShort}",
+    "workbench.activityBar.location": "top",
+    "workbench.editor.editorActionsLocation": "hidden",
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.editorAssociations": {
+        "*.docx": "docxreader.docxEditor"
+    },
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.list.smoothScrolling": true,
+    "workbench.settings.applyToAllProfiles": ["editor.fontFamily"],
+    "workbench.sideBar.location": "right",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.tree.expandMode": "doubleClick",
+    "workbench.tree.indent": 24,
+    "workbench.tree.renderIndentGuides": "always",
+    "workbench.colorTheme": "Rubber",
+    "workbench.layoutControl.enabled": false,
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[go]": {
+        "editor.insertSpaces": false,
+        "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "never"
+        }
+    },
+    "chat.commandCenter.enabled": false
+}

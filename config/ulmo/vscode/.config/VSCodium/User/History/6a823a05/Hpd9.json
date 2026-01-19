@@ -1,0 +1,236 @@
+{
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.semanticHighlighting.enabled": true,
+        "editor.suggest.insertMode": "replace",
+        "editor.wordBasedSuggestions": "off"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[dockercompose]": {
+        "editor.defaultFormatter": "docker.docker"
+    },
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-containers"
+    },
+    "[go]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "never"
+        },
+        "editor.formatOnSave": false,
+        "editor.insertSpaces": false
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[sql]": {
+        "editor.defaultFormatter": "ReneSaarsoo.sql-formatter-vsc"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.function": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.lambda": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "sameLine",
+    "C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyFunction": true,
+    "chat.agent.enabled": false,
+    "chat.commandCenter.enabled": false,
+    "csv-edit.initialColumnWidth": 20,
+    "database-client.autoSync": true,
+    "debug.onTaskErrors": "abort",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.renderSideBySide": true,
+    "diffEditor.wordWrap": "on",
+    "editor.accessibilitySupport": "off",
+    "editor.cursorStyle": "line",
+    "editor.experimental.preferTreeSitter.typescript": true,
+    "editor.fontFamily": "'ComicShannsMono Nerd Font Mono', 'Consolas'",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 18,
+    "editor.fontWeight": "normal",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
+    "editor.lineNumbers": "relative",
+    "editor.minimap.enabled": true,
+    "editor.mouseWheelZoom": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.rulers": [79, 119],
+    "editor.semanticHighlighting.enabled": true,
+    "editor.smoothScrolling": true,
+    "editor.suggestSelection": "first",
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.nonBasicASCII": false,
+    "editor.wordWrap": "on",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmPasteNative": false,
+    "extensions.ignoreRecommendations": true,
+    "files.associations": {
+        "*.sql": "sql"
+    },
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/.DS_Store": false,
+        "**/.git": false,
+        "**/.hg": false,
+        "**/.svn": false,
+        "**/CVS": false,
+        "**/Thumbs.db": false
+    },
+    "files.hotExit": "off",
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.openRepositoryInParentFolders": "always",
+    "javascript.inlayHints.parameterNames.enabled": "none",
+    "javascript.preferences.quoteStyle": "single",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveServer.settings.donotVerifyTags": true,
+    "liveServer.settings.NoBrowser": true,
+    "markdown.extension.toc.updateOnSave": false,
+    "nix.enableLanguageServer": true,
+    "nix.serverSettings": {
+        "nil": {
+            "formatting": {
+                "command": ["nixpkgs-fmt"]
+            }
+        }
+    },
+    "path-intellisense.absolutePathToWorkspace": false,
+    "path-intellisense.showHiddenFiles": true,
+    "prettier.printWidth": 79,
+    "prettier.tabWidth": 4,
+    "pylint.args": ["\"pylint.args\": [\"--disable=C0116\"]"],
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "standard",
+    "python.createEnvironment.trigger": "off",
+    "python.defaultInterpreterPath": "C:\\Users\\netya\\.pyenv\\pyenv-win\\versions\\3.13.2\\python.exe",
+    "python.languageServer": "Pylance",
+    "remote.autoForwardPorts": false,
+    "remote.SSH.remotePlatform": {
+        "caddy": "linux",
+        "caddy.lan.netyaga.com": "linux",
+        "debian1": "linux",
+        "debian1-maria": "linux",
+        "debian2": "linux",
+        "docker": "linux",
+        "geoinfo": "linux",
+        "hearthstone": "linux",
+        "hearthstone.lan.netyaga.com": "linux",
+        "manwe": "linux",
+        "native-swarm": "linux",
+        "proxmox": "linux",
+        "valentirov": "linux"
+    },
+    "security.allowedUNCHosts": ["wsl.localhost", "truenas"],
+    "security.workspace.trust.banner": "always",
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "settingsSync.ignoredExtensions": ["alefragnani.project-manager"],
+    "settingsSync.ignoredSettings": ["-pylint.showNotifications"],
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.fontFamily": "",
+    "terminal.integrated.hideOnStartup": "always",
+    "terminal.integrated.mouseWheelZoom": true,
+    "terminal.integrated.profiles.windows": {
+        "Arch (WSL)": {
+            "args": ["-d", "Arch"],
+            "path": "C:\\Windows\\System32\\wsl.exe"
+        },
+        "Command Prompt": null,
+        "Git Bash": null,
+        "JavaScript Debug Terminal": null,
+        "PowerShell": {
+            "icon": "terminal-powershell",
+            "source": "PowerShell"
+        },
+        "Ubuntu (WSL)": null
+    },
+    "typescript.experimental.useTsgo": false,
+    "typescript.preferences.quoteStyle": "single",
+    "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "update.mode": "manual",
+    "vsicons.dontShowNewVersionMessage": true,
+    "vsintellicode.modify.editor.suggestSelection": "disabled",
+    "window.commandCenter": false,
+    "window.confirmSaveUntitledWorkspace": false,
+    "window.menuBarVisibility": "compact",
+    "window.newWindowProfile": "Default",
+    "window.openFilesInNewWindow": "default",
+    "window.restoreWindows": "none",
+    "window.title": "${remoteName}${separator}${rootName}${separator}${activeEditorShort}",
+    "workbench.activityBar.location": "top",
+    "workbench.colorTheme": "Rubber",
+    "workbench.editor.editorActionsLocation": "hidden",
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.excludeDirty": true,
+    "workbench.editor.limit.perEditorGroup": true,
+    "workbench.editor.limit.value": 1,
+    "workbench.editorAssociations": {
+        "*.docx": "docxreader.docxEditor"
+    },
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.layoutControl.enabled": false,
+    "workbench.list.smoothScrolling": true,
+    "workbench.settings.applyToAllProfiles": ["editor.fontFamily"],
+    "workbench.sideBar.location": "right",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.tree.expandMode": "doubleClick",
+    "workbench.tree.indent": 24,
+    "workbench.tree.renderIndentGuides": "always",
+    "pgFormatter.wrapLimit": 80,
+    "pgFormatter.keywordCase": "lowercase",
+    "Prettier-SQL.keywordCase": "lower",
+    "sql-formatter.dialect": "postgresql",
+    "Prettier-SQL.SQLFlavourOverride": "postgresql",
+    "Prettier-SQL.linesBetweenQueries": 2,
+    "SQL-Formatter-VSCode.dialect": "postgresql",
+    "SQL-Formatter-VSCode.functionCase": "lower",
+    "SQL-Formatter-VSCode.identifierCase": "lower",
+    "SQL-Formatter-VSCode.keywordCase": "lower",
+    "SQL-Formatter-VSCode.linesBetweenQueries": 2,
+    "SQL-Formatter-VSCode.paramTypes": {
+        "named": ["@"]
+    },
+    "workbench.secondarySideBar.defaultVisibility": "visible",
+    "chat.viewWelcome.enabled": false
+}

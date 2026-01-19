@@ -53,6 +53,10 @@ button:hover {
     background-color: #a37800;
 }
 
+#workspaces {
+    font-family: 'Alcarin Tengwar';
+}
+
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;

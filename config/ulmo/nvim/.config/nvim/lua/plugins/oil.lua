@@ -11,6 +11,7 @@ return {
                 border = "single",
                 win_options = {
                     winblend = 0,
+                    signcolumn = "yes:2",
                 },
             },
             columns = {
