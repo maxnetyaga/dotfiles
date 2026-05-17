@@ -1,0 +1,118 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["tray", "hyprland/window"],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["custom/timer", "custom/brightness", "pulseaudio", "clock"],
+
+  "tray": {
+    "spacing": 10,
+    // "icon-size": 8,
+  },
+
+  "hyprland/window": {
+    "format": "{}",
+  },
+
+  "hyprland/workspaces": {
+    "active-only": true,
+    "persistent-workspaces": {
+      "*": 11,
+    },
+  },
+
+  // ####################################################################### //
+
+  "custom/timer": {
+    "exec": "waybar_timer hook",
+    "exec-on-event": false,
+    "return-type": "json",
+    "format": "{0} {icon}",
+    "format-icons": {
+      "standby": "󱫦",
+      "running": "󱫠",
+      "paused": "󱫞",
+    },
+    "on-click": "waybar_timer new 180 'notify-send \"Session finished\"'",
+    "on-click-middle": "waybar_timer cancel",
+    "on-click-right": "waybar_timer togglepause",
+    "on-scroll-up": "waybar_timer increase 60 || waybar_timer new 1 'notify-send -u critical \"Timer expired\"'",
+    "on-scroll-down": "waybar_timer decrease 60",
+  },
+
+  "custom/brightness": {
+    "format": "{text}% ",
+    "signal": 8,
+    "exec": "brightness-control get",
+    "on-scroll-up": "brightness-control up",
+    "on-scroll-down": "brightness-control down",
+    "on-click": "brightness-control left_click",
+    "on-click-right": "brightness-control right_click",
+  },
+
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-muted": "",
+    "format-icons": {
+      "alsa_output.pci-0000_00_1f.3.analog-stereo": "󱡬",
+      "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "󱡬",
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "phone-muted": "",
+      "portable": "",
+      "car": "",
+      "default": ["", ""],
+    },
+    "format-source": "Mic ON",
+    "format-source-muted": "Mic OFF",
+    "scroll-step": 1,
+    "on-click": "killall pavucontrol || pavucontrol",
+    "ignored-sinks": ["Easy Effects Sink"],
+  },
+
+  "clock": {
+    "format": "{:%Y-%m-%d [%B, W-%V, %A] %H:%M}",
+    "interval": 5,
+    "tooltip": false,
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
+    },
+  },
+}
+
+// ######################################################################### //
+
+// "custom/notification": {
+//   "tooltip": false,
+//   "format": "{icon}",
+//   "format-icons": {
+//     "notification": "<span foreground='red'><sup></sup></span>",
+//     "none": "",
+//     "dnd-notification": "<span foreground='red'><sup></sup></span>",
+//     "dnd-none": "",
+//     "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+//     "inhibited-none": "",
+//     "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+//     "dnd-inhibited-none": "",
+//   },
+//   "return-type": "json",
+//   "exec-if": "which swaync-client",
+//   "exec": "swaync-client -swb",
+//   "on-click": "swaync-client -t -sw",
+//   "on-click-right": "swaync-client -d -sw",
+//   "escape": true,
+// },

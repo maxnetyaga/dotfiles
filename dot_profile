@@ -1,0 +1,49 @@
+# TERM
+export TERMINAL=kitty
+export TERM="xterm-256color"
+# PAGER
+export PAGER=moor
+export MANPAGER='nvim +Man!'
+export LESS='--mouse -R'
+# EDITOR
+export EDITOR=nvim
+export SUDO_EDITOR=nvim
+export GIT_EDITOR=nvim
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+# GTK
+export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
+export GDK_SCALE=1
+# QT
+export QT_QPA_PLATFORMTHEME=qt6ct
+export QT_QUICK_BACKEND=software
+# NEWT
+export NEWT_COLORS="root=#FFFFFF,#000000 border=#FF00FF,#000000 window=#000000,#000000 shadow=#000000,#000000 title=#FF00FF,#000000 button=#000000,#FF00FF button_active=#000000,#FFFF00 actbutton=#FFFF00,#000000 compactbutton=#FFFF00,#000000 checkbox=#FF0000,#000000 entry=#00FF00,#000000 disentry=#000000,#000000 textbox=#00FF00,#000000 acttextbox=#FF00FF,#000000 label=#00FFFF,#000000 listbox=#00FF00,#000000 actlistbox=#FF00FF,#000000 sellistbox=#FF0000,#000000 actsellistbox=#000000,#FFFF00"
+# ELECTRON
+export ELECTRON_OZONE_PLATFORM_HINT=auto
+# C COMPILER
+export CC='gcc'
+export CXX='g++'
+export LD='ld'
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
+# NVIDIA
+export LIBVA_DRIVER_NAME=nvidia
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export NVD_BACKEND=direct
+# REGION FORMATS
+export TIME_STYLE=long-iso
+export LC_CTYPE=en_DK.UTF-8
+export LC_ALL=en_DK.UTF-8
+# JAVA
+JAVA_HOME=/usr/lib/jvm/default
+# WINE
+WINEPREFIX=~/.wine
+
+source $HOME/.path
+
+### UWSM ######################################################################
+if uwsm check may-start && uwsm select; then
+    exec uwsm start default
+fi

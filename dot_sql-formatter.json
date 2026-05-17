@@ -1,0 +1,10 @@
+{
+  "language": "postgresql",
+  "tabWidth": 2,
+  "keywordCase": "lower",
+  "dataTypeCase": "lower",
+  "functionCase": "lower",
+  "identifierCase": "lower",
+  "linesBetweenQueries": 2,
+  "paramTypes": { "named": ["@"] }
+}

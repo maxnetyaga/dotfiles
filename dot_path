@@ -1,0 +1,6 @@
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:/opt/android-sdk/cmdline-tools/latest/bin/"
+export ANDROID_AVD_HOME="$XDG_CONFIG_HOME/.android/avd"

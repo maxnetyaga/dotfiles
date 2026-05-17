@@ -1,0 +1,53 @@
+{
+  "geometry-of-choose-open-with-program-dialog-geometry": {
+    "frame_geometry": {
+      "height": 500,
+      "width": 600,
+      "x": 969,
+      "y": 417
+    },
+    "full_screened": false,
+    "geometry": {
+      "height": 500,
+      "width": 600,
+      "x": 969,
+      "y": 417
+    },
+    "maximized": true,
+    "normal_geometry": {
+      "height": 500,
+      "width": 600,
+      "x": 969,
+      "y": 417
+    },
+    "qt": {
+      "__class__": "bytearray",
+      "__value__": "AdnQywADAAAAAAPJAAABoQAABiAAAAOUAAADyQAAAaEAAAYgAAADlAAAAAACAAAACgAAAAPJAAABoQAABiAAAAOU"
+    },
+    "screen": {
+      "depth": 32,
+      "device_pixel_ratio": 2.0,
+      "geometry_in_logical_pixels": {
+        "height": 1440,
+        "width": 2560,
+        "x": 0,
+        "y": 0
+      },
+      "index_in_screens_list": 0,
+      "manufacturer": "Samsung Electric Company",
+      "model": "LS27A800U",
+      "name": "HDMI-A-1",
+      "serial": "",
+      "size_in_logical_pixels": {
+        "height": 1440,
+        "width": 2560
+      },
+      "virtual_geometry": {
+        "height": 1440,
+        "width": 2560,
+        "x": 0,
+        "y": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+#. Install: cp nautilus.mo /usr/share/locale/en/LC_MESSAGES/
+#. Translators: date and time in 24h format,
+#. * i.e. "2023-12-31 23:59"
+#: src/nautilus-date-utilities.c:83
+#, no-c-format
+msgid "%m/%d/%Y %H:%M"
+msgstr "%Y-%m-%d %H:%M"
+
+#. Translators: date and time in 12h format,
+#. * i.e. "2023-12-31 11:59 PM"
+#: src/nautilus-date-utilities.c:90
+#, no-c-format
+msgid "%m/%d/%Y %I:%M %p"
+msgstr "%Y-%m-%d %I:%M %p"

@@ -1,0 +1,28 @@
+Host root@manwe
+  HostName manwe
+  User root
+
+Host max@manwe
+  HostName manwe
+  User max
+
+Host root@proxmox
+  HostName proxmox
+  User root
+
+Host github.com
+  User git
+
+Host gitea.geoinfo.com.ua
+    Hostname ssh.gitea.geoinfo.com.ua
+    Port 222
+    User git
+
+Host git.jointoit.com
+    HostName git.jointoit.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_jointoit
+
+Host ai-agent
+    HostName ec2-13-48-112-242.eu-north-1.compute.amazonaws.com
+    User ubuntu

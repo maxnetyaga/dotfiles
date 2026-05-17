@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+waybar_timer serve || true &
+sleep 1
+waybar > ~/.cache/waybar.log 2>&1 &
+sleep 1
+opensnitch-ui &

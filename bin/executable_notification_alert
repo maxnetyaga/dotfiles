@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+if [ $(swaync-client -D) = "false" ]; then
+    paplay --volume=20000 /usr/share/sounds/freedesktop/stereo/message.oga
+fi

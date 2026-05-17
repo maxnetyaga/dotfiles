@@ -1,0 +1,3 @@
+language,code
+🇺🇷🇺🇺🇸/🇺🇸 | Russian/English,"ru,us"
+🇺🇺🇺🇦🇦/🇺🇸 | Ukrainian/English,"ua,us"

@@ -1,0 +1,21 @@
+[user]
+	name = Max Netyaga
+	email = max.netyaga@gmail.com
+[init]
+	defaultBranch = main
+[core]
+	quotePath = false
+[credential "https://github.com"]
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = !/usr/bin/gh auth git-credential
+[commit]
+	gpgsign = true
+
+[includeIf "gitdir:~/work/join-to-it/"]
+    path = ~/.gitconfig-join-to-it
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
