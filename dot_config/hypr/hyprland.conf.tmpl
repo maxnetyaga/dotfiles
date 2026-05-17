@@ -1,6 +1,16 @@
+{{- if eq .chezmoi.hostname "ulmo" }}
 $scale = 1.5
 
 monitor = , 3840x2160@60, auto, $scale, bitdepth, 10, cm, srgb
+{{- else if eq .chezmoi.hostname "mandos" }}
+$scale = 1.25
+
+monitor = eDP-1, 1920x1080@60, auto, $scale
+{{- else }}
+$scale = 1.0
+
+monitor = , preferred, auto, $scale
+{{- end }}
 
 input {
     sensitivity = 1
@@ -13,7 +23,9 @@ input {
     }
 } 
 
+{{- if eq .chezmoi.hostname "ulmo" }}
 exec-once = sudo sunshine
+{{- end }}
 
 ###################
 ### MY PROGRAMS ###
@@ -54,9 +66,11 @@ exec-once = [workspace 8 silent] uwsm app -- $terminal
 exec-once = [workspace 9 silent] uwsm app -- anki
 exec-once = [workspace 10 silent] uwsm app -- chromium --profile-directory=Default --app-id=pjibgclleladliembfgfagdaldikeohf
 
+{{- if eq .chezmoi.hostname "ulmo" }}
 exec-once = gio mount smb://hearthstone.lan.netyaga.com/загруженные%20торренты/
 exec-once = gio mount smb://hearthstone.lan.netyaga.com/торренты%20на%20загрузку/
 exec-once = gio mount smb://hearthstone.lan.netyaga.com/shared/
+{{- end }}
 
 exec-once = reset-gvfs-fuse-mount.sh
 
