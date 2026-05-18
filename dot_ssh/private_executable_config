@@ -1,17 +1,9 @@
-Host root@manwe
-  HostName manwe
-  User root
-
-Host max@manwe
-  HostName manwe
-  User max
-
-Host root@proxmox
-  HostName proxmox
-  User root
-
 Host github.com
   User git
+
+Host git.netyaga.com
+  User git
+  Port 222
 
 Host gitea.geoinfo.com.ua
     Hostname ssh.gitea.geoinfo.com.ua
