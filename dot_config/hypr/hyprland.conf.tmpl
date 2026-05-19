@@ -285,6 +285,8 @@ windowrule = match:class org.pulseaudio.pavucontrol, float 1, move (cursor_x+(mi
 
 windowrule = match:class com.github.finefindus.eyedropper, float 1, size (monitor_w*0.2) (monitor_h*0.4), move (min(max((monitor_w*1)-window_w-20\,0)\,monitor_w-window_w)) (min(max(40\,0)\,monitor_h-window_h))
 
+windowrule = match:class ^(google-chrome)$, match:title ^(Notification|Popup)$, float 1
+
 windowrule = match:class .*, suppress_event maximize
 
 windowrule = match:class ^$, match:title ^$, match:xwayland 1, match:float 1, match:fullscreen 0, match:pin 0, no_focus 1
