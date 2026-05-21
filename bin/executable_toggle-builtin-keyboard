@@ -1,0 +1,146 @@
+#!/bin/bash
+
+set -euo pipefail
+
+internal_keyboard="at-translated-set-2-keyboard"
+trackpoint_devices=(
+    "syna30bd:00-06cb:ce08"
+    "syna30bd:00-06cb:ce08-1"
+)
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/hypr"
+state_file="$state_dir/builtin-keyboard-enabled"
+declare -a hyprctl_prefix=(hyprctl)
+
+ignore_keyboard() {
+    case "$1" in
+        video-bus|intel-hid-events|power-button|power-button-*|sleep-button|wireless-hotkeys|hp-wmi-hotkeys)
+            return 0
+            ;;
+        *-consumer-control|*-system-control|*-avrcp)
+            return 0
+            ;;
+    esac
+
+    return 1
+}
+
+resolve_hyprctl_prefix() {
+    local instance_line instance_id
+
+    if [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
+        hyprctl_prefix=(hyprctl --instance "$HYPRLAND_INSTANCE_SIGNATURE")
+        return 0
+    fi
+
+    while IFS= read -r instance_line; do
+        case "$instance_line" in
+            instance\ *)
+                instance_id=${instance_line#instance }
+                instance_id=${instance_id%:}
+                hyprctl_prefix=(hyprctl --instance "$instance_id")
+                return 0
+                ;;
+        esac
+    done < <(hyprctl instances 2>/dev/null)
+
+    return 1
+}
+
+hyprctl_cmd() {
+    "${hyprctl_prefix[@]}" "$@"
+}
+
+count_real_keyboards_hypr() {
+    local line trimmed in_keyboards expect_name count
+
+    in_keyboards=0
+    expect_name=0
+    count=0
+
+    while IFS= read -r line; do
+        trimmed=${line#"${line%%[![:space:]]*}"}
+
+        case "$trimmed" in
+            "Keyboards:")
+                in_keyboards=1
+                expect_name=0
+                continue
+                ;;
+            "Tablets:"|"Touch:"|"Switches:"|"mice:")
+                in_keyboards=0
+                expect_name=0
+                ;;
+        esac
+
+        if [ "$in_keyboards" -ne 1 ]; then
+            continue
+        fi
+
+        case "$trimmed" in
+            "Keyboard at "*)
+                expect_name=1
+                continue
+                ;;
+        esac
+
+        if [ "$expect_name" -ne 1 ] || [ -z "$trimmed" ]; then
+            continue
+        fi
+
+        expect_name=0
+
+        if [ "$trimmed" = "$internal_keyboard" ]; then
+            continue
+        fi
+
+        if ignore_keyboard "$trimmed"; then
+            continue
+        fi
+
+        count=$((count + 1))
+    done < <(hyprctl_cmd devices 2>/dev/null)
+
+    printf '%s\n' "$count"
+}
+
+set_builtin_input_enabled() {
+    local enabled_value="$1"
+    local device_name
+
+    hyprctl_cmd keyword "device[$internal_keyboard]:enabled" "$enabled_value" >/dev/null
+    for device_name in "${trackpoint_devices[@]}"; do
+        hyprctl_cmd keyword "device[$device_name]:enabled" "$enabled_value" >/dev/null
+    done
+
+    mkdir -p "$state_dir"
+    printf '%s\n' "$enabled_value" > "$state_file"
+}
+
+main() {
+    local current_state next_state real_keyboard_count
+
+    if ! resolve_hyprctl_prefix; then
+        exit 0
+    fi
+
+    real_keyboard_count=$(count_real_keyboards_hypr)
+    if [ "$real_keyboard_count" -le 1 ]; then
+        set_builtin_input_enabled true
+        exit 0
+    fi
+
+    current_state=true
+    if [ -f "$state_file" ]; then
+        current_state=$(tr -d '\n' < "$state_file")
+    fi
+
+    if [ "$current_state" = "true" ]; then
+        next_state=false
+    else
+        next_state=true
+    fi
+
+    set_builtin_input_enabled "$next_state"
+}
+
+main

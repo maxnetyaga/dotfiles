@@ -15,13 +15,13 @@ monitor = , preferred, auto, $scale
 input {
     sensitivity = 1
     touchpad {
-        natural_scroll = false
+        natural_scroll = true
     }
 
     tablet {
         left_handed = true
     }
-} 
+}
 
 {{- if eq .chezmoi.hostname "ulmo" }}
 exec-once = sudo sunshine
@@ -55,7 +55,9 @@ exec-once = uwsm app -- /usr/lib/geoclue-2.0/demos/agent
 exec-once = uwsm app -- nm-applet
 exec-once = uwsm app -- blueman-applet
 exec-once = uwsm app -- easyeffects --service-mode -w
-exec-once = uwsm app -- waybar
+{{- if eq .chezmoi.hostname "mandos" }}
+exec-once = external-keyboard-toggle
+{{- end }}
 
 exec-once = [workspace 5 silent] uwsm app -- thunderbird
 exec-once = [workspace 5 silent] uwsm app -- newsflash
@@ -167,6 +169,9 @@ $mainMod = SUPER
 
 bind = $mainMod+Shift, M, exec, hyprctl keyword general:layout master
 bind = $mainMod+Shift, S, exec, hyprctl keyword general:layout scrolling
+{{- if eq .chezmoi.hostname "mandos" }}
+bind = $mainMod+Shift, K, exec, toggle-builtin-keyboard
+{{- end }}
 
 bind = $mainMod, V, exec, cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy
 bind = $mainMod, P, exec, powermenu
@@ -235,8 +240,8 @@ bindel = ,XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@
 bindel = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 bindel = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 bindel = ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
-bindel = ,XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+
-bindel = ,XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-
+bindel = ,XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 1%+
+bindel = ,XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 1%-
 
 bindl = , XF86AudioNext, exec, playerctl next
 bindl = , XF86AudioPlay, exec, playerctl play-pause -a

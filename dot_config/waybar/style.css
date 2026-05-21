@@ -59,14 +59,14 @@ button:hover {
 }
 
 #clock,
+#battery,
+#backlight,
 #pulseaudio,
 #window,
-.timer,
 #custom-brightness,
 #tray {
     padding: 0 10px;
     color: #ffffff;
-    padding-top: 3px;
 }
 
 #workspaces {
@@ -85,27 +85,49 @@ button:hover {
     background-color: #1B4D3C;
 }
 
-.timer {
-    background-color: #ffee82;
-    color: #242424;
-    min-width: 50px;
-}
-
 #custom-brightness {
     background-color: #5785BC;
     color: #242424;
-    min-width: 50px;
 }
 
 #custom-brightness:hover {
     background-color: #365C8A;
 }
 
+#backlight {
+    background-color: #5785BC;
+    color: #242424;
+}
+
+#backlight:hover {
+    background-color: #365C8A;
+}
+
+#battery {
+    background-color: #8FBC8F;
+    color: #242424;
+}
+
+#battery.warning {
+    background-color: #d4ac0d;
+    color: #242424;
+}
+
+#battery.critical {
+    background-color: #c0392b;
+    color: #ffffff;
+}
+
+#battery.charging,
+#battery.plugged {
+    background-color: #6aa84f;
+    color: #242424;
+}
+
 #pulseaudio {
     background-color: #f1c40f;
     color: #000000;
     min-width: 50px;
-    /* padding-top: 3px; */
 }
 
 #pulseaudio:hover {

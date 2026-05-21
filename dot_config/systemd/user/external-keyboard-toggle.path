@@ -1,0 +1,11 @@
+[Unit]
+Description=Watch input device changes for built-in keyboard recovery
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Path]
+PathChanged=/dev/input/by-id
+Unit=external-keyboard-toggle.service
+
+[Install]
+WantedBy=graphical-session.target

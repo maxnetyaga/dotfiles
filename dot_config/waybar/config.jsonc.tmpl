@@ -3,7 +3,11 @@
   "position": "top",
   "modules-left": ["tray", "hyprland/window"],
   "modules-center": ["hyprland/workspaces"],
-  "modules-right": ["custom/timer", "custom/brightness", "pulseaudio", "clock"],
+{{- if eq .chezmoi.hostname "mandos" }}
+  "modules-right": ["battery", "backlight", "pulseaudio", "clock"],
+{{- else }}
+  "modules-right": ["custom/brightness", "pulseaudio", "clock"],
+{{- end }}
 
   "tray": {
     "spacing": 10,
@@ -23,23 +27,7 @@
 
   // ####################################################################### //
 
-  "custom/timer": {
-    "exec": "waybar_timer hook",
-    "exec-on-event": false,
-    "return-type": "json",
-    "format": "{0} {icon}",
-    "format-icons": {
-      "standby": "󱫦",
-      "running": "󱫠",
-      "paused": "󱫞",
-    },
-    "on-click": "waybar_timer new 180 'notify-send \"Session finished\"'",
-    "on-click-middle": "waybar_timer cancel",
-    "on-click-right": "waybar_timer togglepause",
-    "on-scroll-up": "waybar_timer increase 60 || waybar_timer new 1 'notify-send -u critical \"Timer expired\"'",
-    "on-scroll-down": "waybar_timer decrease 60",
-  },
-
+{{- if ne .chezmoi.hostname "mandos" }}
   "custom/brightness": {
     "format": "{text}% ",
     "signal": 8,
@@ -49,6 +37,31 @@
     "on-click": "brightness-control left_click",
     "on-click-right": "brightness-control right_click",
   },
+{{- else }}
+
+  "battery": {
+    "bat": "BAT0",
+    "adapter": "AC",
+    "interval": 10,
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% 󰂄",
+    "format-plugged": "{capacity}% 󰂄",
+    "format-full": "{capacity}% 󰁹",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "states": {
+      "warning": 30,
+      "critical": 15
+    }
+  },
+
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{percent}% {icon}",
+    "format-icons": ["󰃞", "󰃟", "󰃠"],
+    "scroll-step": 1,
+    "min-brightness": 5.0
+  },
+{{- end }}
 
   "pulseaudio": {
     "format": "{volume}% {icon}",

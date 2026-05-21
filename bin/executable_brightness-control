@@ -2,7 +2,7 @@
 
 # --- CONFIGURATION ---
 DISPLAY_NUM=1
-STEP=5
+STEP=1
 STATE_FILE="/tmp/waybar_brightness.tmp"
 # ---------------------
 

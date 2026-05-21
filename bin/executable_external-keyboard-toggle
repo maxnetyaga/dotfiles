@@ -1,0 +1,89 @@
+#!/bin/bash
+
+set -euo pipefail
+
+internal_keyboard="at-translated-set-2-keyboard"
+trackpoint_devices=(
+    "syna30bd:00-06cb:ce08"
+    "syna30bd:00-06cb:ce08-1"
+)
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/hypr"
+state_file="$state_dir/builtin-keyboard-enabled"
+count_file="$state_dir/external-keyboard-count"
+declare -a hyprctl_prefix=(hyprctl)
+
+resolve_hyprctl_prefix() {
+    local instance_line instance_id
+
+    if [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
+        hyprctl_prefix=(hyprctl --instance "$HYPRLAND_INSTANCE_SIGNATURE")
+        return 0
+    fi
+
+    while IFS= read -r instance_line; do
+        case "$instance_line" in
+            instance\ *)
+                instance_id=${instance_line#instance }
+                instance_id=${instance_id%:}
+                hyprctl_prefix=(hyprctl --instance "$instance_id")
+                return 0
+                ;;
+        esac
+    done < <(hyprctl instances 2>/dev/null)
+
+    return 1
+}
+
+hyprctl_cmd() {
+    "${hyprctl_prefix[@]}" "$@"
+}
+
+set_builtin_input_enabled() {
+    local enabled_value="$1"
+    local device_name
+
+    hyprctl_cmd keyword "device[$internal_keyboard]:enabled" "$enabled_value" >/dev/null
+    for device_name in "${trackpoint_devices[@]}"; do
+        hyprctl_cmd keyword "device[$device_name]:enabled" "$enabled_value" >/dev/null
+    done
+
+    mkdir -p "$state_dir"
+    printf '%s\n' "$enabled_value" > "$state_file"
+}
+
+count_external_keyboards() {
+    local count=0 device
+
+    for device in /dev/input/by-id/*-event-kbd; do
+        if [ -e "$device" ]; then
+            count=$((count + 1))
+        fi
+    done
+
+    printf '%s\n' "$count"
+}
+
+main() {
+    local current_count previous_count
+
+    if ! resolve_hyprctl_prefix; then
+        exit 0
+    fi
+
+    current_count=$(count_external_keyboards)
+    previous_count=$current_count
+    if [ -f "$count_file" ]; then
+        previous_count=$(tr -d '\n' < "$count_file")
+    fi
+
+    if [ ! -f "$count_file" ] && [ "$current_count" -eq 0 ]; then
+        set_builtin_input_enabled true
+    elif [ "$current_count" -lt "$previous_count" ]; then
+        set_builtin_input_enabled true
+    fi
+
+    mkdir -p "$state_dir"
+    printf '%s\n' "$current_count" > "$count_file"
+}
+
+main

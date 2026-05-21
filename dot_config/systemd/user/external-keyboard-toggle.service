@@ -1,0 +1,8 @@
+[Unit]
+Description=Enable built-in keyboard after keyboard count drops
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/bin/external-keyboard-toggle
