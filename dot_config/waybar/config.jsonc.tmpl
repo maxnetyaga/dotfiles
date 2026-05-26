@@ -4,7 +4,7 @@
   "modules-left": ["tray", "hyprland/window"],
   "modules-center": ["hyprland/workspaces"],
 {{- if eq .chezmoi.hostname "mandos" }}
-  "modules-right": ["battery", "backlight", "pulseaudio", "clock"],
+  "modules-right": ["battery", "backlight", "custom/brightness", "pulseaudio", "clock"],
 {{- else }}
   "modules-right": ["custom/brightness", "pulseaudio", "clock"],
 {{- end }}
@@ -19,15 +19,14 @@
   },
 
   "hyprland/workspaces": {
-    "active-only": true,
+    "all-outputs": true,
     "persistent-workspaces": {
-      "*": 11,
+      "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
     },
   },
 
   // ####################################################################### //
 
-{{- if ne .chezmoi.hostname "mandos" }}
   "custom/brightness": {
     "format": "{text}% ",
     "signal": 8,
@@ -37,7 +36,8 @@
     "on-click": "brightness-control left_click",
     "on-click-right": "brightness-control right_click",
   },
-{{- else }}
+
+{{- if eq .chezmoi.hostname "mandos" }}
 
   "battery": {
     "bat": "BAT0",

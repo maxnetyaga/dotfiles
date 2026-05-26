@@ -86,12 +86,12 @@ button:hover {
 }
 
 #custom-brightness {
-    background-color: #5785BC;
-    color: #242424;
+    background-color: #8E5CF7;
+    color: #000000;
 }
 
 #custom-brightness:hover {
-    background-color: #365C8A;
+    background-color: #6D3FD9;
 }
 
 #backlight {

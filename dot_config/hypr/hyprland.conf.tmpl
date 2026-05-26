@@ -5,7 +5,8 @@ monitor = , 3840x2160@60, auto, $scale, bitdepth, 10, cm, srgb
 {{- else if eq .chezmoi.hostname "mandos" }}
 $scale = 1.25
 
-monitor = eDP-1, 1920x1080@60, auto, $scale
+monitor = HDMI-A-1, 3840x2160@60, 0x0, 1.5, bitdepth, 10, cm, srgb
+monitor = eDP-1, 1920x1080@60, 512x1440, $scale
 {{- else }}
 $scale = 1.0
 
@@ -266,6 +267,21 @@ bind = Super, R, exec, obs-cli record start || obs-cli record stop
 ##############################
 ### WINDOWS AND WORKSPACES ###
 ##############################
+
+{{- if eq .chezmoi.hostname "mandos" }}
+workspace = 10, monitor:eDP-1, persistent:true, default:true
+
+workspace = 1, monitor:HDMI-A-1, default:true
+workspace = 2, monitor:HDMI-A-1
+workspace = 3, monitor:HDMI-A-1
+workspace = 4, monitor:HDMI-A-1
+workspace = 5, monitor:HDMI-A-1
+workspace = 6, monitor:HDMI-A-1
+workspace = 7, monitor:HDMI-A-1
+workspace = 8, monitor:HDMI-A-1
+workspace = 9, monitor:HDMI-A-1
+workspace = 11, monitor:HDMI-A-1
+{{- end }}
 
 windowrule = match:class com.obsproject.Studio, workspace 11 silent
 
