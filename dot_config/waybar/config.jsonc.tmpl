@@ -21,7 +21,12 @@
   "hyprland/workspaces": {
     "all-outputs": true,
     "persistent-workspaces": {
-      "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+{{- if eq .chezmoi.hostname "mandos" }}
+      "eDP-1": ["spotify"],
+      "HDMI-A-1": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "browser", "telegram", "gimp", "rocketchat", "whatsup", "obs", "chatgpt", "teams", "keepassxc", "thunderbird"],
+{{- else }}
+      "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "browser", "spotify", "telegram", "gimp", "rocketchat", "whatsup", "obs", "chatgpt", "teams", "keepassxc", "thunderbird"],
+{{- end }}
     },
   },
 
@@ -82,7 +87,7 @@
     "format-source": "Mic ON",
     "format-source-muted": "Mic OFF",
     "scroll-step": 1,
-    "on-click": "killall pavucontrol || pavucontrol",
+    // "on-click": "killall pavucontrol || pavucontrol",
     "ignored-sinks": ["Easy Effects Sink"],
   },
 
