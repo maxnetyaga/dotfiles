@@ -1,8 +1,10 @@
 .ssh/known_hosts
 .ssh/known_hosts.old
 {{- if ne .chezmoi.hostname "mandos" }}
+dot_config/kanata/kanata.kbd
 bin/executable_external-keyboard-toggle
 bin/executable_toggle-builtin-keyboard
+dot_config/systemd/user/kanata.service
 dot_config/systemd/user/external-keyboard-toggle.path
 dot_config/systemd/user/external-keyboard-toggle.service
 {{- end }}

@@ -1,0 +1,138 @@
+{{- if eq .chezmoi.hostname "mandos" }}
+;; Vortex Core-inspired laptop layout for mandos.
+;; Base goals:
+;; - keep left shift
+;; - right shift becomes left alt
+;; - left alt becomes PN
+;; - right alt/AltGr becomes FN1
+;; - menu becomes FN
+;; - right ctrl becomes right alt
+
+(defcfg
+  concurrent-tap-hold yes
+  linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd
+  process-unmapped-keys yes
+)
+
+(deflocalkeys-linux
+  iso 86
+  quote 41
+)
+
+(defvirtualkeys
+  relf24 (release-key f24)
+)
+
+(defsrc
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft iso  z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt menu rctl
+)
+
+(defalias
+  fn  (tap-hold-press 200 200 XX (layer-while-held fn))
+  fn1 (tap-hold-press 200 200 XX (layer-while-held fn1))
+  pn  (tap-hold-press 200 200 XX (layer-while-held pn))
+)
+
+(deflayer base
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  esc  q    w    e    r    t    y    u    i    o    p    [    ]    ret
+  (unmod tab) a    s    d    f    g    h    j    k    l    ;    ret  ret
+  lsft lalt z    x    c    v    b    n    m    ,    .    ralt lalt
+  lctl lmet @pn            spc            @fn1 @fn  rctl
+)
+
+(deflayermap (fn)
+  ___ _
+  ' ret
+  \ ret
+  iso lalt
+  h left
+  j down
+  k up
+  l rght
+  n home
+  ; end
+  u pgup
+  i ins
+  o pgdn
+  p prnt
+  [ slck
+  bspc del
+  / ralt
+)
+
+(deflayermap (fn1)
+  ___ _
+  caps -
+  tab quote
+  ' =
+  \ =
+  iso lalt
+  q f1
+  w f2
+  e f3
+  r f4
+  t f5
+  y f6
+  u f7
+  i f8
+  o f9
+  p f10
+  [ f11
+  ] f12
+
+  a 1
+  s 2
+  d 3
+  f 4
+  g 5
+  h 6
+  j 7
+  k 8
+  l 9
+  ; 0
+  ret =
+
+  b S-grv
+  n S-7
+  m [
+  , ]
+  . bksl
+  / ralt
+)
+
+(deflayermap (pn)
+  ___ _
+  caps S--
+  tab S-quote
+  ' S-=
+  \ S-=
+  iso lalt
+  esc S-grv
+  q S-'
+  w S-,
+  e S-.
+  r S-;
+  ret S-=
+  a S-1
+  s S-2
+  d S-3
+  f S-4
+  g S-5
+  h S-6
+  j S-7
+  k S-8
+  l S-9
+  ; S-0
+  b S-grv
+  n S-/
+  m S-[
+  , S-]
+  . S-bksl
+  / ralt
+)
+{{- end }}

@@ -1,0 +1,15 @@
+{{- if eq .chezmoi.hostname "mandos" }}
+[Unit]
+Description=Kanata keyboard remapper
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/kanata --cfg=%h/.config/kanata/kanata.kbd --no-wait
+Restart=on-failure
+RestartSec=1
+
+[Install]
+WantedBy=graphical-session.target
+{{- end }}
