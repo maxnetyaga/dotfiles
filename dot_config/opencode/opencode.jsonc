@@ -16,6 +16,18 @@
         "FIGMA_API_KEY": "${FIGMA_API_KEY}"
       },
       "enabled": true
+    },
+    "google-sheets": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@freema/mcp-gsheets"
+      ],
+      "environment": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "~/secrets/google-jointoit-service-key.json"
+      },
+      "enabled": true
     }
   },
   "lsp": {
