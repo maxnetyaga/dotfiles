@@ -12,7 +12,7 @@
    "$schema": "https://vicinae.com/schemas/config.json",
    "activate_on_single_click": true,
    "font": {
-      "rendering": "native",
+      "rendering": "qt",
       "normal": {
          "family": "ComicCode Nerd Font Mono",
          "size": 12
@@ -27,6 +27,9 @@
    "launcher_window": {
       "opacity": 1,
       "client_side_decorations": {
+         "enabled": true
+      },
+      "compact_mode": {
          "enabled": true
       }
    },

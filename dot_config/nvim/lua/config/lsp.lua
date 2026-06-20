@@ -63,5 +63,7 @@ vim.lsp.config["basedpyright"] = {
 }
 
 vim.lsp.config["haskell-language-server"] = {
+    cmd = { "haskell-language-server" },
     filetypes = { "haskell" },
 }
+vim.lsp.enable("haskell-language-server")
