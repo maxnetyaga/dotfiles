@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly TMP_FILE="$(mktemp --suffix=.png)"
+readonly EDITED_FILE="$(mktemp --suffix=.png)"
+
+cleanup() {
+    rm -f "$TMP_FILE"
+    rm -f "$EDITED_FILE"
+}
+
+trap cleanup EXIT
+
+geometry_from_monitor() {
+    jq -r '"\(.x),\(.y) \(.width/.scale|round)x\(.height/.scale|round)"'
+}
+
+geometry_from_window() {
+    jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"'
+}
+
+get_visible_windows() {
+    local monitors workspaces active_ids fullscreen_ids windows
+
+    monitors="$(hyprctl -j monitors)"
+    workspaces="$(hyprctl -j workspaces)"
+    active_ids="$(printf '%s' "$monitors" | jq '[map(.activeWorkspace.id), map(.specialWorkspace.id)] | flatten')"
+    fullscreen_ids="$(printf '%s' "$workspaces" | jq 'map(select(.hasfullscreen) | .id)')"
+    windows="$(hyprctl -j clients)"
+
+    printf '%s' "$windows" | jq --argjson active_ids "$active_ids" --argjson fullscreen_ids "$fullscreen_ids" '
+        map(select(
+            ([.workspace.id] | inside($active_ids)) and
+            (.hidden | not) and
+            (([.workspace.id] | inside($fullscreen_ids) | not) or (.fullscreen != 0))
+        ))
+    '
+}
+
+get_active_monitor_geometry() {
+    local active_workspace_id monitors active_monitor
+
+    active_workspace_id="$(hyprctl -j activeworkspace | jq -r '.id')"
+    monitors="$(hyprctl -j monitors)"
+    active_monitor="$(printf '%s' "$monitors" | jq -r '.[] | select(.activeWorkspace.id == '"$active_workspace_id"')')"
+
+    [ -n "$active_monitor" ] || return 1
+    printf '%s' "$active_monitor" | geometry_from_monitor
+}
+
+get_window_geometry() {
+    local visible_windows boxes
+
+    visible_windows="$(get_visible_windows)"
+    boxes="$(printf '%s' "$visible_windows" | jq '.[]' | geometry_from_window)"
+
+    [ -n "$boxes" ] || return 1
+    printf '%s\n' "$boxes" | slurp -r
+}
+
+mode="$({
+    printf 'Region\n'
+    printf 'Window\n'
+    printf 'Fullscreen\n'
+} | vicinae dmenu \
+    --navigation-title "Screenshot" \
+    --section-title "Modes" \
+    --placeholder "Choose screenshot mode")"
+
+[ -n "$mode" ] || exit 0
+
+case "$mode" in
+    Region)
+        geometry="$(slurp -w 0)" || exit 0
+        ;;
+    Window)
+        geometry="$(get_window_geometry)" || exit 0
+        ;;
+    Fullscreen)
+        geometry="$(get_active_monitor_geometry)" || exit 0
+        ;;
+    *)
+        exit 1
+        ;;
+esac
+
+[ -n "$geometry" ] || exit 0
+
+grim -g "$geometry" "$TMP_FILE"
+
+if [ ! -s "$TMP_FILE" ]; then
+    exit 0
+fi
+
+swappy -f "$TMP_FILE" -o "$EDITED_FILE"
+
+if [ ! -s "$EDITED_FILE" ]; then
+    exit 0
+fi
+
+wl-copy --type image/png < "$EDITED_FILE"
+notify-send "Screenshot copied" "Edited screenshot copied to clipboard"

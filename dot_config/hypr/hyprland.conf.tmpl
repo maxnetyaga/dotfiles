@@ -45,11 +45,8 @@ $menu = vicinae toggle
 exec-once = hyprpm reload
 exec-once = xrdb ~/.Xresources
 
-exec-once = uwsm app -- wl-paste --type text --watch cliphist store
 exec-once = uwsm app -- /usr/lib/xdg-desktop-portal-gnome
 exec-once = uwsm app -- opensnitch-ui
-exec-once = uwsm app -- wl-paste --type image --watch cliphist store
-exec-once = uwsm app -- cliphist-preserve
 exec-once = uwsm app -- aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log
 
 exec-once = uwsm app -- run-obs.sh
@@ -65,6 +62,7 @@ exec-once = [workspace name:thunderbird silent] uwsm app -- thunderbird
 exec-once = [workspace name:thunderbird silent] uwsm app -- newsflash
 exec-once = [workspace name:telegram silent] uwsm app -- flatpak run org.telegram.desktop
 exec-once = [workspace name:spotify silent] uwsm app -- chromium --profile-directory=Default --app-id=pjibgclleladliembfgfagdaldikeohf
+exec-once = [workspace name:anki silent] uwsm app -- anki
 
 {{- if eq .chezmoi.hostname "ulmo" }}
 exec-once = gio mount smb://hearthstone.lan.netyaga.com/загруженные%20торренты/
@@ -172,7 +170,7 @@ bind = $primaryMod+Shift, S, exec, hyprctl keyword general:layout scrolling
 bind = $primaryMod+Shift, K, exec, toggle-builtin-keyboard
 {{- end }}
 
-bind = $primaryMod, V, exec, cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy
+bind = $primaryMod, V, exec, vicinae 'vicinae://launch/clipboard/history?toggle=true'
 bind = $primaryMod, P, exec, powermenu
 bind = $primaryMod, B, exec, uwsm app -- hyprlock
 bindl = $primaryMod+Shift, B, exec, sh -c 'hyprctl monitors | grep -q "dpmsStatus: 1" && hyprctl dispatch dpms off || hyprctl dispatch dpms on'
@@ -271,6 +269,8 @@ bind = , M, exec, hyprctl dispatch workspace name:teams && hyprctl dispatch subm
 bind = SHIFT, M, exec, hyprctl dispatch movetoworkspace name:teams && hyprctl dispatch submap reset
 bind = , H, exec, hyprctl dispatch workspace name:thunderbird && hyprctl dispatch submap reset
 bind = SHIFT, H, exec, hyprctl dispatch movetoworkspace name:thunderbird && hyprctl dispatch submap reset
+bind = , A, exec, hyprctl dispatch workspace name:anki && hyprctl dispatch submap reset
+bind = SHIFT, A, exec, hyprctl dispatch movetoworkspace name:anki && hyprctl dispatch submap reset
 
 bind = , escape, submap, reset
 bind = , Return, submap, reset
@@ -296,7 +296,7 @@ bind = $primaryMod+Shift, X, exec, hyprctl keyword cursor:zoom_factor 1
 
 bind = $primaryMod, n, exec, swaync-client -t -sw
 
-bind = , Print, exec, uwsm app -- hyprcap shot -c
+bind = , Print, exec, uwsm app -- screenshot-menu
 
 bind = $primaryMod, G, exec, uwsm app -- chromium --profile-directory=Default --app-id=edanbjnaiofggfmimiidpfmhggkbokck
 
@@ -330,9 +330,11 @@ workspace = name:whatsup, monitor:HDMI-A-1
 workspace = name:obs, monitor:HDMI-A-1
 workspace = name:teams, monitor:HDMI-A-1
 workspace = name:thunderbird, monitor:HDMI-A-1
+workspace = name:anki, monitor:HDMI-A-1
 {{- end }}
 
 windowrule = match:class com.obsproject.Studio, workspace name:obs silent
+windowrule = match:class anki, workspace name:anki silent
 
 windowrule = match:class org.gnome.NautilusPreviewer, float 1
 windowrule = match:class org.gnome.NautilusPreviewer, move (cursor_x+(min(max(-(monitor_w*0.5)\,0)\,monitor_w-window_w))) (cursor_y+(min(max(-(monitor_h*0.5)\,0)\,monitor_h-window_h)))
