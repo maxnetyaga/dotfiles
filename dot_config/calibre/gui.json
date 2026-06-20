@@ -307,28 +307,28 @@
   },
   "geometry-of-calibre_main_window_geometry": {
     "frame_geometry": {
-      "height": 1410,
-      "width": 1146,
+      "height": 1440,
+      "width": 2560,
       "x": 0,
       "y": 0
     },
-    "full_screened": false,
+    "full_screened": true,
     "geometry": {
-      "height": 1410,
-      "width": 1146,
+      "height": 1440,
+      "width": 2560,
       "x": 0,
       "y": 0
     },
     "maximized": true,
     "normal_geometry": {
-      "height": 1410,
+      "height": 702,
       "width": 1146,
       "x": 0,
       "y": 0
     },
     "qt": {
       "__class__": "bytearray",
-      "__value__": "AdnQywADAAAAAAAAAAAAAAAABHkAAAWBAAAAAAAAAAAAAAR5AAAFgQAAAAACAAAACgAAAAAAAAAAAAAABHkAAAWB"
+      "__value__": "AdnQywADAAAAAAAAAAAAAAAACf8AAAWfAAAAAAAAAAAAAAR5AAACvQAAAAACBAAACgAAAAAAAAAAAAAACf8AAAWf"
     },
     "screen": {
       "depth": 32,
@@ -954,7 +954,7 @@
       "index_in_screens_list": 0,
       "manufacturer": "Samsung Electric Company",
       "model": "LS27A800U",
-      "name": "DP-1",
+      "name": "HDMI-A-1",
       "serial": "",
       "size_in_logical_pixels": {
         "height": 1440,
@@ -1078,7 +1078,7 @@
     "__value__": "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfQAAAAFAQEBAAAAAAAAAAAAAAAAAGT/////AAAAhAAAAAAAAAAAAAAD6AAAAAAAAAAAAAAAAAAAAAAFAAAAAA=="
   },
   "library_usage_stats": {
-    "/home/max/books/calibre-library": 80
+    "/home/max/books/calibre-library": 84
   },
   "light_palette_name": "",
   "light_palettes": {
