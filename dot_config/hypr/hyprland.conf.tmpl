@@ -255,8 +255,6 @@ bind = SHIFT, 8, exec, hyprctl dispatch movetoworkspace 8 && hyprctl dispatch su
 bind = SHIFT, 9, exec, hyprctl dispatch movetoworkspace 9 && hyprctl dispatch submap reset
 bind = SHIFT, 0, exec, hyprctl dispatch movetoworkspace 10 && hyprctl dispatch submap reset
 
-bind = , F, exec, hyprctl dispatch workspace name:browser && hyprctl dispatch submap reset
-bind = SHIFT, F, exec, hyprctl dispatch movetoworkspace name:browser && hyprctl dispatch submap reset
 bind = , S, exec, hyprctl dispatch workspace name:spotify && hyprctl dispatch submap reset
 bind = SHIFT, S, exec, hyprctl dispatch movetoworkspace name:spotify && hyprctl dispatch submap reset
 bind = , T, exec, hyprctl dispatch workspace name:telegram && hyprctl dispatch submap reset
@@ -269,12 +267,8 @@ bind = , W, exec, hyprctl dispatch workspace name:whatsup && hyprctl dispatch su
 bind = SHIFT, W, exec, hyprctl dispatch movetoworkspace name:whatsup && hyprctl dispatch submap reset
 bind = , O, exec, hyprctl dispatch workspace name:obs && hyprctl dispatch submap reset
 bind = SHIFT, O, exec, hyprctl dispatch movetoworkspace name:obs && hyprctl dispatch submap reset
-bind = , C, exec, hyprctl dispatch workspace name:chatgpt && hyprctl dispatch submap reset
-bind = SHIFT, C, exec, hyprctl dispatch movetoworkspace name:chatgpt && hyprctl dispatch submap reset
 bind = , M, exec, hyprctl dispatch workspace name:teams && hyprctl dispatch submap reset
 bind = SHIFT, M, exec, hyprctl dispatch movetoworkspace name:teams && hyprctl dispatch submap reset
-bind = , K, exec, hyprctl dispatch workspace name:keepassxc && hyprctl dispatch submap reset
-bind = SHIFT, K, exec, hyprctl dispatch movetoworkspace name:keepassxc && hyprctl dispatch submap reset
 bind = , H, exec, hyprctl dispatch workspace name:thunderbird && hyprctl dispatch submap reset
 bind = SHIFT, H, exec, hyprctl dispatch movetoworkspace name:thunderbird && hyprctl dispatch submap reset
 
@@ -291,8 +285,8 @@ bindel = ,XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 1%+
 bindel = ,XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 1%-
 
 bindl = , XF86AudioNext, exec, playerctl next
-bindl = , XF86AudioPlay, exec, playerctl play-pause -a
-bindl = Shift, XF86AudioPlay, exec, playerctl pause -a
+bindl = , XF86AudioPlay, exec, playerctl play-pause
+bindl = Shift, XF86AudioPlay, exec, playerctl pause
 bindl = , XF86AudioPrev, exec, playerctl previous
 
 bind = $primaryMod, Z, exec, hyprctl keyword cursor:zoom_factor $(awk "BEGIN {print $(hyprctl getoption cursor:zoom_factor | grep 'float:' | awk '{print $2}') + 0.5}") # Zoom out
@@ -329,15 +323,12 @@ workspace = 7, monitor:HDMI-A-1
 workspace = 8, monitor:HDMI-A-1
 workspace = 9, monitor:HDMI-A-1
 workspace = 10, monitor:HDMI-A-1
-workspace = name:browser, monitor:HDMI-A-1
 workspace = name:telegram, monitor:HDMI-A-1
 workspace = name:gimp, monitor:HDMI-A-1
 workspace = name:rocketchat, monitor:HDMI-A-1
 workspace = name:whatsup, monitor:HDMI-A-1
 workspace = name:obs, monitor:HDMI-A-1
-workspace = name:chatgpt, monitor:HDMI-A-1
 workspace = name:teams, monitor:HDMI-A-1
-workspace = name:keepassxc, monitor:HDMI-A-1
 workspace = name:thunderbird, monitor:HDMI-A-1
 {{- end }}
 

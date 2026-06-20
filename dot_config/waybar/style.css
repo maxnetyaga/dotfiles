@@ -63,6 +63,7 @@ button:hover {
 #backlight,
 #pulseaudio,
 #window,
+#custom-lyrics,
 #custom-brightness,
 #tray {
     padding: 0 10px;
@@ -83,6 +84,15 @@ button:hover {
 
 #clock {
     background-color: #1B4D3C;
+}
+
+#custom-lyrics {
+    background-color: #2b5d34;
+    min-width: 120px;
+}
+
+#custom-lyrics.paused {
+    color: #d7d7d7;
 }
 
 #custom-brightness {

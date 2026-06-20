@@ -4,9 +4,9 @@
   "modules-left": ["tray", "hyprland/window"],
   "modules-center": ["hyprland/workspaces"],
 {{- if eq .chezmoi.hostname "mandos" }}
-  "modules-right": ["battery", "backlight", "custom/brightness", "pulseaudio", "clock"],
+  "modules-right": ["custom/lyrics", "battery", "backlight", "custom/brightness", "pulseaudio", "clock"],
 {{- else }}
-  "modules-right": ["custom/brightness", "pulseaudio", "clock"],
+  "modules-right": ["custom/lyrics", "custom/brightness", "pulseaudio", "clock"],
 {{- end }}
 
   "tray": {
@@ -20,12 +20,23 @@
 
   "hyprland/workspaces": {
     "all-outputs": true,
+    "format": "{icon}",
+    "format-icons": {
+      "spotify": "󰓇",
+      "telegram": "",
+      "gimp": "",
+      "rocketchat": "󰭹",
+      "whatsup": "",
+      "obs": "󰐾",
+      "teams": "󰊻",
+      "thunderbird": ""
+    },
     "persistent-workspaces": {
 {{- if eq .chezmoi.hostname "mandos" }}
       "eDP-1": ["spotify"],
-      "HDMI-A-1": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "browser", "telegram", "gimp", "rocketchat", "whatsup", "obs", "chatgpt", "teams", "keepassxc", "thunderbird"],
+      "HDMI-A-1": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "telegram", "gimp", "rocketchat", "whatsup", "obs", "teams", "thunderbird"],
 {{- else }}
-      "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "browser", "spotify", "telegram", "gimp", "rocketchat", "whatsup", "obs", "chatgpt", "teams", "keepassxc", "thunderbird"],
+      "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "spotify", "telegram", "gimp", "rocketchat", "whatsup", "obs", "teams", "thunderbird"],
 {{- end }}
     },
   },
@@ -40,6 +51,23 @@
     "on-scroll-down": "brightness-control down",
     "on-click": "brightness-control left_click",
     "on-click-right": "brightness-control right_click",
+  },
+
+  "custom/lyrics": {
+    "return-type": "json",
+    "format": "{icon} {0}",
+    "hide-empty-text": true,
+    "format-icons": {
+      "playing": "",
+      "paused": "",
+      "lyric": "",
+      "music": "󰝚",
+      "no_lyric": "",
+      "getting": ""
+    },
+    "exec-if": "which waybar-lyric",
+    "exec": "waybar-lyric --quiet --experimental-chromium-support",
+    "on-click": "waybar-lyric play-pause"
   },
 
 {{- if eq .chezmoi.hostname "mandos" }}
