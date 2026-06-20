@@ -41,7 +41,7 @@ vim.lsp.config["ruff"] = {
     init_options = {
         settings = {
             configuration = vim.fn.expand("~/.config/ruff/ruff.toml"),
-            configurationPreference = "filesystemFirst"
+            configurationPreference = "filesystemFirst",
         },
     },
 }
@@ -60,4 +60,8 @@ vim.lsp.config["basedpyright"] = {
             },
         },
     },
+}
+
+vim.lsp.config["haskell-language-server"] = {
+    filetypes = { "haskell" },
 }
