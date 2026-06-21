@@ -1,0 +1,61 @@
+# Tokyo Night Storm
+
+color normal        #c0caf5 #24283b
+color status        #1f2335 #7aa2f7
+color indicator     #1f2335 #bb9af7
+color tree          #7dcfff #24283b
+color tilde         #545c7e #24283b
+color prompt        #7dcfff #24283b
+color message       #9ece6a #24283b
+color error         #f7768e #24283b
+color warning       #e0af68 #24283b
+color markers       #ff9e64 #24283b
+color search        #1f2335 #e0af68
+color bold          #c0caf5 #24283b
+color underline     #7dcfff #24283b
+
+color index         #9ece6a #24283b ~N
+color index         #7dcfff #24283b ~O
+color index         #e0af68 #24283b ~F
+color index         #bb9af7 #24283b ~T
+color index         #f7768e #24283b ~D
+color index         #c0caf5 #292e42 ~Q
+color index         #7aa2f7 #24283b ~P
+color index         #ff9e64 #24283b ~v
+color index         #1f2335 #bb9af7 ~l
+
+color header        #7aa2f7 #24283b "^(From|To|Cc|Bcc):"
+color header        #bb9af7 #24283b "^Subject:"
+color header        #7dcfff #24283b "^Date:"
+color header        #e0af68 #24283b "^(Reply-To|Message-ID|User-Agent|X-Mailer):"
+color header        #545c7e #24283b ".*"
+
+color body          #7dcfff #24283b "((https?|ftp|gemini)://|mailto:)[^][><()[:space:]]+"
+color body          #7dcfff #24283b "[-.+_[:alnum:]]+@[-._[:alnum:]]+"
+color body          #bb9af7 #24283b "(^|[[:space:]])#[[:alnum:]_+-]+"
+color body          #e0af68 #24283b "(^|[[:space:]])@[[:alnum:]_+-]+"
+color body          #9ece6a #24283b "[[:<:]](TODO|FIXME|NOTE|IMPORTANT)[[:>:]]"
+
+color quoted        #9ece6a #24283b
+color quoted1       #7dcfff #24283b
+color quoted2       #bb9af7 #24283b
+color quoted3       #e0af68 #24283b
+color quoted4       #ff9e64 #24283b
+color signature     #545c7e #24283b
+color attachment    #7aa2f7 #24283b
+
+color compose header        #7aa2f7 #24283b
+color compose security_encrypt #7dcfff #24283b
+color compose security_sign    #bb9af7 #24283b
+color compose security_both    #9ece6a #24283b
+color compose security_none    #f7768e #24283b
+
+color sidebar_divider #545c7e #24283b
+color sidebar_flagged #e0af68 #24283b
+color sidebar_highlight #1f2335 #7aa2f7
+color sidebar_indicator #1f2335 #bb9af7
+color sidebar_new #9ece6a #24283b
+color sidebar_ordinary #c0caf5 #24283b
+color sidebar_spoolfile #7dcfff #24283b
+
+color progress #1f2335 #7aa2f7

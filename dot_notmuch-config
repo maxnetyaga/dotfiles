@@ -1,0 +1,17 @@
+[database]
+path=/home/max/.local/share/mail
+
+[user]
+name=Max Netyaga
+primary_email=max@max.netyaga.com
+other_email=busybusiness@max.netyaga.com;services@max.netyaga.com;shopping@max.netyaga.com;maksym.netiaha@jointoit.com
+
+[new]
+tags=unread;inbox;
+ignore=.mbsyncstate;.uidvalidity
+
+[search]
+exclude_tags=deleted;spam;
+
+[maildir]
+synchronize_flags=true

@@ -10,9 +10,9 @@ configurations:
     passwordCMD: "secret-tool lookup service imap account busybusiness@max.netyaga.com host mail.netyaga.com"
     boxes:
       - mailbox: INBOX
-        onNewMail: "mbsync busybusiness"
-        onChangedMail: "mbsync busybusiness"
-        onDeletedMail: "mbsync busybusiness"
+        onNewMail: "systemctl --user start mbsync@busybusiness.service"
+        onChangedMail: "systemctl --user start mbsync@busybusiness.service"
+        onDeletedMail: "systemctl --user start mbsync@busybusiness.service"
 
   - host: mail.netyaga.com
     port: 993
@@ -25,9 +25,9 @@ configurations:
     passwordCMD: "secret-tool lookup service imap account services@max.netyaga.com host mail.netyaga.com"
     boxes:
       - mailbox: INBOX
-        onNewMail: "mbsync services"
-        onChangedMail: "mbsync services"
-        onDeletedMail: "mbsync services"
+        onNewMail: "systemctl --user start mbsync@services.service"
+        onChangedMail: "systemctl --user start mbsync@services.service"
+        onDeletedMail: "systemctl --user start mbsync@services.service"
 
   - host: mail.netyaga.com
     port: 993
@@ -40,9 +40,9 @@ configurations:
     passwordCMD: "secret-tool lookup service imap account shopping@max.netyaga.com host mail.netyaga.com"
     boxes:
       - mailbox: INBOX
-        onNewMail: "mbsync shopping"
-        onChangedMail: "mbsync shopping"
-        onDeletedMail: "mbsync shopping"
+        onNewMail: "systemctl --user start mbsync@shopping.service"
+        onChangedMail: "systemctl --user start mbsync@shopping.service"
+        onDeletedMail: "systemctl --user start mbsync@shopping.service"
 
   - host: mail.netyaga.com
     port: 993
@@ -55,9 +55,9 @@ configurations:
     passwordCMD: "secret-tool lookup service imap account max@max.netyaga.com host mail.netyaga.com"
     boxes:
       - mailbox: INBOX
-        onNewMail: "mbsync max"
-        onChangedMail: "mbsync max"
-        onDeletedMail: "mbsync max"
+        onNewMail: "systemctl --user start mbsync@max.service"
+        onChangedMail: "systemctl --user start mbsync@max.service"
+        onDeletedMail: "systemctl --user start mbsync@max.service"
 
   - host: mailing.jointoit.com
     port: 143
@@ -70,6 +70,6 @@ configurations:
     passwordCMD: "secret-tool lookup service imap account maksym.netiaha@jointoit.com host mailing.jointoit.com"
     boxes:
       - mailbox: INBOX
-        onNewMail: "mbsync jointoit"
-        onChangedMail: "mbsync jointoit"
-        onDeletedMail: "mbsync jointoit"
+        onNewMail: "systemctl --user start mbsync@jointoit.service"
+        onChangedMail: "systemctl --user start mbsync@jointoit.service"
+        onDeletedMail: "systemctl --user start mbsync@jointoit.service"

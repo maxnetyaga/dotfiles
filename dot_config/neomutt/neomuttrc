@@ -11,6 +11,16 @@ set mail_check = 60
 set timeout = 10
 set markers = no
 set index_format = "%4C %Z %{%Y-%m-%d %H:%M} %-20.20F %s"
+set mailcap_path = ~/.config/neomutt/mailcap
+
+alternative_order text/plain text/html
+auto_view text/html
+
+source ~/.config/neomutt/colors/tokyonight-storm
+
+set nm_default_uri = "notmuch:///home/max/.local/share/mail"
+set nm_query_type = messages
+set virtual_spoolfile = yes
 
 set use_from = yes
 set envelope_from = yes
@@ -37,6 +47,12 @@ mailboxes \
   +personal/max/INBOX \
   +work/jointoit/INBOX
 
+virtual-mailboxes \
+  "Unread" "notmuch://?query=tag:unread" \
+  "Inbox" "notmuch://?query=tag:inbox" \
+  "Personal unread" "notmuch://?query=tag:unread and path:personal/**" \
+  "Work unread" "notmuch://?query=tag:unread and path:work/**"
+
 folder-hook +personal/busybusiness/* source ~/.config/neomutt/accounts/busybusiness
 folder-hook +personal/services/* source ~/.config/neomutt/accounts/services
 folder-hook +personal/shopping/* source ~/.config/neomutt/accounts/shopping
@@ -50,6 +66,7 @@ macro index,pager <f5> "<sync-mailbox><enter-command>source ~/.config/neomutt/ac
 macro index,pager <f6> "<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/jointoit<enter><change-folder>!<enter>" "switch to jointoit"
 
 macro index,pager S "<shell-escape>mbsync -a<enter>" "sync all mail"
+macro index,pager / "<vfolder-from-query>" "notmuch search"
 macro compose S "<pgp-menu>s" "toggle signing"
 macro compose E "<pgp-menu>e" "toggle encryption"
 macro compose B "<pgp-menu>b" "toggle sign and encrypt"

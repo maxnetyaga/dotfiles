@@ -1,0 +1,7 @@
+[Unit]
+Description=Mailbox synchronization for %i
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/mbsync %i
+ExecStartPost=/usr/bin/notmuch new

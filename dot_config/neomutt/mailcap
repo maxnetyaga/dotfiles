@@ -1,0 +1,2 @@
+text/html; elinks -dump -dump-color-mode 1 -force-html %s; copiousoutput; nametemplate=%s.html
+text/html; xdg-open %s; test=test -n "$DISPLAY"; nametemplate=%s.html
