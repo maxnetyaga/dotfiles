@@ -59,7 +59,7 @@ exec-once = external-keyboard-toggle
 {{- end }}
 
 exec-once = [workspace name:thunderbird silent] uwsm app -- thunderbird
-exec-once = [workspace name:thunderbird silent] uwsm app -- newsflash
+exec-once = [workspace name:rss silent] uwsm app -- newsflash
 exec-once = [workspace name:telegram silent] uwsm app -- flatpak run org.telegram.desktop
 exec-once = [workspace name:spotify silent] uwsm app -- chromium --profile-directory=Default --app-id=pjibgclleladliembfgfagdaldikeohf
 exec-once = [workspace name:anki silent] uwsm app -- anki
@@ -269,6 +269,8 @@ bind = , M, exec, hyprctl dispatch workspace name:teams && hyprctl dispatch subm
 bind = SHIFT, M, exec, hyprctl dispatch movetoworkspace name:teams && hyprctl dispatch submap reset
 bind = , H, exec, hyprctl dispatch workspace name:thunderbird && hyprctl dispatch submap reset
 bind = SHIFT, H, exec, hyprctl dispatch movetoworkspace name:thunderbird && hyprctl dispatch submap reset
+bind = , N, exec, hyprctl dispatch workspace name:rss && hyprctl dispatch submap reset
+bind = SHIFT, N, exec, hyprctl dispatch movetoworkspace name:rss && hyprctl dispatch submap reset
 bind = , A, exec, hyprctl dispatch workspace name:anki && hyprctl dispatch submap reset
 bind = SHIFT, A, exec, hyprctl dispatch movetoworkspace name:anki && hyprctl dispatch submap reset
 
@@ -330,11 +332,14 @@ workspace = name:whatsup, monitor:HDMI-A-1
 workspace = name:obs, monitor:HDMI-A-1
 workspace = name:teams, monitor:HDMI-A-1
 workspace = name:thunderbird, monitor:HDMI-A-1
+workspace = name:rss, monitor:HDMI-A-1
 workspace = name:anki, monitor:HDMI-A-1
 {{- end }}
 
 windowrule = match:class com.obsproject.Studio, workspace name:obs silent
 windowrule = match:class anki, workspace name:anki silent
+windowrule = match:class org.mozilla.Thunderbird, workspace name:thunderbird silent
+windowrule = match:class io.gitlab.news_flash.NewsFlash, workspace name:rss silent
 
 windowrule = match:class org.gnome.NautilusPreviewer, float 1
 windowrule = match:class org.gnome.NautilusPreviewer, move (cursor_x+(min(max(-(monitor_w*0.5)\,0)\,monitor_w-window_w))) (cursor_y+(min(max(-(monitor_h*0.5)\,0)\,monitor_h-window_h)))

@@ -1,0 +1,9 @@
+[Unit]
+Description=Portal service (Hyprland implementation)
+
+[Service]
+ExecStart=/usr/lib/xdg-desktop-portal-hyprland
+Restart=always
+
+[Install]
+WantedBy=graphical-session.target

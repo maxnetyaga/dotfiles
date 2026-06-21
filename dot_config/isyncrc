@@ -1,0 +1,95 @@
+# Global defaults
+Create Both
+Expunge None
+SyncState *
+
+MaildirStore local-busybusiness
+Path ~/.local/share/mail/personal/busybusiness/
+Inbox ~/.local/share/mail/personal/busybusiness/INBOX
+SubFolders Verbatim
+
+MaildirStore local-services
+Path ~/.local/share/mail/personal/services/
+Inbox ~/.local/share/mail/personal/services/INBOX
+SubFolders Verbatim
+
+MaildirStore local-shopping
+Path ~/.local/share/mail/personal/shopping/
+Inbox ~/.local/share/mail/personal/shopping/INBOX
+SubFolders Verbatim
+
+MaildirStore local-max
+Path ~/.local/share/mail/personal/max/
+Inbox ~/.local/share/mail/personal/max/INBOX
+SubFolders Verbatim
+
+MaildirStore local-jointoit
+Path ~/.local/share/mail/work/jointoit/
+Inbox ~/.local/share/mail/work/jointoit/INBOX
+SubFolders Verbatim
+
+IMAPStore busybusiness
+Host mail.netyaga.com
+Port 993
+User busybusiness@max.netyaga.com
+PassCmd "secret-tool lookup service imap account busybusiness@max.netyaga.com host mail.netyaga.com"
+TLSType IMAPS
+
+IMAPStore services
+Host mail.netyaga.com
+Port 993
+User services@max.netyaga.com
+PassCmd "secret-tool lookup service imap account services@max.netyaga.com host mail.netyaga.com"
+TLSType IMAPS
+
+IMAPStore shopping
+Host mail.netyaga.com
+Port 993
+User shopping@max.netyaga.com
+PassCmd "secret-tool lookup service imap account shopping@max.netyaga.com host mail.netyaga.com"
+TLSType IMAPS
+
+IMAPStore max
+Host mail.netyaga.com
+Port 993
+User max@max.netyaga.com
+PassCmd "secret-tool lookup service imap account max@max.netyaga.com host mail.netyaga.com"
+TLSType IMAPS
+
+IMAPStore jointoit
+Host mailing.jointoit.com
+Port 143
+User maksym.netiaha@jointoit.com
+PassCmd "secret-tool lookup service imap account maksym.netiaha@jointoit.com host mailing.jointoit.com"
+TLSType STARTTLS
+
+Channel busybusiness
+Far :busybusiness:
+Near :local-busybusiness:
+Patterns *
+
+Channel services
+Far :services:
+Near :local-services:
+Patterns *
+
+Channel shopping
+Far :shopping:
+Near :local-shopping:
+Patterns *
+
+Channel max
+Far :max:
+Near :local-max:
+Patterns *
+
+Channel jointoit
+Far :jointoit:
+Near :local-jointoit:
+Patterns *
+
+Group personal
+Channels busybusiness services shopping max
+
+Group work
+Channels jointoit

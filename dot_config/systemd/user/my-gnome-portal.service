@@ -1,0 +1,9 @@
+[Unit]
+Description=Portal service (GTK/GNOME implementation)
+
+[Service]
+ExecStart=/usr/lib/xdg-desktop-portal-gnome -v
+Restart=always
+
+[Install]
+WantedBy=graphical-session.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=GNOME Clocks (GApplication service)
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/gnome-clocks
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,75 @@
+configurations:
+  - host: mail.netyaga.com
+    port: 993
+    tls: true
+    tlsOptions:
+      rejectUnauthorized: true
+      starttls: false
+    username: busybusiness@max.netyaga.com
+    alias: busybusiness
+    passwordCMD: "secret-tool lookup service imap account busybusiness@max.netyaga.com host mail.netyaga.com"
+    boxes:
+      - mailbox: INBOX
+        onNewMail: "mbsync busybusiness"
+        onChangedMail: "mbsync busybusiness"
+        onDeletedMail: "mbsync busybusiness"
+
+  - host: mail.netyaga.com
+    port: 993
+    tls: true
+    tlsOptions:
+      rejectUnauthorized: true
+      starttls: false
+    username: services@max.netyaga.com
+    alias: services
+    passwordCMD: "secret-tool lookup service imap account services@max.netyaga.com host mail.netyaga.com"
+    boxes:
+      - mailbox: INBOX
+        onNewMail: "mbsync services"
+        onChangedMail: "mbsync services"
+        onDeletedMail: "mbsync services"
+
+  - host: mail.netyaga.com
+    port: 993
+    tls: true
+    tlsOptions:
+      rejectUnauthorized: true
+      starttls: false
+    username: shopping@max.netyaga.com
+    alias: shopping
+    passwordCMD: "secret-tool lookup service imap account shopping@max.netyaga.com host mail.netyaga.com"
+    boxes:
+      - mailbox: INBOX
+        onNewMail: "mbsync shopping"
+        onChangedMail: "mbsync shopping"
+        onDeletedMail: "mbsync shopping"
+
+  - host: mail.netyaga.com
+    port: 993
+    tls: true
+    tlsOptions:
+      rejectUnauthorized: true
+      starttls: false
+    username: max@max.netyaga.com
+    alias: max
+    passwordCMD: "secret-tool lookup service imap account max@max.netyaga.com host mail.netyaga.com"
+    boxes:
+      - mailbox: INBOX
+        onNewMail: "mbsync max"
+        onChangedMail: "mbsync max"
+        onDeletedMail: "mbsync max"
+
+  - host: mailing.jointoit.com
+    port: 143
+    tls: true
+    tlsOptions:
+      rejectUnauthorized: true
+      starttls: true
+    username: maksym.netiaha@jointoit.com
+    alias: jointoit
+    passwordCMD: "secret-tool lookup service imap account maksym.netiaha@jointoit.com host mailing.jointoit.com"
+    boxes:
+      - mailbox: INBOX
+        onNewMail: "mbsync jointoit"
+        onChangedMail: "mbsync jointoit"
+        onDeletedMail: "mbsync jointoit"
