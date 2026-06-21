@@ -1,0 +1,9 @@
+set realname = "Max Netyaga"
+set from = maksym.netiaha@jointoit.com
+set spoolfile = +work/jointoit/INBOX
+set record = +work/jointoit/Sent
+set postponed = +work/jointoit/Drafts
+set trash = +work/jointoit/Trash
+set smtp_url = "smtp://maksym.netiaha%40jointoit.com@mailing.jointoit.com:587/"
+set smtp_pass = `secret-tool lookup service imap account maksym.netiaha@jointoit.com host mailing.jointoit.com`
+set signature = ""

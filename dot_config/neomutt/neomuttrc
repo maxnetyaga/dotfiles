@@ -1,0 +1,44 @@
+set mbox_type = Maildir
+set folder = ~/.local/share/mail
+
+set header_cache = ~/.cache/neomutt/headers
+set message_cachedir = ~/.cache/neomutt/bodies
+set certificate_file = ~/.config/neomutt/certificates
+
+set sort = reverse-date
+set sort_aux = reverse-last-date-received
+set mail_check = 60
+set timeout = 10
+set markers = no
+set index_format = "%4C %Z %{%Y-%m-%d %H:%M} %-20.20F %s"
+
+set use_from = yes
+set envelope_from = yes
+set edit_headers = yes
+set ssl_force_tls = yes
+set ssl_starttls = yes
+
+mailboxes \
+  +personal/busybusiness/INBOX \
+  +personal/services/INBOX \
+  +personal/shopping/INBOX \
+  +personal/max/INBOX \
+  +work/jointoit/INBOX
+
+folder-hook +personal/busybusiness/* source ~/.config/neomutt/accounts/busybusiness
+folder-hook +personal/services/* source ~/.config/neomutt/accounts/services
+folder-hook +personal/shopping/* source ~/.config/neomutt/accounts/shopping
+folder-hook +personal/max/* source ~/.config/neomutt/accounts/max
+folder-hook +work/jointoit/* source ~/.config/neomutt/accounts/jointoit
+
+macro index,pager <f2> "<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/max<enter><change-folder>!<enter>" "switch to max"
+macro index,pager <f3> "<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/services<enter><change-folder>!<enter>" "switch to services"
+macro index,pager <f4> "<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/shopping<enter><change-folder>!<enter>" "switch to shopping"
+macro index,pager <f5> "<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/busybusiness<enter><change-folder>!<enter>" "switch to busybusiness"
+macro index,pager <f6> "<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/jointoit<enter><change-folder>!<enter>" "switch to jointoit"
+
+macro index,pager S "<shell-escape>mbsync -a<enter>" "sync all mail"
+bind index,pager g noop
+macro index,pager gi "<change-folder>!<enter>" "go to inbox"
+
+source ~/.config/neomutt/accounts/max

@@ -1,0 +1,9 @@
+set realname = "busybusiness@max.netyaga.com"
+set from = busybusiness@max.netyaga.com
+set spoolfile = +personal/busybusiness/INBOX
+set record = +personal/busybusiness/Sent
+set postponed = +personal/busybusiness/Drafts
+set trash = +personal/busybusiness/Trash
+set smtp_url = "smtps://busybusiness%40max.netyaga.com@mail.netyaga.com:465/"
+set smtp_pass = `secret-tool lookup service imap account busybusiness@max.netyaga.com host mail.netyaga.com`
+set signature = ""

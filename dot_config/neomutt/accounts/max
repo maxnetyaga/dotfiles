@@ -1,0 +1,9 @@
+set realname = "Max Netyaga"
+set from = max@max.netyaga.com
+set spoolfile = +personal/max/INBOX
+set record = +personal/max/Sent
+set postponed = +personal/max/Drafts
+set trash = +personal/max/Trash
+set smtp_url = "smtps://max%40max.netyaga.com@mail.netyaga.com:465/"
+set smtp_pass = `secret-tool lookup service imap account max@max.netyaga.com host mail.netyaga.com`
+set signature = ""
