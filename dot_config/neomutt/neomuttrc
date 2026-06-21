@@ -18,6 +18,18 @@ set edit_headers = yes
 set ssl_force_tls = yes
 set ssl_starttls = yes
 
+set crypt_use_gpgme = yes
+set pgp_use_gpg_agent = yes
+set pgp_self_encrypt = yes
+set crypt_autosign = yes
+set crypt_autoencrypt = no
+set crypt_replyencrypt = yes
+set crypt_replysign = yes
+set crypt_replysignencrypted = yes
+set crypt_protected_headers_write = yes
+set crypt_protected_headers_save = yes
+set crypt_protected_headers_subject = "..."
+
 mailboxes \
   +personal/busybusiness/INBOX \
   +personal/services/INBOX \
@@ -38,6 +50,10 @@ macro index,pager <f5> "<sync-mailbox><enter-command>source ~/.config/neomutt/ac
 macro index,pager <f6> "<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/jointoit<enter><change-folder>!<enter>" "switch to jointoit"
 
 macro index,pager S "<shell-escape>mbsync -a<enter>" "sync all mail"
+macro compose S "<pgp-menu>s" "toggle signing"
+macro compose E "<pgp-menu>e" "toggle encryption"
+macro compose B "<pgp-menu>b" "toggle sign and encrypt"
+macro index,pager V "<verify-key>" "verify sender key"
 bind index,pager g noop
 macro index,pager gi "<change-folder>!<enter>" "go to inbox"
 

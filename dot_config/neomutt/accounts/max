@@ -6,4 +6,6 @@ set postponed = +personal/max/Drafts
 set trash = +personal/max/Trash
 set smtp_url = "smtps://max%40max.netyaga.com@mail.netyaga.com:465/"
 set smtp_pass = `secret-tool lookup service imap account max@max.netyaga.com host mail.netyaga.com`
+set pgp_default_key = 3710A5249FC14949
+set pgp_sign_as = 3710A5249FC14949
 set signature = ""

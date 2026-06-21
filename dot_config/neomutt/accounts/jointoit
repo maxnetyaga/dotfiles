@@ -6,4 +6,6 @@ set postponed = +work/jointoit/Drafts
 set trash = +work/jointoit/Trash
 set smtp_url = "smtp://maksym.netiaha%40jointoit.com@mailing.jointoit.com:587/"
 set smtp_pass = `secret-tool lookup service imap account maksym.netiaha@jointoit.com host mailing.jointoit.com`
+set pgp_default_key = D451A7B0C40F9ABC
+set pgp_sign_as = D451A7B0C40F9ABC
 set signature = ""
