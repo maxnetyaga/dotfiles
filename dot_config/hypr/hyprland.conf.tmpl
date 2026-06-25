@@ -171,7 +171,6 @@ bind = $primaryMod+Shift, K, exec, toggle-builtin-keyboard
 {{- end }}
 
 bind = $primaryMod, V, exec, vicinae 'vicinae://launch/clipboard/history?toggle=true'
-bind = $primaryMod, P, exec, powermenu
 bind = $primaryMod, B, exec, uwsm app -- hyprlock
 bindl = $primaryMod+Shift, B, exec, sh -c 'hyprctl monitors | grep -q "dpmsStatus: 1" && hyprctl dispatch dpms off || hyprctl dispatch dpms on'
 bind = $primaryMod, M, exec, rofi -modi "emoji:rofimoji" -show emoji
@@ -182,7 +181,6 @@ bind = $primaryMod, Q, killactive,
 bind = $primaryMod+Shift, Q, forcekillactive,
 bind = $primaryMod, E, exec, $fileManager
 bind = $primaryMod, T, exec, uwsm app -- flatpak run org.telegram.desktop
-bind = $primaryMod, C, exec, rofi -show calc -modi calc -no-show-match -no-sort -calc-command "echo -n '{result}' | wl-copy"
 bind = $primaryMod, W, togglefloating
 bind = $primaryMod, O, fullscreen, 0
 bind = $primaryMod, SPACE, exec, $menu

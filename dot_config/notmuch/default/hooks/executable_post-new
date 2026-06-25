@@ -1,0 +1,95 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if ! command -v notify-send >/dev/null 2>&1; then
+    exit 0
+fi
+
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/mail-notify"
+tmp_dir=$(mktemp -d)
+trap 'rm -rf "$tmp_dir"' EXIT
+
+mkdir -p "$state_dir"
+
+accounts=(
+    "busybusiness|personal/busybusiness/INBOX|busybusiness"
+    "services|personal/services/INBOX|services"
+    "shopping|personal/shopping/INBOX|shopping"
+    "max|personal/max/INBOX|max"
+    "jointoit|work/jointoit/INBOX|jointoit"
+)
+
+for account in "${accounts[@]}"; do
+    IFS='|' read -r label folder state_name <<<"$account"
+
+    query="folder:${folder}"
+    current_file="$tmp_dir/${state_name}.current"
+    current_sorted_file="$tmp_dir/${state_name}.current.sorted"
+    previous_sorted_file="$tmp_dir/${state_name}.previous.sorted"
+    new_ids_file="$tmp_dir/${state_name}.new"
+    state_file="$state_dir/${state_name}-inbox.ids"
+
+    notmuch search --sort=newest-first --output=messages --format=text "$query" | sed '/^$/d' > "$current_file"
+
+    if [[ ! -f "$state_file" ]]; then
+        cp "$current_file" "$state_file"
+        continue
+    fi
+
+    sort -u "$current_file" > "$current_sorted_file"
+    sort -u "$state_file" > "$previous_sorted_file"
+    comm -13 "$previous_sorted_file" "$current_sorted_file" > "$new_ids_file"
+    cp "$current_file" "$state_file"
+
+    if [[ ! -s "$new_ids_file" ]]; then
+        continue
+    fi
+
+    declare -A new_lookup=()
+    while IFS= read -r message_id; do
+        new_lookup["$message_id"]=1
+    done < "$new_ids_file"
+
+    latest_id=""
+    while IFS= read -r message_id; do
+        if [[ -n "${new_lookup[$message_id]:-}" ]]; then
+            latest_id="$message_id"
+            break
+        fi
+    done < "$current_file"
+
+    count=$(wc -l < "$new_ids_file")
+    count=${count//[[:space:]]/}
+    noun="messages"
+    if [[ "$count" == "1" ]]; then
+        noun="message"
+    fi
+
+    body="$count new inbox $noun"
+
+    if [[ -n "$latest_id" ]]; then
+        message_json=$(notmuch show --format=json --entire-thread=false "$latest_id")
+        from=$(jq -r '.[0][0][0].headers.From // empty' <<<"$message_json")
+        subject=$(jq -r '.[0][0][0].headers.Subject // empty' <<<"$message_json")
+
+        if [[ -n "$from" ]]; then
+            body+=$'\n'
+            body+="$from"
+        fi
+
+        if [[ -n "$subject" ]]; then
+            body+=$'\n'
+            body+="$subject"
+        fi
+    fi
+
+    notify-send \
+        --app-name=mail \
+        --icon=mail-unread \
+        --category=email.arrived \
+        "New Mail: $label" \
+        "$body"
+
+    printf 'notified account=%s count=%s latest=%s\n' "$label" "$count" "$latest_id" | systemd-cat -t mail-notify
+done

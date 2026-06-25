@@ -59,19 +59,4 @@ folder-hook +personal/shopping/* source ~/.config/neomutt/accounts/shopping
 folder-hook +personal/max/* source ~/.config/neomutt/accounts/max
 folder-hook +work/jointoit/* source ~/.config/neomutt/accounts/jointoit
 
-macro index,pager <f2> "<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/max<enter><change-folder>!<enter>" "switch to max"
-macro index,pager <f3> "<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/services<enter><change-folder>!<enter>" "switch to services"
-macro index,pager <f4> "<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/shopping<enter><change-folder>!<enter>" "switch to shopping"
-macro index,pager <f5> "<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/busybusiness<enter><change-folder>!<enter>" "switch to busybusiness"
-macro index,pager <f6> "<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/jointoit<enter><change-folder>!<enter>" "switch to jointoit"
-
-macro index,pager S "<shell-escape>mbsync -a<enter>" "sync all mail"
-macro index,pager / "<vfolder-from-query>" "notmuch search"
-macro compose S "<pgp-menu>s" "toggle signing"
-macro compose E "<pgp-menu>e" "toggle encryption"
-macro compose B "<pgp-menu>b" "toggle sign and encrypt"
-macro index,pager V "<verify-key>" "verify sender key"
-bind index,pager g noop
-macro index,pager gi "<change-folder>!<enter>" "go to inbox"
-
 source ~/.config/neomutt/accounts/max
